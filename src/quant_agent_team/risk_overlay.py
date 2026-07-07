@@ -87,3 +87,26 @@ def position_scales(vols: Sequence[float], risk: RiskOverlay) -> List[float]:
         else:
             out.append(1.0)
     return out
+
+
+def default_live_overlay() -> RiskOverlay:
+    """实盘默认风控层 — 固定参数，零搜索。
+
+    与 gen_today_signals / rolling_worker_risk 中的默认参数一致：
+    - 两层移动止损: +15%收益后锁定+5%底线, +30%后从峰值回撤10%止损
+    - 波动率仓位: 50分位缩0.7, 80分位缩0.5
+
+    设计原则: 止损是固定保护层，不进HPO搜索空间，确保alpha真实。
+    """
+    return RiskOverlay(
+        trailing_stop_enabled=True,
+        tier1_trigger=0.15,
+        tier1_floor=0.05,
+        tier2_trigger=0.30,
+        tier2_pullback=0.10,
+        vol_position_enabled=True,
+        vol_tier1_pct=50.0,
+        vol_tier1_scale=0.7,
+        vol_tier2_pct=80.0,
+        vol_tier2_scale=0.5,
+    )
