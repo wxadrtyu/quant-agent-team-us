@@ -1,0 +1,32 @@
+# 2026-03-20 Fast Bootstrap And Next Step
+
+- stage: data-collection-alignment
+- kpi_version: v0
+- summary:
+  - 停止了首轮 `base-incremental-ingest` 走 staging 再批量 merge 的慢路径，改为使用预生成 bootstrap CSV 直接走 PostgreSQL `COPY` 做首次全量灌库。
+  - 成功把 `/Users/laisicong/Downloads/stock_history` 写入 `quant_agent_team`。
+  - 同步把 `raw_market_daily` 全量回填到 `normalized_market_daily`，当前标准层的 `close_price_adj=close_price`、`adj_factor=1.0`，交易约束字段保持空。
+  - workflow 默认交易约束目录设为项目内 `inputs/trading_constraints`，README 已补充约束目录说明和样例文件。
+- facts:
+  - `raw_market_daily=11010989`
+  - `normalized_market_daily=11010989`
+  - `raw_trading_constraints_daily=0`
+  - `ingest_conflict_log=0`
+  - `ingest_runs` 最新记录：`run_type=bootstrap_fast`、`status=success`、`inserted_rows=11010989`
+  - 股票数：`5309`
+  - 日期范围：`2014-01-02` 到 `2026-03-06`
+- decision:
+  - 首次全量导入使用 fast bootstrap 路径；后续日常更新继续在真实增量链上追加新数据，不再重跑首次全量慢路径。
+- next_step:
+  - 基于现有 `base_incremental_ingest` 接入每日新增数据写入。
+  - 把定时更新做成固定流程，默认运行时点仍按项目规则保留在收盘后 `15:30 Asia/Shanghai`。
+  - 若后续拿到真实交易约束源，则把 `inputs/trading_constraints` 的样例替换成正式每日输入。
+- tags:
+  - project:quant-agent-team
+  - market:cn_a
+  - freq:daily
+  - stage:data-collection-alignment
+  - topic:bootstrap
+  - topic:ingestion
+  - topic:postgres
+  - status:accepted

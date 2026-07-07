@@ -1,0 +1,108 @@
+# Paper Trading Configuration v6.2
+# 五个最佳策略，来自5个不同因子家族，均基于 HS300 票池，滚动验证 IR > 0.5
+# 更新日期: 2026-06-30
+# 分支: codex/strategy-v6.1-paper-trading
+
+paper_trading:
+  start_date: "2026-07-01"
+  initial_capital: 500000  # 50万虚拟资金（5策略各10万）
+  benchmark: "csi300"
+  universe: "hs300"
+  # 每个策略分配 1/5 资金
+  allocation:
+    strategy_1: 0.20
+    strategy_2: 0.20
+    strategy_3: 0.20
+    strategy_4: 0.20
+    strategy_5: 0.20
+
+strategies:
+  # 策略1: P-001 rsv5_mom_2 (新冠军! 滚动 IR=1.074, OOS+131.0%, MDD=12.3%)
+  # 因子家族: RSV超卖回调
+  - id: "P-001"
+    name: "rsv5_mom_2"
+    description: "5日RSV超卖 + 20日动量（新冠军，动量股回调买入）"
+    factors:
+      - name: "rsv_5"
+        source_field: "rsv_5"
+        direction: "long_low"  # 低RSV = 超卖回调
+      - name: "ret_20d"
+        source_field: "ret_20d"
+        direction: "long_high"  # 高动量
+    top_n: 30
+    rebalance_days: 20
+    initial_weights:
+      rsv_5: 0.5
+      ret_20d: 0.5
+
+  # 策略2: I-012 tochg_mom_2 (前冠军, 滚动 IR=0.967, OOS+114.7%, MDD=14.6%)
+  # 因子家族: 换手率加速
+  - id: "I-012"
+    name: "tochg_mom_2"
+    description: "换手率加速 + 20日动量（前冠军，缩量+动量）"
+    factors:
+      - name: "turnover_change_5_20"
+        source_field: "turnover_change_5_20"
+        direction: "long_low"  # 低换手率加速 = 缩量
+      - name: "ret_20d"
+        source_field: "ret_20d"
+        direction: "long_high"  # 高动量
+    top_n: 30
+    rebalance_days: 20
+    initial_weights:
+      turnover_change_5_20: 0.5
+      ret_20d: 0.5
+
+  # 策略3: I-004 vol_mom_2 (滚动 IR=0.960, OOS+121.5%, MDD=16.6%)
+  # 因子家族: 量比
+  - id: "I-004"
+    name: "vol_mom_2"
+    description: "量比 + 20日动量（最高绝对收益）"
+    factors:
+      - name: "volume_ma_ratio_5_20"
+        source_field: "volume_ma_ratio_5_20"
+        direction: "long_low"  # 低量比 = 缩量
+      - name: "ret_20d"
+        source_field: "ret_20d"
+        direction: "long_high"  # 高动量
+    top_n: 30
+    rebalance_days: 20
+    initial_weights:
+      volume_ma_ratio_5_20: 0.5
+      ret_20d: 0.5
+
+  # 策略4: M-001 skew_mom_2 (滚动 IR=0.611, OOS+73.2%, MDD=15.0%)
+  # 因子家族: 收益率偏度（全新Alpha维度）
+  - id: "M-001"
+    name: "skew_mom_2"
+    description: "收益率偏度 + 20日动量（低偏度=稳定上涨，过滤妖股）"
+    factors:
+      - name: "ret_skew_20d"
+        source_field: "ret_skew_20d"
+        direction: "long_low"  # 低偏度 = 稳定上涨
+      - name: "ret_20d"
+        source_field: "ret_20d"
+        direction: "long_high"  # 高动量
+    top_n: 30
+    rebalance_days: 20
+    initial_weights:
+      ret_skew_20d: 0.5
+      ret_20d: 0.5
+
+  # 策略5: I-007 vp_corr_ret20 (滚动 IR=0.553, OOS+65.4%, MDD=13.8%)
+  # 因子家族: 量价相关（最低回撤）
+  - id: "I-007"
+    name: "vp_corr_ret20"
+    description: "量价负相关 + 20日动量（最低回撤13.8%，最稳健）"
+    factors:
+      - name: "vol_price_corr_20d"
+        source_field: "vol_price_corr_20d"
+        direction: "long_low"  # 量价负相关 = 健康回调
+      - name: "ret_20d"
+        source_field: "ret_20d"
+        direction: "long_high"  # 高动量
+    top_n: 30
+    rebalance_days: 20
+    initial_weights:
+      vol_price_corr_20d: 0.5
+      ret_20d: 0.5

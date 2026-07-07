@@ -1,0 +1,28 @@
+project:
+  name: quant-agent-team
+  market: cn_a
+  frequency: daily
+  timezone: Asia/Shanghai
+
+monitoring:
+  mode: manual
+  reserved_time: "15:30"
+  channel: feishu
+
+kpi:
+  win_rate_metric: trade_win_rate
+  annual_return_metric: annualized_return
+  max_drawdown_metric: max_drawdown
+  fallback_order:
+    - annualized_return
+    - trade_win_rate
+  fallback_floor:
+    annualized_return: 0.05
+    trade_win_rate: 0.80
+
+memory:
+  required_tags:
+    - project:quant-agent-team
+    - market:cn_a
+    - freq:daily
+

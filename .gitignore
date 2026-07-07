@@ -1,0 +1,89 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.DS_Store
+.venv/
+venv/
+dist/
+build/
+configs/data_inventory.json
+reports/ingestion/
+reports/data_sync/
+reports/features/
+reports/logs/
+.daily_job.lock/
+
+# Large database dump files (too big for git)
+data/db_dump.sql
+data/db_dump.custom
+data/quant_agent_team_dump.sql
+data/quant_agent_team_dump.custom
+
+# V5 rebuild data artifacts (large, regenerable from scripts/fetch_akshare_history.py)
+*.duckdb
+data/akshare_qfq/
+data/akshare_hfq/
+data/akshare_*.log
+data/akshare_qfq_fetch.log
+
+# Secrets (tokens/credentials) - NEVER commit
+.secrets/
+.tushare_token
+
+# Tushare pulled data (regenerable via scripts/fetch_tushare.py)
+data/tushare/
+data/tushare_*.log
+
+# Runtime logs (regenerable, not version-controlled)
+data/*.log
+
+# Rolling backtest result files (large JSON, regenerable from auto_driver.py)
+reports/v51_production/rolling_strat*.json
+
+# Backup database files (large, manual backup only)
+backup/
+
+# Export files (regenerable from database)
+reports/v51_production/export/*.csv
+reports/v51_production/export/*.json
+
+# Live signals JSON/HTML (regenerable from gen_simulation_v2.py)
+reports/v51_production/live_signals/*.json
+reports/v51_production/live_signals/*.html
+
+# Auto driver log (regenerable)
+reports/v51_production/auto_driver_log.md
+
+# Large data directories (local only, too big for git)
+量化数据/
+tushare_data/
+data/akshare_*/
+inputs/
+reports/backtests/
+reports/data_quality/
+reports/evaluations/
+reports/ingestion/
+reports/features/
+reports/logs/
+reports/overnight-hold-verify/
+reports/paper-trading-dashboard/
+data/universe.json
+reports/v51_production/strat*.json
+reports/v51_production/hpo_*.json
+reports/v51_production/rolling_*.json
+reports/v51_production/factor_*.json
+reports/v51_production/hs300_*.json
+reports/v51_production/multi_*.json
+reports/v51_production/*.json
+reports/v51_production/*.log
+reports/v51_production/*.csv
+reports/v51_production/screen_*.txt
+reports/paper_trading_v6.1/
+reports/overnight_hold_verify.json
+reports/market_context/
+strategies/generated/
+strategies/specs/
+strategies/library/
+research/candidates/
+.claude/skills/superpowers/plugin.json
+.agents/skills/superpowers/plugin.json

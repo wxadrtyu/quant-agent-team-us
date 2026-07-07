@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "quant-agent-team"
+version = "0.1.0"
+description = "Scaffold for an A-share daily quant strategy agent team"
+requires-python = ">=3.9"
+dependencies = [
+    "pandas",
+    "numpy",
+    "pycryptodome",
+    "optuna",
+]
+
+[project.optional-dependencies]
+test = ["pytest"]
+llm = ["anthropic"]
+us = ["yfinance"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

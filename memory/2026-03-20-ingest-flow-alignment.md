@@ -1,0 +1,32 @@
+# 2026-03-20 Ingest Flow Alignment
+
+- stage: data-collection-alignment
+- kpi_version: v0
+- summary:
+  - 已核验首轮全量导入后的 `raw_market_daily` 与源 `stock_history` 一致。
+  - 清理了真实库中的测试污染数据和样例约束污染数据，当前 `raw_market_daily` 与 `normalized_market_daily` 都回到干净基线。
+  - 用户要求下一步先对齐“新增数据写入”的实际流程，而不是继续直接实现调度。
+- facts:
+  - `raw_market_daily=11010989`
+  - `normalized_market_daily=11010989`
+  - `raw_trading_constraints_daily=0`
+  - 已完成 100 只股票、201633 行的逐行抽样核对，`mismatch_count=0`
+- alignment:
+  - 现阶段不能默认把项目内 `inputs/trading_constraints/000001.csv` 当成真实约束源参与生产流程。
+  - 以后拿到真实交易约束数据时，必须提醒用户显式传入 `--constraints-dir <真实约束目录>`，不能恢复为默认自动读取样例目录。
+  - 对“新增数据写入”的形态仍需最终确认：
+    - 方案 A：继续向原股票文件追加新日期
+    - 方案 B：每天提供单独的增量文件或目录
+  - 用户明确说明真实流程不是“覆盖重写”，而是“只更新”。
+- next_step:
+  - 先确认“只更新”具体是追加到原股票文件，还是单独增量包。
+  - 基于确认结果再设计唯一的日常入库入口，不直接继续猜测实现。
+- tags:
+  - project:quant-agent-team
+  - market:cn_a
+  - freq:daily
+  - stage:data-collection-alignment
+  - topic:ingestion
+  - topic:alignment
+  - topic:normalized
+  - status:accepted
