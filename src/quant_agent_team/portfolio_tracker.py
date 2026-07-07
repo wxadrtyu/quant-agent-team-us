@@ -219,8 +219,60 @@ def update_holdings(
         buy_codes = new_codes - current_codes
         hold_codes = current_codes & new_codes
 
+        # === 移动止损扫描 ===
+        # 对当前持仓逐只判断是否触发两层移动止损
+        stop_sells = []  # [(code, reason), ...]
+        if not current.empty:
+            from quant_agent_team.risk_overlay import default_live_overlay
+            risk = default_live_overlay()
+
+            for code in list(current_codes):
+                row = current[current["stock_code"] == code].iloc[0]
+                buy_price = float(row["buy_price"])
+                curr_price = prices.get(code, {}).get("close", buy_price)
+                if buy_price <= 0:
+                    continue
+
+                # 查持仓期历史最高价 (从buy_date到signal_date)
+                try:
+                    peak_row = con.execute("""
+                        SELECT MAX(close_adj) as peak FROM market_daily
+                        WHERE stock_code = ? AND trade_date >= ? AND trade_date <= ?
+                    """, [code, str(row["buy_date"]), signal_date]).fetchone()
+                    peak_price = float(peak_row[0]) if peak_row and peak_row[0] else buy_price
+                except Exception:
+                    peak_price = max(buy_price, curr_price)
+
+                gain = curr_price / buy_price - 1.0
+                peak_gain = peak_price / buy_price - 1.0
+
+                # Tier2: +30%后从峰值回撤10%
+                if peak_gain >= risk.tier2_trigger:
+                    stop_level = peak_price * (1.0 - risk.tier2_pullback)
+                    if curr_price <= stop_level:
+                        stop_sells.append((code, "stop_tier2"))
+                        continue
+
+                # Tier1: +15%后锁定+5%底线
+                if peak_gain >= risk.tier1_trigger:
+                    stop_level = buy_price * (1.0 + risk.tier1_floor)
+                    if curr_price <= stop_level:
+                        stop_sells.append((code, "stop_tier1"))
+                        continue
+
+        # 止损卖出合并到sell_codes
+        for code, reason in stop_sells:
+            if code not in sell_codes:
+                sell_codes.add(code)
+                # 如果该股票仍在new_codes中, 也需要先卖出再重新买入
+            elif code in hold_codes:
+                # 持有的股票触发止损, 需要从hold移到sell再重新买
+                hold_codes.discard(code)
+                buy_codes.add(code)
+
         # Record sells
         trades = []
+        stop_reason_map = {code: reason for code, reason in stop_sells}
         for code in sell_codes:
             row = current[current["stock_code"] == code].iloc[0]
             buy_price = float(row["buy_price"])
@@ -230,13 +282,15 @@ def update_holdings(
                 "DELETE FROM portfolio_holdings WHERE strategy_id = ? AND stock_code = ?",
                 [sid, code],
             )
+            sell_reason = stop_reason_map.get(code, "跌出top_n")
             con.execute(
                 """INSERT INTO portfolio_trades VALUES (?,?,?,?,?,?,?,?,?,?)""",
                 [signal_date, sid, code, names.get(code, ""), "SELL",
-                 curr_price, float(row["shares"]), float(row["shares"]) * curr_price, pnl, "跌出top_n"],
+                 curr_price, float(row["shares"]), float(row["shares"]) * curr_price, pnl, sell_reason],
             )
             trades.append({"action": "SELL", "code": code, "name": names.get(code, ""),
-                          "pnl_pct": pnl, "buy_price": buy_price, "sell_price": curr_price})
+                          "pnl_pct": pnl, "buy_price": buy_price, "sell_price": curr_price,
+                          "reason": sell_reason})
 
         # Record buys
         for code in buy_codes:
