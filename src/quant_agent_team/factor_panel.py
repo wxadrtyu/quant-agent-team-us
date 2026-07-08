@@ -407,6 +407,95 @@ def build_factor_panel(
         """)
         joined.append("industry_mom(industry_mom_20d)")
 
+    # Strategy FF: 资金流向 + 龙虎榜因子 (新 Alpha 维度, 抗跌 + 事件驱动)
+    # 所有因子用 trailing window (含当日), 与 ret_20d/rsv_9 同口径, 无额外前视偏差。
+    tables = {r[0] for r in con.execute("show tables").fetchall()}
+
+    # FF-1: 个股资金流向 (moneyflow_daily 全市场, 每股每天)
+    if "moneyflow_daily" in tables:
+        con.execute("""
+            CREATE OR REPLACE TABLE factor_panel AS
+            SELECT fp.*,
+                mf.net_mf_amount,
+                mf.buy_lg_amount, mf.sell_lg_amount,
+                mf.buy_elg_amount, mf.sell_elg_amount,
+                -- 个股5日主力净流入额 (trailing 5d, 含当日)
+                sum(coalesce(mf.net_mf_amount, 0)) OVER w AS net_mf_amount_5d,
+                -- 个股20日主力净流入额
+                sum(coalesce(mf.net_mf_amount, 0)) OVER w20 AS net_mf_amount_20d,
+                -- 大单+超大单5日净额 (主力大资金动向)
+                sum(coalesce(mf.buy_lg_amount, 0) + coalesce(mf.buy_elg_amount, 0)
+                    - coalesce(mf.sell_lg_amount, 0) - coalesce(mf.sell_elg_amount, 0)) OVER w AS lg_net_amount_5d
+            FROM factor_panel fp
+            LEFT JOIN moneyflow_daily mf
+              ON fp.stock_code = mf.stock_code AND fp.trade_date = mf.trade_date
+            WINDOW w AS (PARTITION BY fp.stock_code ORDER BY fp.trade_date
+                         ROWS BETWEEN 4 PRECEDING AND CURRENT ROW),
+                   w20 AS (PARTITION BY fp.stock_code ORDER BY fp.trade_date
+                           ROWS BETWEEN 19 PRECEDING AND CURRENT ROW)
+        """)
+        joined.append("moneyflow(net_mf_amount_5d,net_mf_amount_20d,lg_net_amount_5d)")
+
+    # FF-2: 龙虎榜因子 (lhb_daily 稀疏, 仅上榜股票; 缺失=未上榜)
+    if "lhb_daily" in tables:
+        con.execute("""
+            CREATE OR REPLACE TABLE factor_panel AS
+            SELECT fp.*,
+                -- 当日是否上榜 (0/1)
+                CASE WHEN lhb.net_amount IS NOT NULL THEN 1 ELSE 0 END AS lhb_flag,
+                -- 近20日上榜次数 (关注度热度)
+                sum(CASE WHEN lhb.net_amount IS NOT NULL THEN 1 ELSE 0 END) OVER w20 AS lhb_count_20d,
+                -- 近5日龙虎榜净买入额 (游资/机构资金认可)
+                sum(coalesce(lhb.net_amount, 0)) OVER w AS lhb_net_amount_5d,
+                -- 近20日龙虎榜净买入额
+                sum(coalesce(lhb.net_amount, 0)) OVER w20 AS lhb_net_amount_20d,
+                -- 近20日机构席位净买入 (只统计"机构专用"席位, 抗跌信号)
+                sum(coalesce(li.inst_net_buy, 0)) OVER w20 AS lhb_inst_net_buy_20d
+            FROM factor_panel fp
+            LEFT JOIN lhb_daily lhb
+              ON fp.stock_code = lhb.stock_code AND fp.trade_date = lhb.trade_date
+            LEFT JOIN (
+                -- 机构席位: exalter 含"机构专用", 按 stock+date 聚合净买入
+                SELECT stock_code, trade_date, sum(net_buy) AS inst_net_buy
+                FROM lhb_inst_daily
+                WHERE exalter LIKE '%机构%'
+                GROUP BY stock_code, trade_date
+            ) li
+              ON fp.stock_code = li.stock_code AND fp.trade_date = li.trade_date
+            WINDOW w AS (PARTITION BY fp.stock_code ORDER BY fp.trade_date
+                         ROWS BETWEEN 4 PRECEDING AND CURRENT ROW),
+                   w20 AS (PARTITION BY fp.stock_code ORDER BY fp.trade_date
+                           ROWS BETWEEN 19 PRECEDING AND CURRENT ROW)
+        """)
+        joined.append("lhb(lhb_count_20d,lhb_net_amount_5d,lhb_net_amount_20d,lhb_inst_net_buy_20d)")
+
+    # FF-3: 行业资金流向 (需 industry + moneyflow; 个股净流入按行业聚合)
+    tables = {r[0] for r in con.execute("show tables").fetchall()}
+    if "industry" in tables and "moneyflow_daily" in tables:
+        con.execute("""
+            CREATE OR REPLACE TABLE factor_panel AS
+            WITH ind_flow AS (
+                -- 每日行业资金净流入 = 行业内个股 net_mf_amount 之和
+                SELECT fp.trade_date, i.industry,
+                       sum(coalesce(fp.net_mf_amount, 0)) AS ind_net_inflow
+                FROM factor_panel fp
+                JOIN industry i ON fp.stock_code = i.stock_code
+                GROUP BY fp.trade_date, i.industry
+            ),
+            ind_flow_roll AS (
+                SELECT trade_date, industry,
+                       sum(ind_net_inflow) OVER (PARTITION BY industry ORDER BY trade_date
+                           ROWS BETWEEN 4 PRECEDING AND CURRENT ROW) AS ind_net_inflow_5d
+                FROM ind_flow
+            )
+            SELECT fp.*, r.ind_net_inflow_5d
+            FROM factor_panel fp
+            JOIN industry i ON fp.stock_code = i.stock_code
+            LEFT JOIN ind_flow_roll r
+              ON r.trade_date = fp.trade_date AND r.industry = i.industry
+        """)
+        joined.append("ind_flow(ind_net_inflow_5d)")
+
     # MACD and KD require recursive EMA (not expressible in pure SQL window functions).
     # Compute them in Python, reading close_adj from the source market_daily table.
     try:

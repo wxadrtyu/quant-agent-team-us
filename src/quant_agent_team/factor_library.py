@@ -110,6 +110,16 @@ DEFAULT_FACTOR_LIBRARY: List[FactorSpec] = [
     FactorSpec("cmf_10", "cmf_10", "long_low", "volume_price", "10d CMF: medium window Chaikin Money Flow"),
     FactorSpec("cmf_14", "cmf_14", "long_low", "volume_price", "14d CMF: standard window Chaikin Money Flow"),
     FactorSpec("cmf_20", "cmf_20", "long_low", "volume_price", "20d CMF: long window Chaikin Money Flow"),
+    # Strategy FF: 资金流向因子 (moneyflow_daily, 全市场每日个股资金流向)
+    FactorSpec("net_mf_amount_5d", "net_mf_amount_5d", "long_high", "flow", "5d 主力资金净流入额: 持续流入=资金认可, 抗跌信号"),
+    FactorSpec("net_mf_amount_20d", "net_mf_amount_20d", "long_high", "flow", "20d 主力资金净流入额: 中期资金趋势"),
+    FactorSpec("lg_net_amount_5d", "lg_net_amount_5d", "long_high", "flow", "5d 大单+超大单净额: 机构大资金动向"),
+    FactorSpec("ind_net_inflow_5d", "ind_net_inflow_5d", "long_high", "flow", "行业5d资金净流入: 行业资金面配置信号"),
+    # Strategy FF: 龙虎榜因子 (lhb_daily/lhb_inst_daily, 事件驱动稀疏数据)
+    FactorSpec("lhb_count_20d", "lhb_count_20d", "long_high", "event", "20d龙虎榜上榜次数: 高频上榜=市场关注度高"),
+    FactorSpec("lhb_net_amount_5d", "lhb_net_amount_5d", "long_high", "event", "5d龙虎榜净买入额: 游资/机构资金认可"),
+    FactorSpec("lhb_net_amount_20d", "lhb_net_amount_20d", "long_high", "event", "20d龙虎榜净买入额: 中期龙虎榜资金趋势"),
+    FactorSpec("lhb_inst_net_buy_20d", "lhb_inst_net_buy_20d", "long_high", "event", "20d机构席位净买入: 机构席位买入=稳健抗跌信号"),
 ]
 
 
