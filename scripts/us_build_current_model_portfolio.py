@@ -49,6 +49,43 @@ def _normalize(values: pd.Series) -> pd.Series:
     return values / total
 
 
+def strategy_cluster_key(candidate_id: str) -> str:
+    tokens = str(candidate_id or "").split("_")
+    if not tokens or tokens == [""]:
+        return "unknown"
+
+    prefix = tokens[0]
+    factor_starts = {"ret", "px", "mfi", "rsi", "low", "close", "turnover", "vol"}
+    suffixes = {"top5", "top7", "top10", "top20", "a", "b", "c", "v1", "v2", "v3"}
+    factors: list[str] = []
+    i = 1
+    while i < len(tokens) and len(factors) < 3:
+        token = tokens[i]
+        if token in suffixes:
+            break
+        if token == "ret" and i + 1 < len(tokens):
+            factors.append("_".join(tokens[i : i + 2]))
+            i += 2
+        elif token == "px" and i + 2 < len(tokens):
+            factors.append("_".join(tokens[i : i + 3]))
+            i += 3
+        elif token in {"mfi", "rsi", "vol"} and i + 1 < len(tokens):
+            factors.append("_".join(tokens[i : i + 2]))
+            i += 2
+        elif token in {"low", "close", "turnover"} and i + 2 < len(tokens):
+            factors.append("_".join(tokens[i : i + 3]))
+            i += 3
+        elif token in factor_starts:
+            factors.append(token)
+            i += 1
+        else:
+            i += 1
+
+    if not factors:
+        return prefix
+    return f"{prefix}:{'|'.join(factors)}"
+
+
 def _redistribute_with_caps(weights: pd.Series, caps: pd.Series, max_sector_weight: float | None, sectors: pd.Series) -> pd.Series:
     weights = _normalize(weights)
     caps = caps.reindex(weights.index).astype(float)
@@ -98,6 +135,7 @@ def build_model_portfolio(
     max_drag_weight: float = 0.02,
     max_sector_weight: float | None = 0.30,
     max_source_strategies: int = 60,
+    max_cluster_share: float = 0.65,
 ) -> pd.DataFrame:
     pool = strategies[
         strategies["入库至今持续跑赢"].astype(bool)
@@ -113,10 +151,13 @@ def build_model_portfolio(
         + pd.to_numeric(pool["去偏标准分"], errors="coerce").clip(lower=0) * 0.5
     )
     pool = pool.sort_values(["strategy_quality", "实盘超基准收益"], ascending=[False, False]).head(max_source_strategies)
+    if "candidate_id" not in pool.columns:
+        pool["candidate_id"] = pool["monitor_key"].astype(str)
+    pool["strategy_cluster"] = pool["candidate_id"].map(strategy_cluster_key)
 
     selected = holdings[holdings["monitor_key"].isin(set(pool["monitor_key"]))].copy()
     selected = selected.merge(
-        pool[["monitor_key", "strategy_quality", "实盘超基准收益", "信息比率"]],
+        pool[["monitor_key", "strategy_quality", "实盘超基准收益", "信息比率", "strategy_cluster"]],
         on="monitor_key",
         how="inner",
     )
@@ -126,6 +167,29 @@ def build_model_portfolio(
         raise ValueError("selected strategies have no positive holdings")
 
     selected["holding_score"] = selected["strategy_quality"] * selected["目标权重"]
+    cluster_scores = (
+        selected.groupby(["股票代码", "strategy_cluster"], as_index=False)
+        .agg(cluster_score=("holding_score", "sum"))
+        .copy()
+    )
+    cluster_totals = cluster_scores.groupby("股票代码")["cluster_score"].transform("sum").clip(lower=1e-12)
+    cluster_scores["cluster_share"] = cluster_scores["cluster_score"] / cluster_totals
+    dominant_clusters = cluster_scores.sort_values(
+        ["股票代码", "cluster_share", "cluster_score"],
+        ascending=[True, False, False],
+    ).drop_duplicates("股票代码")
+    cluster_summary = (
+        cluster_scores.groupby("股票代码", as_index=False)
+        .agg(
+            cluster_count=("strategy_cluster", "nunique"),
+            max_cluster_share=("cluster_share", "max"),
+        )
+        .merge(
+            dominant_clusters[["股票代码", "strategy_cluster"]].rename(columns={"strategy_cluster": "dominant_cluster"}),
+            on="股票代码",
+            how="left",
+        )
+    )
     grouped = (
         selected.groupby("股票代码", as_index=False)
         .agg(
@@ -136,10 +200,17 @@ def build_model_portfolio(
         )
         .reset_index(drop=True)
     )
+    grouped = grouped.merge(cluster_summary, on="股票代码", how="left")
+    grouped["cluster_count"] = grouped["cluster_count"].fillna(1).astype(int)
+    grouped["max_cluster_share"] = grouped["max_cluster_share"].fillna(1.0)
+    grouped["dominant_cluster"] = grouped["dominant_cluster"].fillna("unknown")
     drag_set = {symbol.upper() for symbol in drag_symbols}
     grouped["is_drag_symbol"] = grouped["股票代码"].astype(str).str.upper().isin(drag_set)
     grouped["congestion_penalty"] = grouped["strategy_count"].map(lambda count: 1.0 / math.sqrt(max(float(count), 1.0)))
-    grouped["adjusted_score"] = grouped["raw_score"] * grouped["congestion_penalty"]
+    grouped["cluster_concentration_penalty"] = grouped["max_cluster_share"].map(
+        lambda share: max(0.2, (1.0 - max(float(share) - max_cluster_share, 0.0)) ** 2)
+    )
+    grouped["adjusted_score"] = grouped["raw_score"] * grouped["congestion_penalty"] * grouped["cluster_concentration_penalty"]
     grouped.loc[grouped["is_drag_symbol"], "adjusted_score"] *= 0.15
 
     meta = metadata.copy() if metadata is not None else _load_metadata()
@@ -181,6 +252,7 @@ def main() -> int:
     parser.add_argument("--max-symbol-weight", type=float, default=0.08)
     parser.add_argument("--max-drag-weight", type=float, default=0.02)
     parser.add_argument("--max-sector-weight", type=float, default=0.30)
+    parser.add_argument("--max-cluster-share", type=float, default=0.65)
     parser.add_argument("--exclude-drag-symbols", action="store_true")
     parser.add_argument("--date", default="20260716")
     args = parser.parse_args()
@@ -201,6 +273,7 @@ def main() -> int:
         exclude_drag_symbols=args.exclude_drag_symbols,
         max_drag_weight=args.max_drag_weight,
         max_sector_weight=args.max_sector_weight,
+        max_cluster_share=args.max_cluster_share,
     )
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     out_csv = OUT_DIR / f"us_current_model_portfolio_{args.date}.csv"
@@ -213,8 +286,10 @@ def main() -> int:
         "total_weight": float(portfolio["目标权重"].sum()),
         "largest_weight": float(portfolio["目标权重"].max()),
         "largest_sector_weight": float(sector_weights.iloc[0]),
+        "largest_cluster_share": float(portfolio["max_cluster_share"].max()),
+        "min_cluster_count": int(portfolio["cluster_count"].min()),
         "drag_symbols": portfolio.loc[portfolio["is_drag_symbol"], "股票代码"].tolist(),
-        "source": "persistent outperforming current strategies, 5/7 sleeves only, portfolio-level capped aggregation",
+        "source": "persistent outperforming current strategies, 5/7 sleeves only, portfolio-level capped aggregation with strategy-cluster concentration penalty",
         "status": "候选模型组合，未替代 current 单策略池",
     }
     out_json.write_text(

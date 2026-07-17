@@ -9,7 +9,7 @@ SCRIPTS = ROOT / "scripts"
 if str(SCRIPTS) not in sys.path:
     sys.path.insert(0, str(SCRIPTS))
 
-from us_build_current_model_portfolio import build_model_portfolio
+from us_build_current_model_portfolio import build_model_portfolio, strategy_cluster_key
 
 
 class UsCurrentModelPortfolioTest(unittest.TestCase):
@@ -134,6 +134,82 @@ class UsCurrentModelPortfolioTest(unittest.TestCase):
         )
 
         self.assertNotIn("ON", set(portfolio["股票代码"]))
+
+    def test_cluster_concentration_penalty_prefers_diverse_strategy_support(self) -> None:
+        self.assertEqual(strategy_cluster_key("qmv_ret_120d_px_to_ma20_mfi_14_top5"), "qmv:ret_120d|px_to_ma20|mfi_14")
+
+        strategies = pd.DataFrame(
+            [
+                {
+                    "monitor_key": "S1",
+                    "candidate_id": "qmv_ret_120d_px_to_ma20_mfi_14_a",
+                    "入库至今持续跑赢": True,
+                    "实盘超基准收益": 0.090,
+                    "信息比率": 1.0,
+                    "去偏标准分": 1.8,
+                    "top_n_numeric": 5,
+                },
+                {
+                    "monitor_key": "S2",
+                    "candidate_id": "qmv_ret_120d_px_to_ma20_mfi_14_b",
+                    "入库至今持续跑赢": True,
+                    "实盘超基准收益": 0.090,
+                    "信息比率": 1.0,
+                    "去偏标准分": 1.8,
+                    "top_n_numeric": 5,
+                },
+                {
+                    "monitor_key": "S3",
+                    "candidate_id": "liquidity_close_pos_20d_turnover_stability_20d_a",
+                    "入库至今持续跑赢": True,
+                    "实盘超基准收益": 0.047,
+                    "信息比率": 1.0,
+                    "去偏标准分": 1.8,
+                    "top_n_numeric": 5,
+                },
+                {
+                    "monitor_key": "S4",
+                    "candidate_id": "defensivequality_low_vol_20d_ret_120d_a",
+                    "入库至今持续跑赢": True,
+                    "实盘超基准收益": 0.047,
+                    "信息比率": 1.0,
+                    "去偏标准分": 1.8,
+                    "top_n_numeric": 5,
+                },
+            ]
+        )
+        holdings = pd.DataFrame(
+            [
+                {"monitor_key": "S1", "股票代码": "AAA", "目标权重": 1.0},
+                {"monitor_key": "S2", "股票代码": "AAA", "目标权重": 1.0},
+                {"monitor_key": "S3", "股票代码": "BBB", "目标权重": 1.0},
+                {"monitor_key": "S4", "股票代码": "BBB", "目标权重": 1.0},
+            ]
+        )
+        metadata = pd.DataFrame(
+            [
+                {"symbol": "AAA", "sector": "Technology", "name": "AAA"},
+                {"symbol": "BBB", "sector": "Health Care", "name": "BBB"},
+            ]
+        )
+
+        portfolio = build_model_portfolio(
+            strategies,
+            holdings,
+            target_symbols=2,
+            max_symbol_weight=0.8,
+            metadata=metadata,
+            drag_symbols=set(),
+            max_sector_weight=None,
+            max_cluster_share=0.60,
+        )
+
+        by_symbol = portfolio.set_index("股票代码")
+        self.assertEqual(int(by_symbol.loc["AAA", "cluster_count"]), 1)
+        self.assertEqual(int(by_symbol.loc["BBB", "cluster_count"]), 2)
+        self.assertAlmostEqual(float(by_symbol.loc["AAA", "max_cluster_share"]), 1.0)
+        self.assertLess(float(by_symbol.loc["BBB", "adjusted_score"]), float(by_symbol.loc["BBB", "raw_score"]))
+        self.assertGreater(float(by_symbol.loc["BBB", "adjusted_score"]), float(by_symbol.loc["AAA", "adjusted_score"]))
 
 
 if __name__ == "__main__":
