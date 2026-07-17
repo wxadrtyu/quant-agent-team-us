@@ -16,10 +16,12 @@ from us_live_strength_strategy_exploration import (
     holding_congestion_metrics,
     is_defensive_quality_trend_set,
     is_event_volume_trend_hold_set,
+    is_industry_low_congestion_relative_set,
     is_liquidity_quality_low_congestion_set,
     is_long_strength_close_position_set,
     is_micro_reversal_protected_momentum_set,
     is_portfolio20_specialized_set,
+    is_relative_strength_diffusion_set,
     is_quality_trend_factor_set,
     is_volume_confirmed_low_vol_extension_set,
     passes_branch_structure,
@@ -243,6 +245,20 @@ class UsLiveStrengthStrategyExplorationTest(unittest.TestCase):
         self.assertTrue(passes_branch_structure(defensive_quality, top_n=7, branch="defensivequality"))
         self.assertFalse(passes_branch_structure(repeated_flow_qmv, top_n=5, branch="closepos"))
         self.assertFalse(passes_branch_structure(repeated_flow_qmv, top_n=7, branch="defensivequality"))
+
+    def test_low_correlation_branches_avoid_prior_ret120_px20_turnover_core(self) -> None:
+        diffusion = {"ret_20d", "ret_60d", "mom_252_21", "volume_ma_ratio_5_20", "range_pct_5d"}
+        industry_low_crowd = {"ma20_above_ma60", "vol_20d", "dollar_volume_20d", "close_pos_20d", "obv_change_20"}
+        repeated_core = {"ret_120d", "px_to_ma20", "turnover_stability_20d", "parkinson_vol_20d", "close_pos_20d"}
+
+        self.assertTrue(is_relative_strength_diffusion_set(diffusion))
+        self.assertTrue(is_industry_low_congestion_relative_set(industry_low_crowd))
+        self.assertFalse(is_relative_strength_diffusion_set(repeated_core))
+        self.assertFalse(is_industry_low_congestion_relative_set(repeated_core))
+        self.assertTrue(passes_branch_structure(diffusion, top_n=5, branch="diffusion"))
+        self.assertTrue(passes_branch_structure(industry_low_crowd, top_n=7, branch="industrylowcrowd"))
+        self.assertFalse(passes_branch_structure(repeated_core, top_n=5, branch="diffusion"))
+        self.assertFalse(passes_branch_structure(repeated_core, top_n=7, branch="industrylowcrowd"))
 
 
 if __name__ == "__main__":

@@ -156,7 +156,7 @@ def sector_rotation_metrics(
 
 
 def top_choices_for_branch(branch: str) -> list[int]:
-    if branch in {"strong", "liquidity", "eventtrend", "closepos", "defensivequality"}:
+    if branch in {"strong", "liquidity", "eventtrend", "closepos", "defensivequality", "diffusion", "industrylowcrowd"}:
         return [5, 7]
     if branch == "portfolio20":
         return [20]
@@ -176,6 +176,10 @@ def passes_branch_structure(names: set[str], top_n: int, branch: str) -> bool:
         return top_n in {5, 7} and is_long_strength_close_position_set(names)
     if branch == "defensivequality":
         return top_n in {5, 7} and is_defensive_quality_trend_set(names)
+    if branch == "diffusion":
+        return top_n in {5, 7} and is_relative_strength_diffusion_set(names)
+    if branch == "industrylowcrowd":
+        return top_n in {5, 7} and is_industry_low_congestion_relative_set(names)
     return True
 
 
@@ -277,6 +281,34 @@ def is_defensive_quality_trend_set(names: set[str]) -> bool:
     return has_long_strength and has_trend_position and has_defensive_risk and has_quality_stability and has_tail_guard and avoids_flow_qmv
 
 
+def avoids_prior_round287_core(names: set[str]) -> bool:
+    return not {"ret_120d", "px_to_ma20", "turnover_stability_20d"}.issubset(names)
+
+
+def is_relative_strength_diffusion_set(names: set[str]) -> bool:
+    has_multi_horizon_strength = len(names & {"ret_20d", "ret_60d", "mom_252_21", "macd_hist"}) >= 2
+    has_confirmation = bool(names & {"volume_ma_ratio_5_20", "obv_change_20", "close_pos_20d"})
+    has_failure_protection = bool(names & {"range_pct_5d", "vol_20d", "atr_20d", "parkinson_vol_20d"})
+    avoids_old_flow_core = not bool(names & {"mfi_7", "mfi_14", "cmf_10", "cmf_20"})
+    return has_multi_horizon_strength and has_confirmation and has_failure_protection and avoids_old_flow_core and avoids_prior_round287_core(names)
+
+
+def is_industry_low_congestion_relative_set(names: set[str]) -> bool:
+    has_relative_trend = bool(names & {"ma20_above_ma60", "macd_hist", "ret_60d", "mom_252_21"})
+    has_liquidity_or_flow = bool(names & {"dollar_volume_20d", "obv_change_20", "volume_ma_ratio_5_20"})
+    has_flow_confirmation = bool(names & {"obv_change_20", "volume_ma_ratio_5_20", "close_pos_20d"})
+    has_risk_control = bool(names & {"vol_20d", "vol_60d", "atr_20d", "parkinson_vol_20d", "range_pct_5d"})
+    has_position_or_stability = bool(names & {"close_pos_20d", "turnover_stability_20d"})
+    return (
+        has_relative_trend
+        and has_liquidity_or_flow
+        and has_flow_confirmation
+        and has_risk_control
+        and has_position_or_stability
+        and avoids_prior_round287_core(names)
+    )
+
+
 def passes_factor_structure_screen(names: set[str], top_n: int) -> bool:
     if top_n == 20 and is_portfolio20_specialized_set(names):
         return True
@@ -290,6 +322,8 @@ def passes_factor_structure_screen(names: set[str], top_n: int) -> bool:
         or is_event_volume_trend_hold_set(names)
         or is_long_strength_close_position_set(names)
         or is_defensive_quality_trend_set(names)
+        or is_relative_strength_diffusion_set(names)
+        or is_industry_low_congestion_relative_set(names)
         or (top_n == 20 and is_portfolio20_specialized_set(names))
     )
 
@@ -314,6 +348,10 @@ def structural_prior(prefix: str, names: set[str], top_n: int, rebalance_days: i
         score += 2.2
     if is_defensive_quality_trend_set(names):
         score += 2.1
+    if is_relative_strength_diffusion_set(names):
+        score += 2.2
+    if is_industry_low_congestion_relative_set(names):
+        score += 2.0
     if names & FLOW_FACTORS:
         score += 0.8
     if names & QUALITY_FACTORS:
@@ -337,7 +375,7 @@ def candidate_quality_score(row: dict[str, float | int | str]) -> float:
         branch_bonus = 0.6
     elif branch == "portfolio20" and int(row["top_n"]) == 20:
         branch_bonus = 0.8
-    elif branch in {"liquidity", "eventtrend", "closepos", "defensivequality"} and int(row["top_n"]) in {5, 7}:
+    elif branch in {"liquidity", "eventtrend", "closepos", "defensivequality", "diffusion", "industrylowcrowd"} and int(row["top_n"]) in {5, 7}:
         branch_bonus = 0.9
     return (
         float(row["factory_prior_score"])
@@ -478,7 +516,17 @@ def main() -> int:
     parser.add_argument("--max-signal-overlap", type=float, default=0.70)
     parser.add_argument(
         "--branch",
-        choices=["mixed", "strong", "portfolio20", "liquidity", "eventtrend", "closepos", "defensivequality"],
+        choices=[
+            "mixed",
+            "strong",
+            "portfolio20",
+            "liquidity",
+            "eventtrend",
+            "closepos",
+            "defensivequality",
+            "diffusion",
+            "industrylowcrowd",
+        ],
         default="mixed",
     )
     parser.add_argument("--revisit-historical-candidates", action="store_true")
