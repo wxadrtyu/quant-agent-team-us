@@ -1,4 +1,4 @@
-from pathlib import Path
+﻿from pathlib import Path
 import sys
 import unittest
 
@@ -211,6 +211,63 @@ class UsCurrentModelPortfolioTest(unittest.TestCase):
         self.assertLess(float(by_symbol.loc["BBB", "adjusted_score"]), float(by_symbol.loc["BBB", "raw_score"]))
         self.assertGreater(float(by_symbol.loc["BBB", "adjusted_score"]), float(by_symbol.loc["AAA", "adjusted_score"]))
 
+    def test_max_allowed_cluster_share_filters_over_concentrated_symbols(self) -> None:
+        persistent_col = "\u5165\u5e93\u81f3\u4eca\u6301\u7eed\u8dd1\u8d62"
+        excess_col = "\u5b9e\u76d8\u8d85\u57fa\u51c6\u6536\u76ca"
+        ir_col = "\u4fe1\u606f\u6bd4\u7387"
+        z_col = "\u53bb\u504f\u6807\u51c6\u5206"
+        symbol_col = "\u80a1\u7968\u4ee3\u7801"
+        weight_col = "\u76ee\u6807\u6743\u91cd"
+        strategies = pd.DataFrame(
+            [
+                {
+                    "monitor_key": key,
+                    "candidate_id": candidate_id,
+                    persistent_col: True,
+                    excess_col: excess,
+                    ir_col: 1.0,
+                    z_col: 1.8,
+                    "top_n_numeric": 5,
+                }
+                for key, candidate_id, excess in [
+                    ("A1", "qmv_ret_120d_px_to_ma20_mfi_14_a", 0.20),
+                    ("B1", "balanced_ret_120d_ret_5d_px_to_ma20_a", 0.10),
+                    ("B2", "defensivequality_low_vol_20d_ret_120d_a", 0.10),
+                    ("C1", "liquidity_close_pos_20d_turnover_stability_20d_a", 0.09),
+                    ("C2", "smoothquality_ret_60d_mfi_14_vol_20d_a", 0.09),
+                ]
+            ]
+        )
+        holdings = pd.DataFrame(
+            [
+                {"monitor_key": "A1", symbol_col: "AAA", weight_col: 1.0},
+                {"monitor_key": "B1", symbol_col: "BBB", weight_col: 1.0},
+                {"monitor_key": "B2", symbol_col: "BBB", weight_col: 1.0},
+                {"monitor_key": "C1", symbol_col: "CCC", weight_col: 1.0},
+                {"monitor_key": "C2", symbol_col: "CCC", weight_col: 1.0},
+            ]
+        )
+        metadata = pd.DataFrame(
+            [
+                {"symbol": "AAA", "sector": "Technology", "name": "AAA"},
+                {"symbol": "BBB", "sector": "Health Care", "name": "BBB"},
+                {"symbol": "CCC", "sector": "Financials", "name": "CCC"},
+            ]
+        )
+
+        portfolio = build_model_portfolio(
+            strategies,
+            holdings,
+            target_symbols=2,
+            max_symbol_weight=0.8,
+            metadata=metadata,
+            drag_symbols=set(),
+            max_sector_weight=None,
+            max_allowed_cluster_share=0.75,
+        )
+
+        self.assertNotIn("AAA", set(portfolio[symbol_col]))
+        self.assertLessEqual(float(portfolio["max_cluster_share"].max()), 0.75)
 
 if __name__ == "__main__":
     unittest.main()

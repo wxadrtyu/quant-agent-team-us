@@ -136,6 +136,7 @@ def build_model_portfolio(
     max_sector_weight: float | None = 0.30,
     max_source_strategies: int = 60,
     max_cluster_share: float = 0.65,
+    max_allowed_cluster_share: float | None = None,
 ) -> pd.DataFrame:
     pool = strategies[
         strategies["入库至今持续跑赢"].astype(bool)
@@ -226,6 +227,8 @@ def build_model_portfolio(
     grouped = grouped.sort_values(["adjusted_score", "raw_score"], ascending=[False, False]).copy()
     if exclude_drag_symbols and int((~grouped["is_drag_symbol"]).sum()) >= target_symbols:
         grouped = grouped[~grouped["is_drag_symbol"]].copy()
+    if max_allowed_cluster_share is not None and int(grouped["max_cluster_share"].le(max_allowed_cluster_share).sum()) >= target_symbols:
+        grouped = grouped[grouped["max_cluster_share"].le(max_allowed_cluster_share)].copy()
     grouped = grouped.head(target_symbols).copy()
     if len(grouped) < target_symbols:
         raise ValueError(f"only {len(grouped)} symbols available for target {target_symbols}")
@@ -253,6 +256,7 @@ def main() -> int:
     parser.add_argument("--max-drag-weight", type=float, default=0.02)
     parser.add_argument("--max-sector-weight", type=float, default=0.30)
     parser.add_argument("--max-cluster-share", type=float, default=0.65)
+    parser.add_argument("--max-allowed-cluster-share", type=float, default=None)
     parser.add_argument("--exclude-drag-symbols", action="store_true")
     parser.add_argument("--date", default="20260717")
     args = parser.parse_args()
@@ -274,6 +278,7 @@ def main() -> int:
         max_drag_weight=args.max_drag_weight,
         max_sector_weight=args.max_sector_weight,
         max_cluster_share=args.max_cluster_share,
+        max_allowed_cluster_share=args.max_allowed_cluster_share,
     )
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     out_csv = OUT_DIR / f"us_current_model_portfolio_{args.date}.csv"
@@ -288,6 +293,7 @@ def main() -> int:
         "largest_sector_weight": float(sector_weights.iloc[0]),
         "largest_cluster_share": float(portfolio["max_cluster_share"].max()),
         "min_cluster_count": int(portfolio["cluster_count"].min()),
+        "max_allowed_cluster_share": args.max_allowed_cluster_share,
         "drag_symbols": portfolio.loc[portfolio["is_drag_symbol"], "股票代码"].tolist(),
         "source": "persistent outperforming current strategies, 5/7 sleeves only, portfolio-level capped aggregation with strategy-cluster concentration penalty",
         "status": "候选模型组合，未替代 current 单策略池",
