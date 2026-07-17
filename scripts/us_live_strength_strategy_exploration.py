@@ -13,7 +13,7 @@ import us_live_pool
 import us_strategy_factory_loop as factory
 
 
-RAW_DIR = Path(r"E:\quant-agent-team-us\data\us\raw\2026-07-16-intraday-chart")
+RAW_DIR = Path(r"E:\quant-agent-team-us\data\us\raw\2026-07-17-intraday-chart")
 RESEARCH_DIR = Path(r"E:\quant-agent-team-us\research")
 DB_PATH = RESEARCH_DIR / "us_strategy_research.duckdb"
 

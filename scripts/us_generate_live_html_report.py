@@ -521,7 +521,7 @@ def write_outputs(payload: dict, out_dir: Path) -> dict:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--db", default=r"E:\quant-agent-team-us\research\us_strategy_research.duckdb")
-    parser.add_argument("--raw-dir", default=r"E:\quant-agent-team-us\data\us\raw\2026-07-16-intraday-chart")
+    parser.add_argument("--raw-dir", default=r"E:\quant-agent-team-us\data\us\raw\2026-07-17-intraday-chart")
     parser.add_argument("--out-dir", default=r"G:\quant-agent-team-us\reports\us\live\current")
     args = parser.parse_args()
     payload = build_payload(Path(args.db), Path(args.raw_dir))
