@@ -139,15 +139,27 @@ def adjust_scores_for_diagnostic_exposure(
         if symbols is not None
         else pd.Series(adjusted.index.astype(str), index=adjusted.index)
     )
-    for index, symbol in score_symbols.items():
-        symbol_exposure = exposure.get(symbol, {})
-        winner_weight = float(symbol_exposure.get("winner_weight", 0.0))
-        loser_weight = float(symbol_exposure.get("loser_weight", 0.0))
-        if max_loser_exposure is not None and loser_weight > max_loser_exposure:
-            adjusted.loc[index] = float("-inf")
-        else:
-            adjusted.loc[index] = float(adjusted.loc[index]) + strength * (winner_weight - loser_weight * 1.35)
+    winner_by_symbol = {symbol: float(values.get("winner_weight", 0.0)) for symbol, values in exposure.items()}
+    loser_by_symbol = {symbol: float(values.get("loser_weight", 0.0)) for symbol, values in exposure.items()}
+    winner_weights = score_symbols.map(winner_by_symbol).fillna(0.0)
+    loser_weights = score_symbols.map(loser_by_symbol).fillna(0.0)
+    adjusted = adjusted + strength * (winner_weights - loser_weights * 1.35)
+    if max_loser_exposure is not None:
+        adjusted = adjusted.mask(loser_weights > max_loser_exposure, float("-inf"))
     return adjusted
+
+
+def adjust_scores_for_sector_strength(
+    scores: pd.Series,
+    sector_map: dict[str, str],
+    sector_scores: dict[str, float],
+    symbols: pd.Series,
+    strength: float = 4.0,
+) -> pd.Series:
+    adjusted = scores.copy()
+    score_symbols = symbols.reindex(adjusted.index).astype(str)
+    sector_bonus = score_symbols.map(sector_map).fillna("Unknown").map(sector_scores).fillna(0.0)
+    return adjusted + sector_bonus * strength
 
 
 def jaccard(left: set[str], right: set[str]) -> float:
@@ -239,6 +251,7 @@ def top_choices_for_branch(branch: str) -> list[int]:
         "industrylowcrowd",
         "cleanmomentum",
         "qmvstrongnodrag",
+        "sectorleader",
     }:
         return [5, 7]
     if branch in {"portfolio20", "breadthquality20"}:
@@ -267,6 +280,8 @@ def passes_branch_structure(names: set[str], top_n: int, branch: str) -> bool:
         return top_n in {5, 7} and is_clean_momentum_continuation_set(names)
     if branch == "qmvstrongnodrag":
         return top_n in {5, 7} and is_qmv_strong_no_drag_set(names)
+    if branch == "sectorleader":
+        return top_n in {5, 7} and is_sector_leader_quality_set(names)
     if branch == "breadthquality20":
         return top_n == 20 and is_breadth_quality20_set(names)
     return True
@@ -438,6 +453,20 @@ def is_qmv_strong_no_drag_set(names: set[str]) -> bool:
     return has_proven_strength_core and has_flow_confirmation and has_quality_or_risk_guard and has_current_position_guard and not weak_pullback_core
 
 
+def is_sector_leader_quality_set(names: set[str]) -> bool:
+    has_strength = bool(names & {"ret_60d", "ret_120d", "mom_252_21", "ma20_above_ma60", "px_to_ma20", "macd_hist"})
+    has_confirmation = bool(names & {"obv_change_20", "volume_ma_ratio_5_20", "cmf_20", "cmf_10", "close_pos_20d"})
+    has_risk_or_liquidity_guard = bool(
+        names & {"vol_20d", "vol_60d", "atr_20d", "parkinson_vol_20d", "dollar_volume_20d", "turnover_stability_20d"}
+    )
+    weak_pullback_core = (
+        {"ret_5d", "ret_120d", "px_to_ma60"}.issubset(names)
+        or {"ret_120d", "ret_5d", "turnover_stability_20d"}.issubset(names)
+        or {"ret_120d", "px_to_ma60", "turnover_stability_20d"}.issubset(names)
+    )
+    return has_strength and has_confirmation and has_risk_or_liquidity_guard and not weak_pullback_core
+
+
 def passes_factor_structure_screen(names: set[str], top_n: int) -> bool:
     if top_n == 20 and is_portfolio20_specialized_set(names):
         return True
@@ -446,6 +475,8 @@ def passes_factor_structure_screen(names: set[str], top_n: int) -> bool:
     if top_n in {5, 7} and is_clean_momentum_continuation_set(names):
         return True
     if top_n in {5, 7} and is_qmv_strong_no_drag_set(names):
+        return True
+    if top_n in {5, 7} and is_sector_leader_quality_set(names):
         return True
     if len(names & STRENGTH_FACTORS) < 2:
         return False
@@ -461,6 +492,7 @@ def passes_factor_structure_screen(names: set[str], top_n: int) -> bool:
         or is_industry_low_congestion_relative_set(names)
         or is_clean_momentum_continuation_set(names)
         or is_qmv_strong_no_drag_set(names)
+        or is_sector_leader_quality_set(names)
         or (top_n == 20 and is_breadth_quality20_set(names))
         or (top_n == 20 and is_portfolio20_specialized_set(names))
     )
@@ -496,6 +528,8 @@ def structural_prior(prefix: str, names: set[str], top_n: int, rebalance_days: i
         score += 2.5 if top_n == 20 else 0.3
     if is_qmv_strong_no_drag_set(names):
         score += 2.6 if top_n in {5, 7} else 0.2
+    if is_sector_leader_quality_set(names):
+        score += 2.4 if top_n in {5, 7} else 0.2
     if names & FLOW_FACTORS:
         score += 0.8
     if names & QUALITY_FACTORS:
@@ -530,6 +564,7 @@ def candidate_quality_score(row: dict[str, float | int | str]) -> float:
         "industrylowcrowd",
         "cleanmomentum",
         "qmvstrongnodrag",
+        "sectorleader",
     } and int(row["top_n"]) in {5, 7}:
         branch_bonus = 0.9
     return (
@@ -634,6 +669,14 @@ def generate_live_strength_pool(
                     symbols=live_frame["symbol"],
                     max_loser_exposure=4.0,
                 )
+            elif branch == "sectorleader":
+                scores = adjust_scores_for_sector_strength(scores, sector_map, sector_scores, live_frame["symbol"])
+                scores = adjust_scores_for_diagnostic_exposure(
+                    scores,
+                    symbol_exposure,
+                    symbols=live_frame["symbol"],
+                    max_loser_exposure=5.0,
+                )
             ic_score = sum(weights.get(name, 0.0) * ics[rebalance_days].get(name, 0.0) for name in names)
 
             for top_n in top_choices:
@@ -737,6 +780,7 @@ def main() -> int:
             "cleanmomentum",
             "breadthquality20",
             "qmvstrongnodrag",
+            "sectorleader",
         ],
         default="mixed",
     )

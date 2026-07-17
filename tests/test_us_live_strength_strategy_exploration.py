@@ -11,6 +11,7 @@ if str(SCRIPTS) not in sys.path:
 
 from us_live_strength_strategy_exploration import (
     adjust_scores_for_diagnostic_exposure,
+    adjust_scores_for_sector_strength,
     DRAG_SYMBOLS,
     candidate_quality_score,
     current_symbol_counts,
@@ -27,6 +28,7 @@ from us_live_strength_strategy_exploration import (
     is_portfolio20_specialized_set,
     is_qmv_strong_no_drag_set,
     is_relative_strength_diffusion_set,
+    is_sector_leader_quality_set,
     is_quality_trend_factor_set,
     is_volume_confirmed_low_vol_extension_set,
     passes_branch_structure,
@@ -378,6 +380,33 @@ class UsLiveStrengthStrategyExplorationTest(unittest.TestCase):
         self.assertTrue(passes_branch_structure(strong_no_drag, top_n=5, branch="qmvstrongnodrag"))
         self.assertFalse(passes_branch_structure(strong_no_drag, top_n=20, branch="qmvstrongnodrag"))
         self.assertTrue(passes_factor_structure_screen(strong_no_drag, top_n=7))
+
+    def test_sector_leader_quality_branch_requires_strength_confirmation_and_risk_guard(self) -> None:
+        sector_leader = {"ret_60d", "ma20_above_ma60", "obv_change_20", "vol_20d", "close_pos_20d"}
+        long_sector_leader = {"ret_120d", "px_to_ma20", "cmf_20", "parkinson_vol_20d", "dollar_volume_20d"}
+        weak_pullback = {"ret_5d", "ret_120d", "px_to_ma60", "mfi_14", "vol_20d"}
+        no_risk_guard = {"ret_60d", "ma20_above_ma60", "obv_change_20", "close_pos_20d"}
+
+        self.assertEqual(top_choices_for_branch("sectorleader"), [5, 7])
+        self.assertTrue(is_sector_leader_quality_set(sector_leader))
+        self.assertTrue(is_sector_leader_quality_set(long_sector_leader))
+        self.assertFalse(is_sector_leader_quality_set(weak_pullback))
+        self.assertFalse(is_sector_leader_quality_set(no_risk_guard))
+        self.assertTrue(passes_branch_structure(sector_leader, top_n=7, branch="sectorleader"))
+        self.assertFalse(passes_branch_structure(sector_leader, top_n=20, branch="sectorleader"))
+        self.assertTrue(passes_factor_structure_screen(sector_leader, top_n=5))
+
+    def test_sector_strength_adjustment_rewards_symbols_in_stronger_sectors(self) -> None:
+        scores = pd.Series([1.0, 1.0], index=[0, 1])
+        symbols = pd.Series(["A", "B"], index=[0, 1])
+        sector_map = {"A": "Technology", "B": "Utilities"}
+        sector_scores = {"Technology": 0.05, "Utilities": -0.02}
+
+        adjusted = adjust_scores_for_sector_strength(scores, sector_map, sector_scores, symbols, strength=4.0)
+
+        self.assertGreater(adjusted.loc[0], adjusted.loc[1])
+        self.assertAlmostEqual(float(adjusted.loc[0]), 1.20)
+        self.assertAlmostEqual(float(adjusted.loc[1]), 0.92)
 
     def test_candidate_pool_ranking_limits_single_strategy_cluster_dominance(self) -> None:
         pool = pd.DataFrame(
