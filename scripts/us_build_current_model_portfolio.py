@@ -13,7 +13,7 @@ from us_model_portfolio import cap_and_redistribute
 
 
 DB = Path(r"E:\quant-agent-team-us\research\us_strategy_research.duckdb")
-RAW_DIR = Path(r"E:\quant-agent-team-us\data\us\raw\2026-07-16-intraday-chart")
+RAW_DIR = Path(r"E:\quant-agent-team-us\data\us\raw\2026-07-17-intraday-chart")
 OUT_DIR = Path(r"G:\quant-agent-team-us\reports\us\live\current")
 DEFAULT_DRAG_SYMBOLS = {
     "ARM",
@@ -254,7 +254,7 @@ def main() -> int:
     parser.add_argument("--max-sector-weight", type=float, default=0.30)
     parser.add_argument("--max-cluster-share", type=float, default=0.65)
     parser.add_argument("--exclude-drag-symbols", action="store_true")
-    parser.add_argument("--date", default="20260716")
+    parser.add_argument("--date", default="20260717")
     args = parser.parse_args()
 
     con = duckdb.connect(str(DB), read_only=True)
