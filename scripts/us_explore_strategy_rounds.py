@@ -13,10 +13,12 @@ import us_rolling_validation as rolling
 import us_strategy_factory_loop as factory
 
 
-RAW_DIR = Path(r"E:\quant-agent-team-us\data\us\raw\2026-07-16-intraday-chart")
+RAW_DIR = Path(r"E:\quant-agent-team-us\data\us\raw\2026-07-17-intraday-chart")
 RESEARCH_DIR = Path(r"E:\quant-agent-team-us\research")
 REPORT_DIR = Path(r"G:\quant-agent-team-us\reports\us\live")
 DB_PATH = RESEARCH_DIR / "us_strategy_research.duckdb"
+LIVE_SIGNAL_DATE = "2026-06-30"
+LIVE_VALUATION_DATE = "2026-07-17"
 
 
 PREFERRED_SETS = [
@@ -206,7 +208,11 @@ def promote_round(round_no: int, label: str, candidates_path: Path, rolling_path
         allowed_holdings=(5, 7, 10, 20),
     )
     panel, _, _, _ = factory.load_panel(RAW_DIR, universe_mode="dynamic_liquidity")
-    live_frame, signal_date, entry_date, valuation_date = us_live_pool.build_live_period(panel, signal_date="2026-06-30")
+    live_frame, signal_date, entry_date, valuation_date = us_live_pool.build_live_period(
+        panel,
+        signal_date=LIVE_SIGNAL_DATE,
+        valuation_date=LIVE_VALUATION_DATE,
+    )
     holdings, live_metrics = us_live_pool.build_signal_holdings_and_live_metrics(
         strategies=strategies,
         candidates=candidates,

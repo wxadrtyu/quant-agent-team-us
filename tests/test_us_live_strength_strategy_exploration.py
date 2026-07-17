@@ -10,12 +10,14 @@ if str(SCRIPTS) not in sys.path:
     sys.path.insert(0, str(SCRIPTS))
 
 from us_live_strength_strategy_exploration import (
+    adjust_scores_for_current_crowding,
     adjust_scores_for_diagnostic_exposure,
     adjust_scores_for_sector_strength,
     DRAG_SYMBOLS,
     candidate_quality_score,
     current_symbol_counts,
     diagnostic_support_metrics,
+    decorrelation_metrics,
     holding_congestion_metrics,
     is_breadth_quality20_set,
     is_clean_momentum_continuation_set,
@@ -463,6 +465,51 @@ class UsLiveStrengthStrategyExplorationTest(unittest.TestCase):
             ],
         )
         self.assertIn("strategy_cluster", ranked.columns)
+
+    def test_current_crowding_adjustment_rewards_less_reused_symbols(self) -> None:
+        scores = pd.Series([1.0, 1.0, 1.0], index=[0, 1, 2])
+        symbols = pd.Series(["A", "B", "C"], index=[0, 1, 2])
+        counts = {"A": 10, "B": 2}
+
+        adjusted = adjust_scores_for_current_crowding(scores, counts, symbols, strength=0.10, hard_count_cap=8)
+
+        self.assertEqual(float(adjusted.loc[0]), float("-inf"))
+        self.assertLess(adjusted.loc[1], adjusted.loc[2])
+
+    def test_decorrelation_metrics_penalize_current_reuse_and_sector_concentration(self) -> None:
+        current_baskets = {
+            "old_a": {"A", "B", "C", "D", "E"},
+            "old_b": {"F", "G", "H", "I", "J"},
+        }
+        symbol_counts = {"A": 8, "B": 7, "C": 6, "X": 0, "Y": 0}
+        sector_map = {
+            "A": "Tech",
+            "B": "Tech",
+            "C": "Tech",
+            "X": "Health",
+            "Y": "Financials",
+            "K": "Industrials",
+            "L": "Utilities",
+            "M": "Consumer",
+            "N": "Energy",
+            "O": "Materials",
+        }
+
+        reused = decorrelation_metrics(["A", "B", "C", "X", "Y"], current_baskets, symbol_counts, sector_map, top_n=5)
+        fresh = decorrelation_metrics(["K", "L", "M", "N", "O"], current_baskets, {}, sector_map, top_n=5)
+
+        self.assertGreater(fresh["decorrelation_score"], reused["decorrelation_score"])
+        self.assertGreater(reused["current_stock_reuse_share"], fresh["current_stock_reuse_share"])
+        self.assertGreater(reused["max_decorrelation_sector_share"], fresh["max_decorrelation_sector_share"])
+
+    def test_decorrelated_branch_uses_low_overlap_factor_structures(self) -> None:
+        allowed = {"ret_60d", "mom_252_21", "obv_change_20", "vol_20d", "close_pos_20d"}
+        rejected_old_core = {"ret_5d", "ret_120d", "px_to_ma60", "turnover_stability_20d"}
+
+        self.assertEqual(top_choices_for_branch("decorrelated"), [5, 7])
+        self.assertTrue(passes_branch_structure(allowed, top_n=7, branch="decorrelated"))
+        self.assertFalse(passes_branch_structure(allowed, top_n=20, branch="decorrelated"))
+        self.assertFalse(passes_branch_structure(rejected_old_core, top_n=5, branch="decorrelated"))
 
 
 if __name__ == "__main__":

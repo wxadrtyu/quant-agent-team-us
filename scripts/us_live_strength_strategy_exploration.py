@@ -180,11 +180,16 @@ def max_current_overlap(candidate_basket: set[str], current_baskets: dict[str, s
 
 def holding_congestion_metrics(symbols: list[str], symbol_counts: dict[str, int], top_n: int) -> dict[str, float]:
     if not symbols:
-        return {"holding_congestion_score": 0.0, "portfolio_breadth_bonus": 0.0}
+        return {
+            "holding_congestion_score": 0.0,
+            "portfolio_breadth_bonus": 0.0,
+            "uncrowded_symbol_share": 0.0,
+        }
     counts = [float(symbol_counts.get(symbol, 0)) for symbol in symbols]
     avg_count = sum(counts) / len(counts)
     max_count = max(counts)
     crowded_share = sum(1 for count in counts if count >= 3) / len(counts)
+    uncrowded_share = sum(1 for count in counts if count <= 1) / len(counts)
     unique_count = len(set(symbols))
     holding_congestion_score = avg_count * 0.18 + max_count * 0.08 + crowded_share * 0.90
     portfolio_breadth_bonus = 0.0
@@ -195,6 +200,54 @@ def holding_congestion_metrics(symbols: list[str], symbol_counts: dict[str, int]
     return {
         "holding_congestion_score": float(holding_congestion_score),
         "portfolio_breadth_bonus": float(portfolio_breadth_bonus),
+        "uncrowded_symbol_share": float(uncrowded_share),
+    }
+
+
+def adjust_scores_for_current_crowding(
+    scores: pd.Series,
+    symbol_counts: dict[str, int],
+    symbols: pd.Series,
+    strength: float = 0.18,
+    hard_count_cap: int | None = None,
+) -> pd.Series:
+    adjusted = scores.copy()
+    score_symbols = symbols.reindex(adjusted.index).astype(str)
+    counts = score_symbols.map(symbol_counts).fillna(0.0).astype(float)
+    adjusted = adjusted - counts * strength
+    if hard_count_cap is not None:
+        adjusted = adjusted.mask(counts > hard_count_cap, float("-inf"))
+    return adjusted
+
+
+def decorrelation_metrics(
+    symbols: list[str],
+    current_baskets: dict[str, set[str]],
+    symbol_counts: dict[str, int],
+    sector_map: dict[str, str],
+    top_n: int,
+) -> dict[str, float]:
+    if not symbols:
+        return {
+            "decorrelation_score": 0.0,
+            "current_stock_reuse_share": 0.0,
+            "max_decorrelation_sector_share": 0.0,
+        }
+    symbol_set = set(symbols)
+    overlap, _ = max_current_overlap(symbol_set, current_baskets)
+    counts = [float(symbol_counts.get(symbol, 0)) for symbol in symbols]
+    reuse_share = sum(1 for count in counts if count > 0) / len(counts)
+    crowded_share = sum(1 for count in counts if count >= 3) / len(counts)
+    sectors = [sector_map.get(symbol, "Unknown") for symbol in symbols]
+    sector_counts = pd.Series(sectors).value_counts()
+    max_sector_share = float(sector_counts.iloc[0] / len(sectors)) if not sector_counts.empty else 0.0
+    sector_cap = 0.35 if top_n == 20 else 0.55
+    sector_penalty = max(0.0, max_sector_share - sector_cap)
+    decorrelation_score = (1.0 - overlap) * 1.4 + (1.0 - reuse_share) * 0.8 + (1.0 - crowded_share) * 0.9 - sector_penalty * 1.8
+    return {
+        "decorrelation_score": float(decorrelation_score),
+        "current_stock_reuse_share": float(reuse_share),
+        "max_decorrelation_sector_share": float(max_sector_share),
     }
 
 
@@ -254,6 +307,7 @@ def top_choices_for_branch(branch: str) -> list[int]:
         "qmvstableflow",
         "sectorleader",
         "smoothquality",
+        "decorrelated",
     }:
         return [5, 7]
     if branch in {"portfolio20", "breadthquality20"}:
@@ -290,6 +344,13 @@ def passes_branch_structure(names: set[str], top_n: int, branch: str) -> bool:
         return top_n in {5, 7} and is_smooth_quality_momentum_set(names)
     if branch == "breadthquality20":
         return top_n == 20 and is_breadth_quality20_set(names)
+    if branch == "decorrelated":
+        return top_n in {5, 7} and (
+            is_liquidity_quality_low_congestion_set(names)
+            or is_industry_low_congestion_relative_set(names)
+            or is_relative_strength_diffusion_set(names)
+            or is_smooth_quality_momentum_set(names)
+        )
     return True
 
 
@@ -610,6 +671,7 @@ def candidate_quality_score(row: dict[str, float | int | str]) -> float:
         "qmvstableflow",
         "sectorleader",
         "smoothquality",
+        "decorrelated",
     } and int(row["top_n"]) in {5, 7}:
         branch_bonus = 0.9
     return (
@@ -625,6 +687,10 @@ def candidate_quality_score(row: dict[str, float | int | str]) -> float:
         - float(row["max_factor_weight"]) * 0.30
         - float(row.get("holding_congestion_score", 0.0)) * 1.4
         + float(row.get("portfolio_breadth_bonus", 0.0))
+        + float(row.get("uncrowded_symbol_share", 0.0)) * 0.8
+        + float(row.get("decorrelation_score", 0.0)) * 1.1
+        - float(row.get("current_stock_reuse_share", 0.0)) * 1.4
+        - float(row.get("max_decorrelation_sector_share", 0.0)) * 0.5
         + float(row.get("winner_support_score", 0.0)) * 0.35
         + float(row.get("net_support_score", 0.0)) * 0.65
         - float(row.get("loser_exposure_score", 0.0)) * 0.55
@@ -674,7 +740,7 @@ def generate_live_strength_pool(
     branch: str = "mixed",
 ) -> pd.DataFrame:
     live_frame, signal_date, _, _ = us_live_pool.build_live_period(
-        panel, signal_date="2026-06-30", valuation_date="2026-07-16"
+        panel, signal_date="2026-06-30", valuation_date="2026-07-17"
     )
     benchmark_ret = float(live_frame["asset_ret"].mean())
     rebalance_choices = [5, 10, 20]
@@ -738,6 +804,21 @@ def generate_live_strength_pool(
                     strength=0.03,
                     max_loser_exposure=4.5,
                 )
+            elif branch == "decorrelated":
+                scores = adjust_scores_for_current_crowding(
+                    scores,
+                    symbol_counts,
+                    live_frame["symbol"],
+                    strength=0.22,
+                    hard_count_cap=8,
+                )
+                scores = adjust_scores_for_diagnostic_exposure(
+                    scores,
+                    symbol_exposure,
+                    symbols=live_frame["symbol"],
+                    strength=0.015,
+                    max_loser_exposure=5.0,
+                )
             ic_score = sum(weights.get(name, 0.0) * ics[rebalance_days].get(name, 0.0) for name in names)
 
             for top_n in top_choices:
@@ -762,6 +843,7 @@ def generate_live_strength_pool(
                     continue
                 metrics = live_strength_metrics(picks, benchmark_ret)
                 congestion = holding_congestion_metrics(symbol_list, symbol_counts, top_n)
+                decorrelation = decorrelation_metrics(symbol_list, current_baskets, symbol_counts, sector_map, top_n)
                 diagnostics = diagnostic_support_metrics(symbol_list, symbol_exposure, top_n)
                 sectors = sector_rotation_metrics(symbol_list, sector_map, sector_scores, top_n)
                 row = {
@@ -783,6 +865,7 @@ def generate_live_strength_pool(
                     "factory_prior_score": structural_prior(prefix, name_set, top_n, rebalance_days),
                     "factory_ic_score": ic_score,
                     **congestion,
+                    **decorrelation,
                     **diagnostics,
                     **sectors,
                     **metrics,
@@ -798,6 +881,8 @@ def generate_live_strength_pool(
     ).reset_index(drop=True)
     if branch == "breadthquality20":
         return rank_with_cluster_diversity(ranked)
+    if branch == "decorrelated":
+        return rank_with_cluster_diversity(ranked, max_per_cluster=1)
     return ranked
 
 
@@ -844,6 +929,7 @@ def main() -> int:
             "qmvstableflow",
             "sectorleader",
             "smoothquality",
+            "decorrelated",
         ],
         default="mixed",
     )
