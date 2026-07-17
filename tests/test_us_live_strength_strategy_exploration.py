@@ -27,7 +27,9 @@ from us_live_strength_strategy_exploration import (
     is_micro_reversal_protected_momentum_set,
     is_portfolio20_specialized_set,
     is_qmv_strong_no_drag_set,
+    is_qmv_stable_flow_set,
     is_relative_strength_diffusion_set,
+    is_smooth_quality_momentum_set,
     is_sector_leader_quality_set,
     is_quality_trend_factor_set,
     is_volume_confirmed_low_vol_extension_set,
@@ -381,6 +383,21 @@ class UsLiveStrengthStrategyExplorationTest(unittest.TestCase):
         self.assertFalse(passes_branch_structure(strong_no_drag, top_n=20, branch="qmvstrongnodrag"))
         self.assertTrue(passes_factor_structure_screen(strong_no_drag, top_n=7))
 
+    def test_qmv_stable_flow_branch_removes_short_reversal_noise(self) -> None:
+        stable_flow = {"ret_120d", "px_to_ma20", "mfi_14", "vol_20d", "turnover_stability_20d"}
+        stable_flow_obv = {"ret_120d", "px_to_ma20", "obv_change_20", "vol_60d", "dollar_volume_20d"}
+        short_reversal_noise = {"ret_120d", "ret_10d", "px_to_ma20", "mfi_14", "vol_20d", "turnover_stability_20d"}
+        missing_second_guard = {"ret_120d", "px_to_ma20", "mfi_14", "vol_20d"}
+
+        self.assertEqual(top_choices_for_branch("qmvstableflow"), [5, 7])
+        self.assertTrue(is_qmv_stable_flow_set(stable_flow))
+        self.assertTrue(is_qmv_stable_flow_set(stable_flow_obv))
+        self.assertFalse(is_qmv_stable_flow_set(short_reversal_noise))
+        self.assertFalse(is_qmv_stable_flow_set(missing_second_guard))
+        self.assertTrue(passes_branch_structure(stable_flow, top_n=7, branch="qmvstableflow"))
+        self.assertFalse(passes_branch_structure(stable_flow, top_n=20, branch="qmvstableflow"))
+        self.assertTrue(passes_factor_structure_screen(stable_flow, top_n=5))
+
     def test_sector_leader_quality_branch_requires_strength_confirmation_and_risk_guard(self) -> None:
         sector_leader = {"ret_60d", "ma20_above_ma60", "obv_change_20", "vol_20d", "close_pos_20d"}
         long_sector_leader = {"ret_120d", "px_to_ma20", "cmf_20", "parkinson_vol_20d", "dollar_volume_20d"}
@@ -395,6 +412,21 @@ class UsLiveStrengthStrategyExplorationTest(unittest.TestCase):
         self.assertTrue(passes_branch_structure(sector_leader, top_n=7, branch="sectorleader"))
         self.assertFalse(passes_branch_structure(sector_leader, top_n=20, branch="sectorleader"))
         self.assertTrue(passes_factor_structure_screen(sector_leader, top_n=5))
+
+    def test_smooth_quality_momentum_branch_uses_stability_without_old_pullback_core(self) -> None:
+        smooth_quality = {"ret_60d", "ret_120d", "cmf_20", "vol_60d", "ret_skew_20d", "turnover_stability_20d"}
+        smooth_quality_alt = {"ret_60d", "mom_252_21", "obv_change_20", "parkinson_vol_20d", "kurtosis_20d"}
+        old_pullback = {"ret_5d", "ret_120d", "px_to_ma60", "cmf_20", "vol_60d"}
+        missing_stability = {"ret_60d", "ret_120d", "cmf_20", "vol_60d"}
+
+        self.assertEqual(top_choices_for_branch("smoothquality"), [5, 7])
+        self.assertTrue(is_smooth_quality_momentum_set(smooth_quality))
+        self.assertTrue(is_smooth_quality_momentum_set(smooth_quality_alt))
+        self.assertFalse(is_smooth_quality_momentum_set(old_pullback))
+        self.assertFalse(is_smooth_quality_momentum_set(missing_stability))
+        self.assertTrue(passes_branch_structure(smooth_quality, top_n=5, branch="smoothquality"))
+        self.assertFalse(passes_branch_structure(smooth_quality, top_n=20, branch="smoothquality"))
+        self.assertTrue(passes_factor_structure_screen(smooth_quality, top_n=7))
 
     def test_sector_strength_adjustment_rewards_symbols_in_stronger_sectors(self) -> None:
         scores = pd.Series([1.0, 1.0], index=[0, 1])

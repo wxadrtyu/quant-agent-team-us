@@ -251,7 +251,9 @@ def top_choices_for_branch(branch: str) -> list[int]:
         "industrylowcrowd",
         "cleanmomentum",
         "qmvstrongnodrag",
+        "qmvstableflow",
         "sectorleader",
+        "smoothquality",
     }:
         return [5, 7]
     if branch in {"portfolio20", "breadthquality20"}:
@@ -280,8 +282,12 @@ def passes_branch_structure(names: set[str], top_n: int, branch: str) -> bool:
         return top_n in {5, 7} and is_clean_momentum_continuation_set(names)
     if branch == "qmvstrongnodrag":
         return top_n in {5, 7} and is_qmv_strong_no_drag_set(names)
+    if branch == "qmvstableflow":
+        return top_n in {5, 7} and is_qmv_stable_flow_set(names)
     if branch == "sectorleader":
         return top_n in {5, 7} and is_sector_leader_quality_set(names)
+    if branch == "smoothquality":
+        return top_n in {5, 7} and is_smooth_quality_momentum_set(names)
     if branch == "breadthquality20":
         return top_n == 20 and is_breadth_quality20_set(names)
     return True
@@ -453,6 +459,20 @@ def is_qmv_strong_no_drag_set(names: set[str]) -> bool:
     return has_proven_strength_core and has_flow_confirmation and has_quality_or_risk_guard and has_current_position_guard and not weak_pullback_core
 
 
+def is_qmv_stable_flow_set(names: set[str]) -> bool:
+    has_proven_strength_core = {"ret_120d", "px_to_ma20"}.issubset(names)
+    has_flow_confirmation = bool(names & {"mfi_14", "mfi_7", "cmf_20", "cmf_10", "obv_change_20"})
+    guard_count = len(names & {"vol_20d", "vol_60d", "atr_20d", "parkinson_vol_20d", "turnover_stability_20d", "dollar_volume_20d"})
+    has_short_reversal_noise = bool(names & REVERSAL_RISK_FACTORS)
+    weak_pullback_core = (
+        {"ret_5d", "ret_120d", "px_to_ma60"}.issubset(names)
+        or {"ret_120d", "ret_5d", "turnover_stability_20d"}.issubset(names)
+        or {"ret_120d", "ret_10d", "turnover_stability_20d"}.issubset(names)
+        or {"ret_120d", "px_to_ma60", "turnover_stability_20d"}.issubset(names)
+    )
+    return has_proven_strength_core and has_flow_confirmation and guard_count >= 2 and not has_short_reversal_noise and not weak_pullback_core
+
+
 def is_sector_leader_quality_set(names: set[str]) -> bool:
     has_strength = bool(names & {"ret_60d", "ret_120d", "mom_252_21", "ma20_above_ma60", "px_to_ma20", "macd_hist"})
     has_confirmation = bool(names & {"obv_change_20", "volume_ma_ratio_5_20", "cmf_20", "cmf_10", "close_pos_20d"})
@@ -467,6 +487,19 @@ def is_sector_leader_quality_set(names: set[str]) -> bool:
     return has_strength and has_confirmation and has_risk_or_liquidity_guard and not weak_pullback_core
 
 
+def is_smooth_quality_momentum_set(names: set[str]) -> bool:
+    has_mid_or_long_strength = len(names & {"ret_60d", "ret_120d", "mom_252_21", "macd_hist"}) >= 2
+    has_flow_confirmation = bool(names & {"cmf_20", "cmf_10", "obv_change_20", "mfi_14", "volume_ma_ratio_5_20"})
+    has_vol_guard = bool(names & {"vol_60d", "vol_20d", "parkinson_vol_20d", "atr_20d"})
+    has_tail_or_stability_guard = bool(names & {"ret_skew_20d", "kurtosis_20d", "turnover_stability_20d"})
+    old_pullback_core = (
+        {"ret_5d", "ret_120d", "px_to_ma60"}.issubset(names)
+        or {"ret_120d", "ret_5d", "turnover_stability_20d"}.issubset(names)
+        or {"ret_120d", "px_to_ma60", "turnover_stability_20d"}.issubset(names)
+    )
+    return has_mid_or_long_strength and has_flow_confirmation and has_vol_guard and has_tail_or_stability_guard and not old_pullback_core
+
+
 def passes_factor_structure_screen(names: set[str], top_n: int) -> bool:
     if top_n == 20 and is_portfolio20_specialized_set(names):
         return True
@@ -476,7 +509,11 @@ def passes_factor_structure_screen(names: set[str], top_n: int) -> bool:
         return True
     if top_n in {5, 7} and is_qmv_strong_no_drag_set(names):
         return True
+    if top_n in {5, 7} and is_qmv_stable_flow_set(names):
+        return True
     if top_n in {5, 7} and is_sector_leader_quality_set(names):
+        return True
+    if top_n in {5, 7} and is_smooth_quality_momentum_set(names):
         return True
     if len(names & STRENGTH_FACTORS) < 2:
         return False
@@ -492,7 +529,9 @@ def passes_factor_structure_screen(names: set[str], top_n: int) -> bool:
         or is_industry_low_congestion_relative_set(names)
         or is_clean_momentum_continuation_set(names)
         or is_qmv_strong_no_drag_set(names)
+        or is_qmv_stable_flow_set(names)
         or is_sector_leader_quality_set(names)
+        or is_smooth_quality_momentum_set(names)
         or (top_n == 20 and is_breadth_quality20_set(names))
         or (top_n == 20 and is_portfolio20_specialized_set(names))
     )
@@ -528,8 +567,12 @@ def structural_prior(prefix: str, names: set[str], top_n: int, rebalance_days: i
         score += 2.5 if top_n == 20 else 0.3
     if is_qmv_strong_no_drag_set(names):
         score += 2.6 if top_n in {5, 7} else 0.2
+    if is_qmv_stable_flow_set(names):
+        score += 2.7 if top_n in {5, 7} else 0.2
     if is_sector_leader_quality_set(names):
         score += 2.4 if top_n in {5, 7} else 0.2
+    if is_smooth_quality_momentum_set(names) and not is_portfolio20_specialized_set(names):
+        score += 2.5 if top_n in {5, 7} else 0.2
     if names & FLOW_FACTORS:
         score += 0.8
     if names & QUALITY_FACTORS:
@@ -564,7 +607,9 @@ def candidate_quality_score(row: dict[str, float | int | str]) -> float:
         "industrylowcrowd",
         "cleanmomentum",
         "qmvstrongnodrag",
+        "qmvstableflow",
         "sectorleader",
+        "smoothquality",
     } and int(row["top_n"]) in {5, 7}:
         branch_bonus = 0.9
     return (
@@ -669,6 +714,14 @@ def generate_live_strength_pool(
                     symbols=live_frame["symbol"],
                     max_loser_exposure=4.0,
                 )
+            elif branch == "qmvstableflow":
+                scores = adjust_scores_for_diagnostic_exposure(
+                    scores,
+                    symbol_exposure,
+                    symbols=live_frame["symbol"],
+                    strength=0.035,
+                    max_loser_exposure=3.5,
+                )
             elif branch == "sectorleader":
                 scores = adjust_scores_for_sector_strength(scores, sector_map, sector_scores, live_frame["symbol"])
                 scores = adjust_scores_for_diagnostic_exposure(
@@ -676,6 +729,14 @@ def generate_live_strength_pool(
                     symbol_exposure,
                     symbols=live_frame["symbol"],
                     max_loser_exposure=5.0,
+                )
+            elif branch == "smoothquality":
+                scores = adjust_scores_for_diagnostic_exposure(
+                    scores,
+                    symbol_exposure,
+                    symbols=live_frame["symbol"],
+                    strength=0.03,
+                    max_loser_exposure=4.5,
                 )
             ic_score = sum(weights.get(name, 0.0) * ics[rebalance_days].get(name, 0.0) for name in names)
 
@@ -780,7 +841,9 @@ def main() -> int:
             "cleanmomentum",
             "breadthquality20",
             "qmvstrongnodrag",
+            "qmvstableflow",
             "sectorleader",
+            "smoothquality",
         ],
         default="mixed",
     )
