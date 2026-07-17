@@ -77,6 +77,54 @@ def current_symbol_counts(current_baskets: dict[str, set[str]]) -> dict[str, int
     return counts
 
 
+def load_current_symbol_exposure() -> dict[str, dict[str, float]]:
+    con = duckdb.connect(str(DB_PATH), read_only=True)
+    try:
+        holdings = con.execute("select * from us_live_monitoring_holdings_current").fetchdf()
+        strategies = con.execute("select * from us_live_monitoring_strategies_current").fetchdf()
+    finally:
+        con.close()
+
+    holdings_monitor_col = holdings.columns[1]
+    symbol_col = holdings.columns[5]
+    weight_col = holdings.columns[7]
+    strategies_monitor_col = strategies.columns[31]
+    winner_col = strategies.columns[37]
+    frame = holdings[[holdings_monitor_col, symbol_col, weight_col]].merge(
+        strategies[[strategies_monitor_col, winner_col]],
+        left_on=holdings_monitor_col,
+        right_on=strategies_monitor_col,
+        how="left",
+    )
+    exposure: dict[str, dict[str, float]] = {}
+    for row in frame.itertuples(index=False):
+        symbol = str(getattr(row, symbol_col))
+        values = exposure.setdefault(symbol, {"winner_weight": 0.0, "loser_weight": 0.0})
+        weight = float(getattr(row, weight_col) or 0.0)
+        if bool(getattr(row, winner_col)):
+            values["winner_weight"] += weight
+        else:
+            values["loser_weight"] += weight
+    return exposure
+
+
+def diagnostic_support_metrics(symbols: list[str], exposure: dict[str, dict[str, float]], top_n: int) -> dict[str, float]:
+    if not symbols:
+        return {"winner_support_score": 0.0, "loser_exposure_score": 0.0, "net_support_score": 0.0}
+    winner_weights = [float(exposure.get(symbol, {}).get("winner_weight", 0.0)) for symbol in symbols]
+    loser_weights = [float(exposure.get(symbol, {}).get("loser_weight", 0.0)) for symbol in symbols]
+    winner_support_score = sum(winner_weights) / len(symbols)
+    loser_exposure_score = sum(loser_weights) / len(symbols)
+    net_support_score = winner_support_score - loser_exposure_score
+    if top_n == 20:
+        net_support_score += min(1.0, sum(1 for value in winner_weights if value > 0) / 20.0) * 0.5
+    return {
+        "winner_support_score": float(winner_support_score),
+        "loser_exposure_score": float(loser_exposure_score),
+        "net_support_score": float(net_support_score),
+    }
+
+
 def jaccard(left: set[str], right: set[str]) -> float:
     union = left | right
     return 0.0 if not union else len(left & right) / len(union)
@@ -450,6 +498,9 @@ def candidate_quality_score(row: dict[str, float | int | str]) -> float:
         - float(row["max_factor_weight"]) * 0.30
         - float(row.get("holding_congestion_score", 0.0)) * 1.4
         + float(row.get("portfolio_breadth_bonus", 0.0))
+        + float(row.get("winner_support_score", 0.0)) * 0.35
+        + float(row.get("net_support_score", 0.0)) * 0.65
+        - float(row.get("loser_exposure_score", 0.0)) * 0.55
         + float(row.get("sector_rotation_score", 0.0)) * 80.0
         + float(row.get("sector_breadth_bonus", 0.0))
         - float(row.get("sector_concentration_penalty", 0.0)) * 1.2
@@ -474,6 +525,7 @@ def generate_live_strength_pool(
     ics = factory.precompute_factor_ics(panel, "2023-06-30", "2025-06-29", rebalance_choices)
     rows: list[dict[str, object]] = []
     symbol_counts = current_symbol_counts(current_baskets)
+    symbol_exposure = load_current_symbol_exposure()
     sector_map = load_sector_map()
     sector_scores = sector_strength_scores(live_frame, sector_map, benchmark_ret)
 
@@ -515,6 +567,7 @@ def generate_live_strength_pool(
                     continue
                 metrics = live_strength_metrics(picks, benchmark_ret)
                 congestion = holding_congestion_metrics(symbol_list, symbol_counts, top_n)
+                diagnostics = diagnostic_support_metrics(symbol_list, symbol_exposure, top_n)
                 sectors = sector_rotation_metrics(symbol_list, sector_map, sector_scores, top_n)
                 row = {
                     "candidate_id": candidate_id[:180],
@@ -535,6 +588,7 @@ def generate_live_strength_pool(
                     "factory_prior_score": structural_prior(prefix, name_set, top_n, rebalance_days),
                     "factory_ic_score": ic_score,
                     **congestion,
+                    **diagnostics,
                     **sectors,
                     **metrics,
                 }

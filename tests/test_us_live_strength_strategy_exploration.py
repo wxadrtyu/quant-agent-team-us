@@ -13,6 +13,7 @@ from us_live_strength_strategy_exploration import (
     DRAG_SYMBOLS,
     candidate_quality_score,
     current_symbol_counts,
+    diagnostic_support_metrics,
     holding_congestion_metrics,
     is_breadth_quality20_set,
     is_clean_momentum_continuation_set,
@@ -144,6 +145,38 @@ class UsLiveStrengthStrategyExplorationTest(unittest.TestCase):
         clean_row = {**base, **clean, "top_n": 20}
 
         self.assertGreater(candidate_quality_score(clean_row), candidate_quality_score(crowded_row))
+
+    def test_candidate_quality_rewards_winner_support_and_penalizes_loser_exposure(self) -> None:
+        exposure = {
+            "AAA": {"winner_weight": 4.0, "loser_weight": 1.0},
+            "BBB": {"winner_weight": 3.0, "loser_weight": 0.5},
+            "CCC": {"winner_weight": 0.5, "loser_weight": 4.0},
+            "DDD": {"winner_weight": 0.2, "loser_weight": 3.0},
+        }
+        supported = diagnostic_support_metrics(["AAA", "BBB"], exposure, top_n=20)
+        dragged = diagnostic_support_metrics(["CCC", "DDD"], exposure, top_n=20)
+
+        self.assertGreater(supported["winner_support_score"], dragged["winner_support_score"])
+        self.assertLess(supported["loser_exposure_score"], dragged["loser_exposure_score"])
+
+        base = {
+            "live_excess_return": 0.025,
+            "live_hit_rate": 0.70,
+            "live_median_excess": 0.01,
+            "max_current_signal_overlap": 0.10,
+            "drag_symbol_hits": 0,
+            "short_reversal_fail_rate": 0.20,
+            "factory_prior_score": 3.0,
+            "factory_ic_score": 0.01,
+            "max_factor_weight": 0.35,
+            "top_n": 20,
+            "branch": "breadthquality20",
+        }
+
+        self.assertGreater(
+            candidate_quality_score({**base, **supported}),
+            candidate_quality_score({**base, **dragged}),
+        )
 
     def test_portfolio20_specialized_set_requires_breadth_and_risk_balance(self) -> None:
         portfolio20 = {"ret_60d", "mom_252_21", "cmf_20", "vol_20d", "turnover_stability_20d"}
