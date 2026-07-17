@@ -25,6 +25,7 @@ def main() -> int:
     parser.add_argument("--end-round", type=int, required=True)
     parser.add_argument("--admission-date", default="2026-07-16")
     parser.add_argument("--current-run-id", default="")
+    parser.add_argument("--allowlist", default="", help="Optional CSV with monitor_key values allowed to append.")
     args = parser.parse_args()
 
     db_path = Path(args.db)
@@ -89,6 +90,14 @@ def main() -> int:
     if not incoming.empty:
         existing_keys = set(current["monitor_key"].astype(str))
         incoming = incoming[~incoming["monitor_key"].astype(str).isin(existing_keys)].copy()
+        incoming_holdings = incoming_holdings[
+            incoming_holdings["monitor_key"].astype(str).isin(set(incoming["monitor_key"].astype(str)))
+        ].copy()
+    if args.allowlist and not incoming.empty:
+        allowlist = pd.read_csv(args.allowlist)
+        key_column = "monitor_key" if "monitor_key" in allowlist.columns else allowlist.columns[0]
+        allowed_keys = set(allowlist[key_column].astype(str))
+        incoming = incoming[incoming["monitor_key"].astype(str).isin(allowed_keys)].copy()
         incoming_holdings = incoming_holdings[
             incoming_holdings["monitor_key"].astype(str).isin(set(incoming["monitor_key"].astype(str)))
         ].copy()

@@ -358,6 +358,8 @@ def _write_table(con: duckdb.DuckDBPyConnection, table: str, frame: pd.DataFrame
     con.register("_frame", frame)
     try:
         con.execute(f"create table if not exists {table} as select * from _frame where 1=0")
+        if frame.empty:
+            return
         existing_columns = [row[1] for row in con.execute(f"pragma table_info('{table}')").fetchall()]
         if existing_columns != list(frame.columns):
             con.execute(f"drop table {table}")

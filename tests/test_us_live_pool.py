@@ -119,6 +119,30 @@ class UsLivePoolTest(unittest.TestCase):
             finally:
                 con.close()
 
+    def test_empty_live_pool_batch_does_not_shrink_existing_schema(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            db_path = Path(tmp) / "research.duckdb"
+            strategies = pd.DataFrame(
+                [{"run_id": "r1", "绛栫暐缂栧彿": "绛栫暐涓€", "candidate_id": "s1", "top_n_numeric": 5}]
+            )
+            holdings = pd.DataFrame(
+                [{"run_id": "r1", "绛栫暐缂栧彿": "绛栫暐涓€", "鑲＄エ浠ｇ爜": "AAPL", "鐩爣鏉冮噸": 1.0}]
+            )
+            empty_strategies = pd.DataFrame(columns=["run_id", "入库状态"])
+            empty_holdings = pd.DataFrame(columns=["run_id"])
+
+            write_live_pool(db_path, run_id="r1", strategies=strategies, holdings=holdings)
+            write_live_pool(db_path, run_id="r2", strategies=empty_strategies, holdings=empty_holdings)
+
+            con = duckdb.connect(str(db_path), read_only=True)
+            try:
+                columns = [row[1] for row in con.execute("pragma table_info('us_live_pool_strategies')").fetchall()]
+                self.assertIn("candidate_id", columns)
+                self.assertIn("top_n_numeric", columns)
+                self.assertEqual(con.execute("select count(*) from us_live_pool_strategies").fetchone()[0], 1)
+            finally:
+                con.close()
+
     def test_build_latest_holdings_from_candidates_generates_each_strategy_basket(self) -> None:
         strategies = pd.DataFrame(
             [
