@@ -14,6 +14,7 @@ from us_live_strength_strategy_exploration import (
     candidate_quality_score,
     current_symbol_counts,
     holding_congestion_metrics,
+    is_breadth_quality20_set,
     is_clean_momentum_continuation_set,
     is_defensive_quality_trend_set,
     is_event_volume_trend_hold_set,
@@ -277,6 +278,26 @@ class UsLiveStrengthStrategyExplorationTest(unittest.TestCase):
         self.assertFalse(passes_branch_structure(weak_pullback, top_n=5, branch="cleanmomentum"))
         self.assertTrue(passes_factor_structure_screen(clean_momentum, top_n=5))
         self.assertTrue(passes_factor_structure_screen(factory_clean_momentum, top_n=5))
+
+    def test_breadth_quality20_branch_is_true_twenty_stock_stabilizer(self) -> None:
+        breadth_quality = {
+            "ret_60d",
+            "ma20_above_ma60",
+            "dollar_volume_20d",
+            "turnover_stability_20d",
+            "vol_20d",
+            "obv_change_20",
+        }
+        weak_pullback = {"ret_5d", "ret_120d", "px_to_ma60", "turnover_stability_20d", "vol_20d"}
+        narrow_strength = {"ret_60d", "ma20_above_ma60", "obv_change_20", "vol_20d"}
+
+        self.assertEqual(top_choices_for_branch("breadthquality20"), [20])
+        self.assertTrue(is_breadth_quality20_set(breadth_quality))
+        self.assertFalse(is_breadth_quality20_set(weak_pullback))
+        self.assertFalse(is_breadth_quality20_set(narrow_strength))
+        self.assertTrue(passes_branch_structure(breadth_quality, top_n=20, branch="breadthquality20"))
+        self.assertFalse(passes_branch_structure(breadth_quality, top_n=7, branch="breadthquality20"))
+        self.assertTrue(passes_factor_structure_screen(breadth_quality, top_n=20))
 
 
 if __name__ == "__main__":
