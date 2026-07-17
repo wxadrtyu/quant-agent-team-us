@@ -262,6 +262,13 @@ def build_signal_holdings_and_live_metrics(
         if picks.empty:
             continue
         trade = live_frame.loc[picks.index].copy()
+        if "selected_symbols" in matched.columns and pd.notna(matched.iloc[0].get("selected_symbols")):
+            selected_symbols = list(json.loads(str(matched.iloc[0]["selected_symbols"])))[:top_n]
+            order = {str(symbol): rank for rank, symbol in enumerate(selected_symbols)}
+            selected_trade = live_frame[live_frame["symbol"].astype(str).isin(order)].copy()
+            if not selected_trade.empty:
+                selected_trade["_selected_order"] = selected_trade["symbol"].astype(str).map(order)
+                trade = selected_trade.sort_values("_selected_order").drop(columns=["_selected_order"])
         strategy_ret = float(trade["asset_ret"].mean())
         weight = 1.0 / len(trade)
         for rank, row in enumerate(trade.itertuples(index=False), start=1):

@@ -1,21 +1,21 @@
 {
-  "run_id": "2026-07-17-current-live-post-decorrelated-round318-319",
+  "run_id": "2026-07-17-current-live-post-lowcorr-round333-334",
   "raw_dir": "E:\\quant-agent-team-us\\data\\us\\raw\\2026-07-17-intraday-chart",
   "signal_date": "2026-06-30",
   "entry_date": "2026-07-01",
   "valuation_date": "2026-07-17",
   "benchmark_ret": 0.010339641943573952,
-  "current_strategies": 428,
-  "current_holdings": 3626,
-  "outperforming": 213,
+  "current_strategies": 430,
+  "current_holdings": 3636,
+  "outperforming": 215,
   "underperforming_kept": 215,
-  "persistent_outperforming": 213,
+  "persistent_outperforming": 215,
   "holding_distribution": {
-    "5": 97,
+    "5": 99,
     "7": 123,
     "10": 188,
     "20": 20
   },
-  "backup_suffix": "20260718_012927",
+  "backup_suffix": "20260718_041707",
   "note": "Full current pool retained; underperforming strategies are not removed."
 }

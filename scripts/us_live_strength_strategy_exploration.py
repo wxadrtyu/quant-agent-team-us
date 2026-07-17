@@ -790,6 +790,13 @@ def generate_live_strength_pool(
                 )
             elif branch == "sectorleader":
                 scores = adjust_scores_for_sector_strength(scores, sector_map, sector_scores, live_frame["symbol"])
+                scores = adjust_scores_for_current_crowding(
+                    scores,
+                    symbol_counts,
+                    live_frame["symbol"],
+                    strength=0.12,
+                    hard_count_cap=20,
+                )
                 scores = adjust_scores_for_diagnostic_exposure(
                     scores,
                     symbol_exposure,
@@ -858,6 +865,7 @@ def generate_live_strength_pool(
                     "signal_date": signal_date,
                     "max_current_signal_overlap": overlap,
                     "nearest_current_monitor_key": overlap_key,
+                    "selected_symbols": json.dumps(symbol_list),
                     "drag_symbol_hits": len(symbols & DRAG_SYMBOLS),
                     "live_strategy_return": strategy_ret,
                     "live_benchmark_return": benchmark_ret,

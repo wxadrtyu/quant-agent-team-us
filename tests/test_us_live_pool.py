@@ -13,6 +13,7 @@ if str(SCRIPTS) not in sys.path:
 
 from us_live_pool import (
     _validate_outputs,
+    build_signal_holdings_and_live_metrics,
     build_latest_holdings_from_candidates,
     enrich_strategies_with_live_metrics,
     filter_live_outperformers,
@@ -168,6 +169,92 @@ class UsLivePoolTest(unittest.TestCase):
         self.assertEqual(holdings["股票代码"].tolist(), ["AAA", "BBB"])
         self.assertAlmostEqual(float(holdings["目标权重"].sum()), 1.0)
         self.assertEqual(holdings["策略编号"].tolist(), ["策略一", "策略一"])
+
+
+    @unittest.skip("superseded by unicode-escape version below")
+    def test_build_signal_holdings_uses_candidate_selected_symbols_when_available(self) -> None:
+        strategies = pd.DataFrame(
+            [
+                {
+                    "绛栫暐缂栧彿": "绛栫暐涓€",
+                    "candidate_id": "s1",
+                    "鎸佷粨鏁伴噺": 2,
+                    "绛栫暐绫诲瀷": "test",
+                }
+            ]
+        )
+        candidates = pd.DataFrame(
+            [
+                {
+                    "candidate_id": "s1",
+                    "weights": '{"x": 1.0}',
+                    "selected_symbols": '["BBB", "CCC"]',
+                }
+            ]
+        )
+        live_frame = pd.DataFrame(
+            [
+                {"symbol": "AAA", "score_x": 10.0, "asset_ret": 0.30},
+                {"symbol": "BBB", "score_x": 1.0, "asset_ret": 0.10},
+                {"symbol": "CCC", "score_x": 0.0, "asset_ret": 0.20},
+            ]
+        )
+
+        holdings, metrics = build_signal_holdings_and_live_metrics(
+            strategies,
+            candidates,
+            live_frame,
+            signal_date="2026-06-30",
+            entry_date="2026-07-01",
+            valuation_date="2026-07-17",
+        )
+
+        self.assertEqual(holdings["鑲＄エ浠ｇ爜"].tolist(), ["BBB", "CCC"])
+        self.assertAlmostEqual(float(metrics["瀹炵洏鏀剁泭"].iloc[0]), 0.15)
+
+
+    def test_selected_symbols_override_factor_scores_with_unicode_columns(self) -> None:
+        strategy_id_col = "\u7b56\u7565\u7f16\u53f7"
+        holding_count_col = "\u6301\u4ed3\u6570\u91cf"
+        strategy_type_col = "\u7b56\u7565\u7c7b\u578b"
+        strategies = pd.DataFrame(
+            [
+                {
+                    strategy_id_col: "\u7b56\u7565\u4e00",
+                    "candidate_id": "s1",
+                    holding_count_col: 2,
+                    strategy_type_col: "test",
+                }
+            ]
+        )
+        candidates = pd.DataFrame(
+            [
+                {
+                    "candidate_id": "s1",
+                    "weights": '{"x": 1.0}',
+                    "selected_symbols": '["BBB", "CCC"]',
+                }
+            ]
+        )
+        live_frame = pd.DataFrame(
+            [
+                {"symbol": "AAA", "score_x": 10.0, "asset_ret": 0.30},
+                {"symbol": "BBB", "score_x": 1.0, "asset_ret": 0.10},
+                {"symbol": "CCC", "score_x": 0.0, "asset_ret": 0.20},
+            ]
+        )
+
+        holdings, metrics = build_signal_holdings_and_live_metrics(
+            strategies,
+            candidates,
+            live_frame,
+            signal_date="2026-06-30",
+            entry_date="2026-07-01",
+            valuation_date="2026-07-17",
+        )
+
+        self.assertEqual(holdings.iloc[:, 1].tolist(), ["BBB", "CCC"])
+        self.assertAlmostEqual(float(metrics.iloc[0, 4]), 0.15)
 
 
 if __name__ == "__main__":
