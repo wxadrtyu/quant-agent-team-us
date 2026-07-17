@@ -31,6 +31,7 @@ from us_live_strength_strategy_exploration import (
     passes_branch_structure,
     passes_factor_structure_screen,
     passes_live_strength_screen,
+    rank_with_cluster_diversity,
     sector_rotation_metrics,
     structural_prior,
     top_choices_for_branch,
@@ -361,6 +362,30 @@ class UsLiveStrengthStrategyExplorationTest(unittest.TestCase):
         self.assertTrue(passes_branch_structure(breadth_quality, top_n=20, branch="breadthquality20"))
         self.assertFalse(passes_branch_structure(breadth_quality, top_n=7, branch="breadthquality20"))
         self.assertTrue(passes_factor_structure_screen(breadth_quality, top_n=20))
+
+    def test_candidate_pool_ranking_limits_single_strategy_cluster_dominance(self) -> None:
+        pool = pd.DataFrame(
+            [
+                {"candidate_id": "qmv_ret_20d_px_to_ma60_obv_change_20_a", "final_score": 10.0},
+                {"candidate_id": "qmv_ret_20d_px_to_ma60_obv_change_20_b", "final_score": 9.8},
+                {"candidate_id": "qmv_ret_20d_px_to_ma60_obv_change_20_c", "final_score": 9.6},
+                {"candidate_id": "defensive_ret_60d_ma20_above_ma60_obv_change_20_a", "final_score": 9.4},
+                {"candidate_id": "quality_ret_60d_mom_252_21_cmf_20_a", "final_score": 9.2},
+            ]
+        )
+
+        ranked = rank_with_cluster_diversity(pool, max_per_cluster=2)
+
+        self.assertEqual(
+            ranked["candidate_id"].tolist()[:4],
+            [
+                "qmv_ret_20d_px_to_ma60_obv_change_20_a",
+                "qmv_ret_20d_px_to_ma60_obv_change_20_b",
+                "defensive_ret_60d_ma20_above_ma60_obv_change_20_a",
+                "quality_ret_60d_mom_252_21_cmf_20_a",
+            ],
+        )
+        self.assertIn("strategy_cluster", ranked.columns)
 
 
 if __name__ == "__main__":

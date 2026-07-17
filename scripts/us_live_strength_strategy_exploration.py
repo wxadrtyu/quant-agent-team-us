@@ -8,6 +8,7 @@ import duckdb
 import pandas as pd
 
 import us_explore_strategy_rounds as rounds
+from us_build_current_model_portfolio import strategy_cluster_key
 import us_live_pool
 import us_strategy_factory_loop as factory
 
@@ -532,6 +533,36 @@ def candidate_quality_score(row: dict[str, float | int | str]) -> float:
     )
 
 
+def rank_with_cluster_diversity(pool: pd.DataFrame, max_per_cluster: int = 2) -> pd.DataFrame:
+    if pool.empty:
+        return pool
+    ranked = pool.copy()
+    ranked["strategy_cluster"] = ranked["candidate_id"].map(strategy_cluster_key)
+    for column, default in {
+        "live_excess_return": 0.0,
+        "live_hit_rate": 0.0,
+        "max_current_signal_overlap": 0.0,
+    }.items():
+        if column not in ranked.columns:
+            ranked[column] = default
+    ranked = ranked.sort_values(
+        ["final_score", "live_excess_return", "live_hit_rate", "max_current_signal_overlap"],
+        ascending=[False, False, False, True],
+    ).reset_index(drop=True)
+
+    selected_rows = []
+    deferred_rows = []
+    cluster_counts: dict[str, int] = {}
+    for row in ranked.to_dict(orient="records"):
+        cluster = str(row["strategy_cluster"])
+        if cluster_counts.get(cluster, 0) < max_per_cluster:
+            selected_rows.append(row)
+            cluster_counts[cluster] = cluster_counts.get(cluster, 0) + 1
+        else:
+            deferred_rows.append(row)
+    return pd.DataFrame(selected_rows + deferred_rows)
+
+
 def generate_live_strength_pool(
     panel: pd.DataFrame,
     limit: int,
@@ -628,10 +659,13 @@ def generate_live_strength_pool(
 
     if not rows:
         return pd.DataFrame()
-    return pd.DataFrame(rows).sort_values(
+    ranked = pd.DataFrame(rows).sort_values(
         ["final_score", "live_excess_return", "live_hit_rate", "max_current_signal_overlap"],
         ascending=[False, False, False, True],
     ).reset_index(drop=True)
+    if branch == "breadthquality20":
+        return rank_with_cluster_diversity(ranked)
+    return ranked
 
 
 def write_round_candidates(pool: pd.DataFrame, start_round: int, rounds_count: int, per_round: int) -> list[tuple[int, Path, str]]:
