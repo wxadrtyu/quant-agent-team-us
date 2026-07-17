@@ -156,7 +156,16 @@ def sector_rotation_metrics(
 
 
 def top_choices_for_branch(branch: str) -> list[int]:
-    if branch in {"strong", "liquidity", "eventtrend", "closepos", "defensivequality", "diffusion", "industrylowcrowd"}:
+    if branch in {
+        "strong",
+        "liquidity",
+        "eventtrend",
+        "closepos",
+        "defensivequality",
+        "diffusion",
+        "industrylowcrowd",
+        "cleanmomentum",
+    }:
         return [5, 7]
     if branch == "portfolio20":
         return [20]
@@ -180,6 +189,8 @@ def passes_branch_structure(names: set[str], top_n: int, branch: str) -> bool:
         return top_n in {5, 7} and is_relative_strength_diffusion_set(names)
     if branch == "industrylowcrowd":
         return top_n in {5, 7} and is_industry_low_congestion_relative_set(names)
+    if branch == "cleanmomentum":
+        return top_n in {5, 7} and is_clean_momentum_continuation_set(names)
     return True
 
 
@@ -309,8 +320,24 @@ def is_industry_low_congestion_relative_set(names: set[str]) -> bool:
     )
 
 
+def is_clean_momentum_continuation_set(names: set[str]) -> bool:
+    has_medium_trend = len(names & {"ret_20d", "ret_60d", "mom_252_21", "macd_hist", "ma20_above_ma60"}) >= 2
+    has_current_confirmation = bool(names & {"close_pos_20d", "px_to_ma20", "ma20_above_ma60"})
+    has_volume_confirmation = bool(names & {"volume_ma_ratio_5_20", "obv_change_20", "cmf_20"})
+    has_failure_protection = bool(names & {"range_pct_5d", "vol_20d", "atr_20d", "parkinson_vol_20d"})
+    weak_pullback_core = (
+        {"ret_5d", "ret_120d", "px_to_ma60"}.issubset(names)
+        or {"ret_120d", "ret_5d", "turnover_stability_20d"}.issubset(names)
+        or {"ret_120d", "ret_5d", "ret_skew_20d"}.issubset(names)
+        or {"ret_120d", "px_to_ma60", "turnover_stability_20d"}.issubset(names)
+    )
+    return has_medium_trend and has_current_confirmation and has_volume_confirmation and has_failure_protection and not weak_pullback_core
+
+
 def passes_factor_structure_screen(names: set[str], top_n: int) -> bool:
     if top_n == 20 and is_portfolio20_specialized_set(names):
+        return True
+    if top_n in {5, 7} and is_clean_momentum_continuation_set(names):
         return True
     if len(names & STRENGTH_FACTORS) < 2:
         return False
@@ -324,6 +351,7 @@ def passes_factor_structure_screen(names: set[str], top_n: int) -> bool:
         or is_defensive_quality_trend_set(names)
         or is_relative_strength_diffusion_set(names)
         or is_industry_low_congestion_relative_set(names)
+        or is_clean_momentum_continuation_set(names)
         or (top_n == 20 and is_portfolio20_specialized_set(names))
     )
 
@@ -352,6 +380,8 @@ def structural_prior(prefix: str, names: set[str], top_n: int, rebalance_days: i
         score += 2.2
     if is_industry_low_congestion_relative_set(names):
         score += 2.0
+    if is_clean_momentum_continuation_set(names):
+        score += 2.3
     if names & FLOW_FACTORS:
         score += 0.8
     if names & QUALITY_FACTORS:
@@ -375,7 +405,15 @@ def candidate_quality_score(row: dict[str, float | int | str]) -> float:
         branch_bonus = 0.6
     elif branch == "portfolio20" and int(row["top_n"]) == 20:
         branch_bonus = 0.8
-    elif branch in {"liquidity", "eventtrend", "closepos", "defensivequality", "diffusion", "industrylowcrowd"} and int(row["top_n"]) in {5, 7}:
+    elif branch in {
+        "liquidity",
+        "eventtrend",
+        "closepos",
+        "defensivequality",
+        "diffusion",
+        "industrylowcrowd",
+        "cleanmomentum",
+    } and int(row["top_n"]) in {5, 7}:
         branch_bonus = 0.9
     return (
         float(row["factory_prior_score"])
@@ -526,6 +564,7 @@ def main() -> int:
             "defensivequality",
             "diffusion",
             "industrylowcrowd",
+            "cleanmomentum",
         ],
         default="mixed",
     )

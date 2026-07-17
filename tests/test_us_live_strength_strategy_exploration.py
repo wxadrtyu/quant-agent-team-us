@@ -14,6 +14,7 @@ from us_live_strength_strategy_exploration import (
     candidate_quality_score,
     current_symbol_counts,
     holding_congestion_metrics,
+    is_clean_momentum_continuation_set,
     is_defensive_quality_trend_set,
     is_event_volume_trend_hold_set,
     is_industry_low_congestion_relative_set,
@@ -259,6 +260,23 @@ class UsLiveStrengthStrategyExplorationTest(unittest.TestCase):
         self.assertTrue(passes_branch_structure(industry_low_crowd, top_n=7, branch="industrylowcrowd"))
         self.assertFalse(passes_branch_structure(repeated_core, top_n=5, branch="diffusion"))
         self.assertFalse(passes_branch_structure(repeated_core, top_n=7, branch="industrylowcrowd"))
+
+    def test_clean_momentum_branch_requires_confirmation_and_rejects_weak_pullback_clusters(self) -> None:
+        clean_momentum = {"ret_60d", "mom_252_21", "close_pos_20d", "volume_ma_ratio_5_20", "range_pct_5d"}
+        factory_clean_momentum = {"ret_20d", "ma20_above_ma60", "cmf_20", "vol_20d", "dollar_volume_20d"}
+        weak_pullback = {"ret_5d", "ret_120d", "px_to_ma60", "turnover_stability_20d", "ret_skew_20d"}
+        no_failure_guard = {"ret_60d", "mom_252_21", "close_pos_20d", "volume_ma_ratio_5_20"}
+
+        self.assertEqual(top_choices_for_branch("cleanmomentum"), [5, 7])
+        self.assertTrue(is_clean_momentum_continuation_set(clean_momentum))
+        self.assertTrue(is_clean_momentum_continuation_set(factory_clean_momentum))
+        self.assertFalse(is_clean_momentum_continuation_set(weak_pullback))
+        self.assertFalse(is_clean_momentum_continuation_set(no_failure_guard))
+        self.assertTrue(passes_branch_structure(clean_momentum, top_n=7, branch="cleanmomentum"))
+        self.assertFalse(passes_branch_structure(clean_momentum, top_n=20, branch="cleanmomentum"))
+        self.assertFalse(passes_branch_structure(weak_pullback, top_n=5, branch="cleanmomentum"))
+        self.assertTrue(passes_factor_structure_screen(clean_momentum, top_n=5))
+        self.assertTrue(passes_factor_structure_screen(factory_clean_momentum, top_n=5))
 
 
 if __name__ == "__main__":
