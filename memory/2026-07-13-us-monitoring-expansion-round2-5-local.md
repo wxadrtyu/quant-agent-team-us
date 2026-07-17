@@ -1,0 +1,22 @@
+# 2026-07-13 美股正式监控池扩容与滚动验证性能修复
+
+- summary: 用户确认第一批策略进入正式监控后，继续处理滚动验证前 80 个候选，并将通过随机检验的策略分批纳入正式监控。
+- stage: monitoring-expansion-and-strategy-exploration
+- kpi_version: us_v1
+- tags: project:quant-agent-team-us, market:us_equity, freq:daily, strategy:live_monitoring, status:formal_monitoring
+- decisions:
+  - 将第一批 30 个策略状态改为“人工已确认，进入正式监控”。
+  - 参考 Trae 技能时，纳入其数据库唯一来源、最新估值日、生成物验证等优点；不照搬 A 股进攻/防守双表结构；分组展示和一键更新流程留作优化后纳入。
+  - 修复 `scripts/us_rolling_validation.py` 的重复计算问题，缓存月度训练相关性和交易切片。
+  - 修复 `scripts/us_null_overfit_check.py` 的随机检验年化频率口径，按候选调仓周期计算。
+  - 滚动验证前 80 个候选后，将通过随机检验和去偏门槛的策略分批入库监控。
+- evidence:
+  - 第二批 run_id: 2026-07-13-monitor-round2-top20，20 条，新增去重 10 条。
+  - 第三批 run_id: 2026-07-13-monitor-round3-rank21-40，20 条，新增去重 11 条。
+  - 第四批 run_id: 2026-07-13-monitor-round4-rank41-60，20 条，新增去重 12 条。
+  - 第五批 run_id: 2026-07-13-monitor-round5-rank61-80，11 条，新增去重 8 条；排名 61 到 80 中 9 条未达门槛，未入监控。
+  - 当前主表: `us_live_monitoring_strategies_current`，71 个去重正式监控策略。
+  - 当前持仓主表: `us_live_monitoring_holdings_current`，1080 行持仓。
+  - 当前监控导出: `reports/us/live/current/2026-07-13-current-formal-monitoring-strategies.csv` 和 `reports/us/live/current/2026-07-13-current-formal-monitoring-holdings.csv`。
+  - 验证: `pytest tests/test_us_live_pool.py tests/test_us_rolling_validation.py tests/test_us_null_overfit_check.py tests/test_us_research_db_ingest.py tests/test_us_universe.py tests/test_us_model_portfolio.py -q`，13 passed。
+- next_step: 前 80 名已经处理完；后续应扩展候选生成或专门围绕回调趋势型、均衡回调型的成功因子组合做新策略家族搜索，同时继续补历史时点成分和退市覆盖。

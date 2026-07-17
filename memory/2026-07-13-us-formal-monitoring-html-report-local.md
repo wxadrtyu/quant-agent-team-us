@@ -1,0 +1,26 @@
+# 2026-07-13 美股正式监控 HTML 实盘报告
+
+- summary: 参考 A 股项目 `reports/v51_production/live_signals/simulation_offensive_detail_0630_0709.html` 的报告结构，为美股当前正式监控池生成内嵌数据 HTML 报告和 JSON。
+- stage: live-monitoring-report-generation
+- kpi_version: us_v1
+- tags: project:quant-agent-team-us, market:us_equity, freq:daily, report:formal_monitoring_html
+- outputs:
+  - `reports/us/live/current/us_simulation_formal_monitoring_0630_0710.json`
+  - `reports/us/live/current/us_simulation_formal_monitoring_detail_0630_0710.html`
+  - `reports/us/live/current/us_simulation_formal_monitoring_simple_0630_0710.html`
+- report_shape:
+  - 顶部摘要卡片
+  - 标签页
+  - 全策略盈亏总览
+  - 唯一股票汇总
+  - 策略类型汇总
+  - 策略持仓明细
+  - JSON 数据内嵌到 HTML，避免本地读取失败
+- evidence:
+  - 策略数: 71
+  - 信号日: 2026-06-30
+  - 入场日: 2026-07-01
+  - 估值日: 2026-07-10
+  - 验证: HTML 包含 `json-data` 和 `results`，无 `NaN`、`Infinity`、`__JSON_DATA__`、`TBD`
+  - 测试: `pytest tests/test_us_live_pool.py tests/test_us_rolling_validation.py tests/test_us_null_overfit_check.py tests/test_us_research_db_ingest.py tests/test_us_universe.py tests/test_us_model_portfolio.py -q`，13 passed
+- next_step: 后续可把该脚本纳入一键实盘更新流程，串联数据补齐、估值、数据库验证和 HTML 报告生成。

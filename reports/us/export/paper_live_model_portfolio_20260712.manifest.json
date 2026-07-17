@@ -1,0 +1,12 @@
+{
+  "output": "G:\\quant-agent-team-us\\reports\\us\\export\\paper_live_model_portfolio_20260712.csv",
+  "strategy_file": "G:\\quant-agent-team-us\\reports\\us\\export\\paper_live_pool_diversified_20260712.csv",
+  "signal_file": "G:\\quant-agent-team-us\\reports\\us\\export\\paper_live_pool_latest_signals_20260712.csv",
+  "primary_strategies": 4,
+  "symbols": 48,
+  "max_symbol_weight": 0.08,
+  "total_weight": 1.0,
+  "largest_weight": 0.05,
+  "status": "paper_live_ready_pending_human_review",
+  "active_monitoring_status": "blocked_pending_pit_universe"
+}

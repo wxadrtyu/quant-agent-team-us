@@ -1,0 +1,33 @@
+# 2026-07-11 US large/mid data download
+
+- summary: Downloaded the US large/mid bootstrap raw dataset for S&P 500, Nasdaq 100, and Russell 1000 current-snapshot universes.
+- stage: data-download
+- kpi_version: us-v1.0-bootstrap
+- tags: project:quant-agent-team, market:us, freq:daily, data-decision, status:partial-provider-coverage
+- sources:
+  - wikipedia_sp500 current constituents: 503 rows
+  - wikipedia_russell1000 current constituents: 1003 rows
+  - nasdaq_api_nasdaq100 current constituents: 103 rows
+  - nasdaq_api_historical raw daily OHLCV prices
+- outputs:
+  - data/us/raw/2026-07-11/us_index_membership.csv and parquet
+  - data/us/raw/2026-07-11/us_stock_meta.csv and parquet
+  - data/us/raw/2026-07-11/us_market_daily.csv and parquet
+  - data/us/raw/2026-07-11/manifest.json
+  - data/us/raw/2026-07-11/us_market_daily_errors.json
+- validation:
+  - stock_count: 1019
+  - price_symbol_count: 1011
+  - price_rows: 1103688
+  - price_date_min: 2022-01-03
+  - price_date_max: 2026-07-09
+  - duplicate symbol/date rows: 0
+  - blank price symbols: 0
+  - null OHLC rows: 0
+  - null volume rows: 1876
+  - pytest: 141 passed, 8 skipped
+- caveats:
+  - Membership is current_snapshot and therefore survivorship-biased for historical backtests.
+  - Nasdaq historical prices are raw OHLCV; adj_close is set equal to close until split/dividend adjustment data is added.
+  - Missing price symbols from Nasdaq historical endpoint: AL, BF.B, BF.A, CWEN.A, HEI.A, LEN.B, MASI, UHAL.B.
+- next_step: Ingest raw files into the project data layer, compute first technical factors from raw OHLCV, and keep fundamentals/adjustment/PIT membership as separate source decisions before using this for strategy reliability claims.

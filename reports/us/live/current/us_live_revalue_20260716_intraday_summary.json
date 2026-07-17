@@ -1,0 +1,22 @@
+{
+  "run_id": "2026-07-16-current-live-intraday-valuation",
+  "raw_dir": "E:\\quant-agent-team-us\\data\\us\\raw\\2026-07-16-intraday-chart",
+  "signal_date": "2026-06-30",
+  "entry_date": "2026-07-01",
+  "valuation_date": "2026-07-16",
+  "benchmark_ret": 0.01581014133989811,
+  "input_strategies": 338,
+  "kept_strategies": 159,
+  "excluded_under_benchmark": 179,
+  "current_holdings": 1359,
+  "min_live_excess": 0.0007026986963156734,
+  "avg_live_excess": 0.019038814340705684,
+  "holding_distribution": {
+    "5": 29,
+    "7": 52,
+    "10": 71,
+    "20": 7
+  },
+  "backup_suffix": "20260716_225429",
+  "note": "2026-07-16 is intraday at Asia/Shanghai update time; historical live pool preserved in backup and revalued tables."
+}

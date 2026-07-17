@@ -1,0 +1,31 @@
+# 2026-07-12 US price-volume strategy research
+
+- summary: Audited the US bootstrap dataset and ran exploratory monthly long-only price/volume factor scans on E drive outputs.
+- stage: strategy-research
+- kpi_version: us-v1.0-bootstrap
+- tags: project:quant-agent-team, market:us, freq:daily, strategy-hypothesis, data-decision, status:exploratory-only
+- data_state:
+  - raw data: data/us/raw/2026-07-11
+  - stock_meta_symbols: 1019
+  - price_symbols: 1011
+  - price_rows: 1103688
+  - price_date_range: 2022-01-03..2026-07-09
+  - missing_price_symbols: AL, BF.B, BF.A, CWEN.A, HEI.A, LEN.B, MASI, UHAL.B
+  - sector coverage is usable; exchange/currency and market_cap coverage are not usable for v1 factors
+- research_outputs:
+  - E:/quant-agent-team-us/research/2026-07-12/us_data_quality_for_strategy.json
+  - E:/quant-agent-team-us/research/2026-07-12/us_price_volume_strategy_scan_relative.csv
+  - E:/quant-agent-team-us/research/2026-07-12/us_price_volume_strategy_scan_robust_relative.csv
+  - E:/quant-agent-team-us/research/2026-07-12/us_price_anomaly_symbols.csv
+- findings:
+  - Raw momentum scans were too strong and exposed raw-price/split or corporate-action contamination risk.
+  - A conservative robust scan excluded symbols with abs daily return over 80 percent and capped momentum candidates to [-80 percent, +300 percent].
+  - Robust top candidates remained momentum/trend: trend_ma60 top20, mom_252_21 top20, ret_120d top20.
+  - Robust mom_252_21 top20: annualized 62.2 percent, benchmark annualized 13.3 percent, excess annualized 43.2 percent, max drawdown 15.9 percent, holdout 2025-2026 excess annualized 48.6 percent.
+  - Robust trend_ma60 top20: annualized 37.6 percent, benchmark annualized 13.3 percent, excess annualized 21.5 percent, max drawdown 16.7 percent, holdout 2025-2026 excess annualized 53.3 percent, but train 2023-2024 excess was near zero.
+- caveats:
+  - Current-snapshot universe creates survivorship bias.
+  - Nasdaq raw OHLCV is not adjusted; adj_close equals close.
+  - No validated split/dividend adjustment source is integrated.
+  - Results are exploratory and must not enter monitoring/live use before PIT membership, adjustment handling, and repeatable research scripts are added.
+- next_step: Build a repeatable US factor-panel and research runner, add robust anomaly filters, then validate momentum/trend candidates with purged walk-forward and benchmark-relative gates.

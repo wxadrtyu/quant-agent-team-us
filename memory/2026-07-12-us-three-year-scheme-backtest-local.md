@@ -1,0 +1,45 @@
+# 2026-07-12 US strict three-year scheme backtest
+
+- summary: Re-ran the US strategy search using the project scheme instead of the earlier exploratory train/OOS split.
+- stage: strategy-research
+- kpi_version: us-v1.0-bootstrap
+- tags: project:quant-agent-team, market:us, freq:daily, backtest-result, review-decision, status:strict-scheme-only
+- data:
+  - raw_dir: E:/quant-agent-team-us/data/us/raw/2026-07-12
+  - price_date_range: 2022-01-03..2026-07-10
+  - symbols: 1011
+  - excluded anomaly symbols: CORT, DJT, INSM, QXO, SHC, SIRI, SMMT, VKTX
+- scheme:
+  - ranking/development window: 2023-06-30..2025-06-29
+  - one-shot holdout window: 2025-06-30..2026-06-29
+  - live proxy: signal 2026-06-30, entry 2026-07-01 open, mark 2026-07-10 close
+  - cost model: 10 bps entry plus 10 bps exit
+  - benchmark: same eligible universe, equal weight, same execution dates and costs
+  - selection rule: rank by development metrics only; holdout and live are pass/fail verification
+- outputs:
+  - E:/quant-agent-team-us/research/2026-07-12-strict/scheme_three_year_all.csv
+  - E:/quant-agent-team-us/research/2026-07-12-strict/scheme_three_year_qualified.csv
+  - E:/quant-agent-team-us/research/2026-07-12-strict/scheme_three_year_qualified_top50.xlsx
+  - E:/quant-agent-team-us/research/2026-07-12-strict/scheme_three_year_manifest.json
+- result:
+  - spec_count: 195
+  - qualified_count: 3
+  - best strict candidate: rev10_W_top10
+  - rev10_W_top10 logic: weekly long-only short-term reversal, buy 10 eligible stocks with the lowest 10-day return
+  - dev_excess_return: 27.95 percent
+  - dev_excess_annual: 13.28 percent
+  - dev_mdd: 23.03 percent
+  - dev_ir: 0.83
+  - dev_avg_ir: 1.15
+  - holdout_excess_return: 17.73 percent
+  - holdout_excess_annual: 17.79 percent
+  - holdout_mdd: 14.84 percent
+  - holdout_ir: 0.81
+  - holdout_avg_ir: 0.92
+  - live_total_return: 4.04 percent
+  - live_benchmark_return: 0.51 percent
+  - live_excess_return: 3.51 percent
+- review_decision:
+  - Earlier exploratory rankings are superseded by this strict scheme result.
+  - Momentum/trend candidates that looked strong in development/holdout failed the live proxy window and should not be promoted.
+  - rev10_W_top10 passes this strict historical/live proxy screen but is still not guaranteed to win live and should not enter monitoring without repeatable repo code, PIT membership, adjusted prices, and review approval.

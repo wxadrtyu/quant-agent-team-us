@@ -33,6 +33,7 @@ data/akshare_qfq_fetch.log
 # Tushare pulled data (regenerable via scripts/fetch_tushare.py)
 data/tushare/
 data/tushare_*.log
+data/us/
 
 # Runtime logs (regenerable, not version-controlled)
 data/*.log

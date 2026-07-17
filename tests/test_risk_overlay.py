@@ -56,8 +56,8 @@ def _spike_crash_frame() -> pd.DataFrame:
     prices = [100.0, 130.0, 140.0, 120.0, 90.0]  # peak 140 then down to 90
     rows = []
     for d, p in zip(dates, prices):
-        rows.append({"stock_code": "A", "trade_date": d, "close_price_adj": p, "mom": 1.0})
-        rows.append({"stock_code": "B", "trade_date": d, "close_price_adj": 100.0, "mom": -1.0})
+        rows.append({"stock_code": "A", "trade_date": d, "open_price": 100.0, "close_price_adj": p, "mom": 1.0})
+        rows.append({"stock_code": "B", "trade_date": d, "open_price": 100.0, "close_price_adj": 100.0, "mom": -1.0})
     return pd.DataFrame(rows)
 
 

@@ -1,0 +1,42 @@
+# 2026-07-12 US strict OOS/live strategy search
+
+- summary: Refreshed US raw data to E drive through 2026-07-10 and reran stricter OOS/live strategy searches with A-share-like metric columns.
+- stage: strategy-research
+- kpi_version: us-v1.0-bootstrap
+- tags: project:quant-agent-team, market:us, freq:daily, strategy-hypothesis, backtest-result, status:exploratory-qualified
+- data:
+  - raw_dir: E:/quant-agent-team-us/data/us/raw/2026-07-12
+  - price_date_range: 2022-01-03..2026-07-10
+  - symbols: 1011
+  - excluded anomaly symbols: CORT, DJT, INSM, QXO, SHC, SIRI, SMMT, VKTX
+- strict_method:
+  - training window: 2023-01-03..2024-12-31
+  - OOS ranking window: 2025-01-02..2026-06-29
+  - live test window: signal 2026-06-30, entry 2026-07-01 open, mark-to-market exit 2026-07-10 close
+  - costs: 10 bps entry plus 10 bps exit
+  - benchmark: equal-weight eligible universe with the same execution dates and same cost convention
+  - selection: rank by OOS metrics first; live window is reported after ranking
+- initial_result:
+  - Momentum/trend strategies that ranked best by OOS were negative in the 2026-06-30..2026-07-12 live window.
+  - Best OOS momentum/trend examples had strong OOS IR but live returns around -5 percent to -10 percent, so they are rejected for the user's live-window requirement.
+- defensive_search_result:
+  - output: E:/quant-agent-team-us/research/2026-07-12-strict/defensive_strategy_qualified_oos_live.csv
+  - best candidate: rev5_W_top50
+  - logic: weekly long-only short-term reversal, buy the 50 eligible stocks with the lowest 5-day return
+  - train_excess_return: 46.0 percent
+  - train_mdd: 15.0 percent
+  - train_ir: 1.79
+  - train_avg_ir: 1.86
+  - oos_excess_return: 21.5 percent
+  - oos_excess_annual: 14.0 percent
+  - oos_mdd: 25.1 percent
+  - oos_ir: 1.28
+  - oos_avg_ir: 1.38
+  - live_total_return: 3.04 percent
+  - live_benchmark_return: 0.51 percent
+  - live_excess_return: 2.52 percent
+- caveats:
+  - No strategy can guarantee future live profits; the live window is a necessary check, not proof.
+  - Current-snapshot universe and raw unadjusted Nasdaq OHLCV still make this exploratory.
+  - Live IR and live avg IR are not meaningful with one live period; report live return/excess instead.
+- next_step: Promote rev5_W_top50 into a repeatable repo script with tests, add purged walk-forward reporting, then add split/dividend adjusted prices before any monitoring decision.

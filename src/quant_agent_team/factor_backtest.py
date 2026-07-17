@@ -34,6 +34,27 @@ def _rebalance_dates(dates: List[pd.Timestamp], step: int) -> List[pd.Timestamp]
     return rd
 
 
+def _next_execution_date(dates: List[pd.Timestamp], signal_date: pd.Timestamp) -> Optional[pd.Timestamp]:
+    try:
+        idx = dates.index(signal_date)
+    except ValueError:
+        return None
+    next_idx = idx + 1
+    return dates[next_idx] if next_idx < len(dates) else None
+
+
+def _execution_price(rows: pd.DataFrame, prefer_open: bool = True) -> Optional[float]:
+    if rows.empty:
+        return None
+    row = rows.iloc[0]
+    price = row.get("open_price") if prefer_open and "open_price" in rows.columns else None
+    if pd.isna(price) or price is None:
+        price = row.get("close_price_adj")
+    if pd.isna(price) or price is None:
+        return None
+    return float(price)
+
+
 def run_factor_backtest(
     frame: pd.DataFrame,
     hypothesis: FactorHypothesis,
@@ -52,7 +73,7 @@ def run_factor_backtest(
     costs = cost_model if cost_model is not None else CostModel()
     frame = frame.copy()
     frame["trade_date"] = pd.to_datetime(frame["trade_date"])
-    all_dates = sorted(frame["trade_date"].unique())
+    all_dates = [pd.Timestamp(d) for d in sorted(frame["trade_date"].unique())]
     rebalance_dates = _rebalance_dates(all_dates, config.rebalance_days)
 
     equity = initial_capital
@@ -63,6 +84,14 @@ def run_factor_backtest(
     for i in range(len(rebalance_dates) - 1):
         entry_date = rebalance_dates[i]
         exit_date = rebalance_dates[i + 1]
+        entry_exec_date = _next_execution_date(all_dates, entry_date)
+        exit_exec_date = _next_execution_date(all_dates, exit_date)
+        exit_prefers_open = True
+        if exit_exec_date is None:
+            exit_exec_date = exit_date
+            exit_prefers_open = False
+        if entry_exec_date is None or entry_exec_date >= exit_exec_date:
+            continue
         entry_rows = frame.loc[frame["trade_date"] == entry_date]
         weights = weights_provider(entry_date) if weights_provider is not None else config.weights
         scored = composite_scores(
@@ -84,14 +113,19 @@ def run_factor_backtest(
         for (_, pick), scale in zip(picks.iterrows(), scales):
             slot_capital = equity * scale / total_scale
             code = pick["stock_code"]
-            entry_price = float(pick["close_price_adj"])
+            entry_price = _execution_price(
+                frame.loc[(frame["trade_date"] == entry_exec_date) & (frame["stock_code"] == code)]
+            )
+            if entry_price is None:
+                period_equity += slot_capital
+                continue
             # A5 trailing stop: walk the position's daily path entry->exit
             if risk is not None and risk.trailing_stop_enabled:
                 path = (
                     frame.loc[
                         (frame["stock_code"] == code)
-                        & (frame["trade_date"] >= entry_date)
-                        & (frame["trade_date"] <= exit_date)
+                        & (frame["trade_date"] >= entry_exec_date)
+                        & (frame["trade_date"] <= exit_exec_date)
                     ]
                     .sort_values("trade_date")["close_price_adj"]
                     .astype(float)
@@ -102,11 +136,13 @@ def run_factor_backtest(
                     continue
                 raw_exit_price, _ = apply_trailing_stop(path, entry_price, risk)
             else:
-                exit_row = frame.loc[(frame["trade_date"] == exit_date) & (frame["stock_code"] == code)]
-                if exit_row.empty or entry_price <= 0:
+                raw_exit_price = _execution_price(
+                    frame.loc[(frame["trade_date"] == exit_exec_date) & (frame["stock_code"] == code)],
+                    prefer_open=exit_prefers_open,
+                )
+                if raw_exit_price is None or entry_price <= 0:
                     period_equity += slot_capital
                     continue
-                raw_exit_price = float(exit_row.iloc[0]["close_price_adj"])
             fill_entry = costs.entry_fill_price(entry_price)
             fill_exit = costs.exit_fill_price(raw_exit_price)
             shares = (slot_capital - costs.commission(slot_capital)) / fill_entry
