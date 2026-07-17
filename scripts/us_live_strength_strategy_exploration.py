@@ -130,6 +130,7 @@ def adjust_scores_for_diagnostic_exposure(
     exposure: dict[str, dict[str, float]],
     symbols: pd.Series | None = None,
     strength: float = 0.025,
+    max_loser_exposure: float | None = None,
 ) -> pd.Series:
     adjusted = scores.copy()
     score_symbols = (
@@ -141,7 +142,10 @@ def adjust_scores_for_diagnostic_exposure(
         symbol_exposure = exposure.get(symbol, {})
         winner_weight = float(symbol_exposure.get("winner_weight", 0.0))
         loser_weight = float(symbol_exposure.get("loser_weight", 0.0))
-        adjusted.loc[index] = float(adjusted.loc[index]) + strength * (winner_weight - loser_weight * 1.35)
+        if max_loser_exposure is not None and loser_weight > max_loser_exposure:
+            adjusted.loc[index] = float("-inf")
+        else:
+            adjusted.loc[index] = float(adjusted.loc[index]) + strength * (winner_weight - loser_weight * 1.35)
     return adjusted
 
 
@@ -564,7 +568,12 @@ def generate_live_strength_pool(
             weights = factory.ic_weights_from_values(factors, ics[rebalance_days])
             scores = factory.score_panel(live_frame, weights)
             if branch == "breadthquality20":
-                scores = adjust_scores_for_diagnostic_exposure(scores, symbol_exposure, symbols=live_frame["symbol"])
+                scores = adjust_scores_for_diagnostic_exposure(
+                    scores,
+                    symbol_exposure,
+                    symbols=live_frame["symbol"],
+                    max_loser_exposure=6.0,
+                )
             ic_score = sum(weights.get(name, 0.0) * ics[rebalance_days].get(name, 0.0) for name in names)
 
             for top_n in top_choices:

@@ -198,6 +198,16 @@ class UsLiveStrengthStrategyExplorationTest(unittest.TestCase):
         row_adjusted = adjust_scores_for_diagnostic_exposure(row_scores, exposure, symbols=symbols, strength=0.05)
         self.assertLess(row_adjusted.loc[0], row_adjusted.loc[1])
 
+        capped = adjust_scores_for_diagnostic_exposure(
+            row_scores,
+            exposure,
+            symbols=symbols,
+            strength=0.05,
+            max_loser_exposure=6.0,
+        )
+        self.assertEqual(capped.loc[0], float("-inf"))
+        self.assertGreater(capped.loc[1], capped.loc[2])
+
     def test_portfolio20_specialized_set_requires_breadth_and_risk_balance(self) -> None:
         portfolio20 = {"ret_60d", "mom_252_21", "cmf_20", "vol_20d", "turnover_stability_20d"}
         narrow = {"ret_60d", "mom_252_21", "px_to_ma20", "macd_hist", "ret_20d"}
