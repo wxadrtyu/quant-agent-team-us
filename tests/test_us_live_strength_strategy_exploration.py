@@ -25,6 +25,7 @@ from us_live_strength_strategy_exploration import (
     is_long_strength_close_position_set,
     is_micro_reversal_protected_momentum_set,
     is_portfolio20_specialized_set,
+    is_qmv_strong_no_drag_set,
     is_relative_strength_diffusion_set,
     is_quality_trend_factor_set,
     is_volume_confirmed_low_vol_extension_set,
@@ -362,6 +363,21 @@ class UsLiveStrengthStrategyExplorationTest(unittest.TestCase):
         self.assertTrue(passes_branch_structure(breadth_quality, top_n=20, branch="breadthquality20"))
         self.assertFalse(passes_branch_structure(breadth_quality, top_n=7, branch="breadthquality20"))
         self.assertTrue(passes_factor_structure_screen(breadth_quality, top_n=20))
+
+    def test_qmv_strong_no_drag_branch_keeps_proven_strength_but_rejects_old_pullback(self) -> None:
+        strong_no_drag = {"ret_120d", "px_to_ma20", "mfi_14", "vol_20d", "turnover_stability_20d"}
+        alternate_confirmation = {"ret_120d", "px_to_ma20", "cmf_20", "atr_20d", "close_pos_20d"}
+        weak_pullback = {"ret_5d", "ret_120d", "px_to_ma60", "mfi_14", "vol_20d"}
+        no_flow_confirmation = {"ret_120d", "px_to_ma20", "vol_20d", "turnover_stability_20d"}
+
+        self.assertEqual(top_choices_for_branch("qmvstrongnodrag"), [5, 7])
+        self.assertTrue(is_qmv_strong_no_drag_set(strong_no_drag))
+        self.assertTrue(is_qmv_strong_no_drag_set(alternate_confirmation))
+        self.assertFalse(is_qmv_strong_no_drag_set(weak_pullback))
+        self.assertFalse(is_qmv_strong_no_drag_set(no_flow_confirmation))
+        self.assertTrue(passes_branch_structure(strong_no_drag, top_n=5, branch="qmvstrongnodrag"))
+        self.assertFalse(passes_branch_structure(strong_no_drag, top_n=20, branch="qmvstrongnodrag"))
+        self.assertTrue(passes_factor_structure_screen(strong_no_drag, top_n=7))
 
     def test_candidate_pool_ranking_limits_single_strategy_cluster_dominance(self) -> None:
         pool = pd.DataFrame(

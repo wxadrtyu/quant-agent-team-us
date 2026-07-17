@@ -238,6 +238,7 @@ def top_choices_for_branch(branch: str) -> list[int]:
         "diffusion",
         "industrylowcrowd",
         "cleanmomentum",
+        "qmvstrongnodrag",
     }:
         return [5, 7]
     if branch in {"portfolio20", "breadthquality20"}:
@@ -264,6 +265,8 @@ def passes_branch_structure(names: set[str], top_n: int, branch: str) -> bool:
         return top_n in {5, 7} and is_industry_low_congestion_relative_set(names)
     if branch == "cleanmomentum":
         return top_n in {5, 7} and is_clean_momentum_continuation_set(names)
+    if branch == "qmvstrongnodrag":
+        return top_n in {5, 7} and is_qmv_strong_no_drag_set(names)
     if branch == "breadthquality20":
         return top_n == 20 and is_breadth_quality20_set(names)
     return True
@@ -422,12 +425,27 @@ def is_breadth_quality20_set(names: set[str]) -> bool:
     return has_medium_strength and has_liquidity_quality and has_risk_balance and has_confirmation and not weak_pullback_core
 
 
+def is_qmv_strong_no_drag_set(names: set[str]) -> bool:
+    has_proven_strength_core = {"ret_120d", "px_to_ma20"}.issubset(names)
+    has_flow_confirmation = bool(names & {"mfi_14", "mfi_7", "cmf_20", "cmf_10", "obv_change_20"})
+    has_quality_or_risk_guard = bool(names & {"vol_20d", "vol_60d", "atr_20d", "parkinson_vol_20d", "turnover_stability_20d"})
+    has_current_position_guard = bool(names & {"px_to_ma20", "close_pos_20d", "ma20_above_ma60"})
+    weak_pullback_core = (
+        {"ret_5d", "ret_120d", "px_to_ma60"}.issubset(names)
+        or {"ret_120d", "ret_5d", "turnover_stability_20d"}.issubset(names)
+        or {"ret_120d", "ret_5d", "ret_skew_20d"}.issubset(names)
+    )
+    return has_proven_strength_core and has_flow_confirmation and has_quality_or_risk_guard and has_current_position_guard and not weak_pullback_core
+
+
 def passes_factor_structure_screen(names: set[str], top_n: int) -> bool:
     if top_n == 20 and is_portfolio20_specialized_set(names):
         return True
     if top_n == 20 and is_breadth_quality20_set(names):
         return True
     if top_n in {5, 7} and is_clean_momentum_continuation_set(names):
+        return True
+    if top_n in {5, 7} and is_qmv_strong_no_drag_set(names):
         return True
     if len(names & STRENGTH_FACTORS) < 2:
         return False
@@ -442,6 +460,7 @@ def passes_factor_structure_screen(names: set[str], top_n: int) -> bool:
         or is_relative_strength_diffusion_set(names)
         or is_industry_low_congestion_relative_set(names)
         or is_clean_momentum_continuation_set(names)
+        or is_qmv_strong_no_drag_set(names)
         or (top_n == 20 and is_breadth_quality20_set(names))
         or (top_n == 20 and is_portfolio20_specialized_set(names))
     )
@@ -475,6 +494,8 @@ def structural_prior(prefix: str, names: set[str], top_n: int, rebalance_days: i
         score += 2.3
     if is_breadth_quality20_set(names):
         score += 2.5 if top_n == 20 else 0.3
+    if is_qmv_strong_no_drag_set(names):
+        score += 2.6 if top_n in {5, 7} else 0.2
     if names & FLOW_FACTORS:
         score += 0.8
     if names & QUALITY_FACTORS:
@@ -508,6 +529,7 @@ def candidate_quality_score(row: dict[str, float | int | str]) -> float:
         "diffusion",
         "industrylowcrowd",
         "cleanmomentum",
+        "qmvstrongnodrag",
     } and int(row["top_n"]) in {5, 7}:
         branch_bonus = 0.9
     return (
@@ -604,6 +626,13 @@ def generate_live_strength_pool(
                     symbol_exposure,
                     symbols=live_frame["symbol"],
                     max_loser_exposure=6.0,
+                )
+            elif branch == "qmvstrongnodrag":
+                scores = adjust_scores_for_diagnostic_exposure(
+                    scores,
+                    symbol_exposure,
+                    symbols=live_frame["symbol"],
+                    max_loser_exposure=4.0,
                 )
             ic_score = sum(weights.get(name, 0.0) * ics[rebalance_days].get(name, 0.0) for name in names)
 
@@ -707,6 +736,7 @@ def main() -> int:
             "industrylowcrowd",
             "cleanmomentum",
             "breadthquality20",
+            "qmvstrongnodrag",
         ],
         default="mixed",
     )
