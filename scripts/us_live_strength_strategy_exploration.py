@@ -125,6 +125,26 @@ def diagnostic_support_metrics(symbols: list[str], exposure: dict[str, dict[str,
     }
 
 
+def adjust_scores_for_diagnostic_exposure(
+    scores: pd.Series,
+    exposure: dict[str, dict[str, float]],
+    symbols: pd.Series | None = None,
+    strength: float = 0.025,
+) -> pd.Series:
+    adjusted = scores.copy()
+    score_symbols = (
+        symbols.reindex(adjusted.index).astype(str)
+        if symbols is not None
+        else pd.Series(adjusted.index.astype(str), index=adjusted.index)
+    )
+    for index, symbol in score_symbols.items():
+        symbol_exposure = exposure.get(symbol, {})
+        winner_weight = float(symbol_exposure.get("winner_weight", 0.0))
+        loser_weight = float(symbol_exposure.get("loser_weight", 0.0))
+        adjusted.loc[index] = float(adjusted.loc[index]) + strength * (winner_weight - loser_weight * 1.35)
+    return adjusted
+
+
 def jaccard(left: set[str], right: set[str]) -> float:
     union = left | right
     return 0.0 if not union else len(left & right) / len(union)
@@ -543,6 +563,8 @@ def generate_live_strength_pool(
         for rebalance_days in rebalance_choices:
             weights = factory.ic_weights_from_values(factors, ics[rebalance_days])
             scores = factory.score_panel(live_frame, weights)
+            if branch == "breadthquality20":
+                scores = adjust_scores_for_diagnostic_exposure(scores, symbol_exposure, symbols=live_frame["symbol"])
             ic_score = sum(weights.get(name, 0.0) * ics[rebalance_days].get(name, 0.0) for name in names)
 
             for top_n in top_choices:

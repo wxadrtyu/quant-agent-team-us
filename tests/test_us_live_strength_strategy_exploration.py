@@ -10,6 +10,7 @@ if str(SCRIPTS) not in sys.path:
     sys.path.insert(0, str(SCRIPTS))
 
 from us_live_strength_strategy_exploration import (
+    adjust_scores_for_diagnostic_exposure,
     DRAG_SYMBOLS,
     candidate_quality_score,
     current_symbol_counts,
@@ -177,6 +178,25 @@ class UsLiveStrengthStrategyExplorationTest(unittest.TestCase):
             candidate_quality_score({**base, **supported}),
             candidate_quality_score({**base, **dragged}),
         )
+
+    def test_diagnostic_adjustment_changes_symbol_selection_before_top_twenty_pick(self) -> None:
+        scores = pd.Series({"AAA": 10.0, "BBB": 9.9, "CCC": 9.8})
+        exposure = {
+            "AAA": {"winner_weight": 0.0, "loser_weight": 8.0},
+            "BBB": {"winner_weight": 4.0, "loser_weight": 0.0},
+            "CCC": {"winner_weight": 0.0, "loser_weight": 0.0},
+        }
+
+        adjusted = adjust_scores_for_diagnostic_exposure(scores, exposure, strength=0.05)
+
+        self.assertLess(adjusted["AAA"], adjusted["BBB"])
+        self.assertGreater(adjusted["BBB"], scores["BBB"])
+        self.assertLess(adjusted["AAA"], scores["AAA"])
+
+        row_scores = pd.Series([10.0, 9.9, 9.8], index=[0, 1, 2])
+        symbols = pd.Series(["AAA", "BBB", "CCC"], index=[0, 1, 2])
+        row_adjusted = adjust_scores_for_diagnostic_exposure(row_scores, exposure, symbols=symbols, strength=0.05)
+        self.assertLess(row_adjusted.loc[0], row_adjusted.loc[1])
 
     def test_portfolio20_specialized_set_requires_breadth_and_risk_balance(self) -> None:
         portfolio20 = {"ret_60d", "mom_252_21", "cmf_20", "vol_20d", "turnover_stability_20d"}
