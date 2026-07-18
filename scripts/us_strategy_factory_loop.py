@@ -71,6 +71,9 @@ FACTOR_LIBRARY = [
     FactorSpec("kurtosis_20d", "low", "risk"),
     FactorSpec("dollar_volume_20d", "high", "liquidity"),
     FactorSpec("turnover_stability_20d", "high", "liquidity"),
+    FactorSpec("sector_rel_ret_20d", "high", "relative_strength"),
+    FactorSpec("sector_rel_ret_60d", "high", "relative_strength"),
+    FactorSpec("sector_rel_drawdown_20d", "low", "relative_reversal"),
 ]
 
 
@@ -217,6 +220,18 @@ def load_panel(
         g["volume"].rolling(5, min_periods=5).mean().reset_index(level=0, drop=True)
         / g["volume"].rolling(20, min_periods=20).mean().reset_index(level=0, drop=True).replace(0, np.nan)
     )
+    meta_path = raw_dir / "us_stock_meta.parquet"
+    if meta_path.exists():
+        meta = pd.read_parquet(meta_path)
+    else:
+        meta = pd.read_csv(raw_dir / "us_stock_meta.csv")
+    sector_map = dict(zip(meta["symbol"].astype(str), meta["sector"].fillna("Unknown").astype(str)))
+    prices["sector"] = prices["symbol"].astype(str).map(sector_map).fillna("Unknown")
+    for window in [20, 60]:
+        sector_avg = prices.groupby(["trade_date", "sector"])[f"ret_{window}d"].transform("mean")
+        prices[f"sector_rel_ret_{window}d"] = prices[f"ret_{window}d"] - sector_avg
+    sector_drawdown_avg = prices.groupby(["trade_date", "sector"])["drawdown_20d"].transform("mean")
+    prices["sector_rel_drawdown_20d"] = prices["drawdown_20d"] - sector_drawdown_avg
 
     factor_names = [f.name for f in FACTOR_LIBRARY]
     mask = prices[factor_names + ["open", "close"]].notna().all(axis=1)
@@ -291,6 +306,8 @@ def candidate_hypotheses(limit: int) -> list[tuple[str, tuple[FactorSpec, ...]]]
         ("defensive", ["momentum", "risk", "risk", "liquidity", "trend"]),
         ("microrev", ["microstructure", "reversal", "volume_price", "risk", "liquidity"]),
         ("microtrend", ["microstructure", "trend", "momentum", "risk", "liquidity"]),
+        ("relativeleader", ["relative_strength", "momentum", "trend", "risk", "liquidity"]),
+        ("relativerepair", ["relative_reversal", "momentum", "trend", "risk", "liquidity"]),
     ]
     out: list[tuple[str, tuple[FactorSpec, ...]]] = []
     seen = set()

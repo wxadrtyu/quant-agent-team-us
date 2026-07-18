@@ -39,6 +39,8 @@ QUALITY_FACTORS = {"turnover_stability_20d", "dollar_volume_20d", "vol_20d", "at
 FLOW_FACTORS = {"cmf_10", "cmf_20", "mfi_7", "mfi_14", "obv_change_20", "volume_ma_ratio_5_20"}
 REVERSAL_RISK_FACTORS = {"ret_5d", "ret_10d", "drawdown_5d", "drawdown_10d", "overnight_gap_1d"}
 MICRO_PROTECTION_FACTORS = {"overnight_gap_1d", "intraday_ret_1d", "close_pos_20d", "range_pct_5d"}
+RELATIVE_STRENGTH_FACTORS = {"sector_rel_ret_20d", "sector_rel_ret_60d"}
+RELATIVE_REVERSAL_FACTORS = {"sector_rel_drawdown_20d"}
 
 
 def load_current_baskets() -> dict[str, set[str]]:
@@ -308,6 +310,8 @@ def top_choices_for_branch(branch: str) -> list[int]:
         "sectorleader",
         "smoothquality",
         "decorrelated",
+        "relativeleader",
+        "relativerepair",
     }:
         return [5, 7]
     if branch in {"portfolio20", "breadthquality20"}:
@@ -351,6 +355,10 @@ def passes_branch_structure(names: set[str], top_n: int, branch: str) -> bool:
             or is_relative_strength_diffusion_set(names)
             or is_smooth_quality_momentum_set(names)
         )
+    if branch == "relativeleader":
+        return top_n in {5, 7} and is_sector_relative_leader_set(names)
+    if branch == "relativerepair":
+        return top_n in {5, 7} and is_sector_relative_repair_set(names)
     return True
 
 
@@ -561,6 +569,44 @@ def is_smooth_quality_momentum_set(names: set[str]) -> bool:
     return has_mid_or_long_strength and has_flow_confirmation and has_vol_guard and has_tail_or_stability_guard and not old_pullback_core
 
 
+def is_sector_relative_leader_set(names: set[str]) -> bool:
+    has_sector_leadership = bool(names & RELATIVE_STRENGTH_FACTORS)
+    has_absolute_strength = bool(names & {"ret_60d", "ret_120d", "mom_252_21", "macd_hist", "ma20_above_ma60"})
+    has_trend_confirmation = bool(names & {"px_to_ma20", "ma20_above_ma60", "macd_hist"})
+    has_risk_or_liquidity_guard = bool(
+        names & {"vol_20d", "vol_60d", "atr_20d", "parkinson_vol_20d", "dollar_volume_20d", "turnover_stability_20d"}
+    )
+    weak_pullback_core = (
+        {"ret_5d", "ret_120d", "px_to_ma60"}.issubset(names)
+        or {"ret_120d", "ret_5d", "turnover_stability_20d"}.issubset(names)
+        or {"ret_120d", "px_to_ma60", "turnover_stability_20d"}.issubset(names)
+    )
+    return has_sector_leadership and has_absolute_strength and has_trend_confirmation and has_risk_or_liquidity_guard and not weak_pullback_core
+
+
+def is_sector_relative_repair_set(names: set[str]) -> bool:
+    has_relative_pullback = bool(names & RELATIVE_REVERSAL_FACTORS)
+    has_absolute_strength = bool(names & {"ret_60d", "ret_120d", "mom_252_21", "ma20_above_ma60", "macd_hist"})
+    has_trend_repair = bool(names & {"px_to_ma20", "ma20_above_ma60", "macd_hist"})
+    has_risk_or_liquidity_guard = bool(
+        names & {"vol_20d", "vol_60d", "atr_20d", "parkinson_vol_20d", "dollar_volume_20d", "turnover_stability_20d"}
+    )
+    avoids_hot_flow_chase = not bool(names & {"mfi_7", "mfi_14", "cmf_10", "cmf_20"})
+    weak_pullback_core = (
+        {"ret_5d", "ret_120d", "px_to_ma60"}.issubset(names)
+        or {"ret_120d", "ret_5d", "turnover_stability_20d"}.issubset(names)
+        or {"ret_120d", "px_to_ma60", "turnover_stability_20d"}.issubset(names)
+    )
+    return (
+        has_relative_pullback
+        and has_absolute_strength
+        and has_trend_repair
+        and has_risk_or_liquidity_guard
+        and avoids_hot_flow_chase
+        and not weak_pullback_core
+    )
+
+
 def passes_factor_structure_screen(names: set[str], top_n: int) -> bool:
     if top_n == 20 and is_portfolio20_specialized_set(names):
         return True
@@ -575,6 +621,10 @@ def passes_factor_structure_screen(names: set[str], top_n: int) -> bool:
     if top_n in {5, 7} and is_sector_leader_quality_set(names):
         return True
     if top_n in {5, 7} and is_smooth_quality_momentum_set(names):
+        return True
+    if top_n in {5, 7} and is_sector_relative_leader_set(names):
+        return True
+    if top_n in {5, 7} and is_sector_relative_repair_set(names):
         return True
     if len(names & STRENGTH_FACTORS) < 2:
         return False
@@ -593,6 +643,8 @@ def passes_factor_structure_screen(names: set[str], top_n: int) -> bool:
         or is_qmv_stable_flow_set(names)
         or is_sector_leader_quality_set(names)
         or is_smooth_quality_momentum_set(names)
+        or is_sector_relative_leader_set(names)
+        or is_sector_relative_repair_set(names)
         or (top_n == 20 and is_breadth_quality20_set(names))
         or (top_n == 20 and is_portfolio20_specialized_set(names))
     )
@@ -634,6 +686,10 @@ def structural_prior(prefix: str, names: set[str], top_n: int, rebalance_days: i
         score += 2.4 if top_n in {5, 7} else 0.2
     if is_smooth_quality_momentum_set(names) and not is_portfolio20_specialized_set(names):
         score += 2.5 if top_n in {5, 7} else 0.2
+    if is_sector_relative_leader_set(names):
+        score += 2.6 if top_n in {5, 7} else 0.2
+    if is_sector_relative_repair_set(names):
+        score += 2.5 if top_n in {5, 7} else 0.2
     if names & FLOW_FACTORS:
         score += 0.8
     if names & QUALITY_FACTORS:
@@ -672,6 +728,8 @@ def candidate_quality_score(row: dict[str, float | int | str]) -> float:
         "sectorleader",
         "smoothquality",
         "decorrelated",
+        "relativeleader",
+        "relativerepair",
     } and int(row["top_n"]) in {5, 7}:
         branch_bonus = 0.9
     return (
@@ -826,6 +884,43 @@ def generate_live_strength_pool(
                     strength=0.015,
                     max_loser_exposure=5.0,
                 )
+            elif branch == "relativeleader":
+                scores = adjust_scores_for_sector_strength(
+                    scores,
+                    sector_map,
+                    sector_scores,
+                    live_frame["symbol"],
+                    strength=2.5,
+                )
+                scores = adjust_scores_for_current_crowding(
+                    scores,
+                    symbol_counts,
+                    live_frame["symbol"],
+                    strength=0.20,
+                    hard_count_cap=8,
+                )
+                scores = adjust_scores_for_diagnostic_exposure(
+                    scores,
+                    symbol_exposure,
+                    symbols=live_frame["symbol"],
+                    strength=0.015,
+                    max_loser_exposure=4.5,
+                )
+            elif branch == "relativerepair":
+                scores = adjust_scores_for_current_crowding(
+                    scores,
+                    symbol_counts,
+                    live_frame["symbol"],
+                    strength=0.24,
+                    hard_count_cap=7,
+                )
+                scores = adjust_scores_for_diagnostic_exposure(
+                    scores,
+                    symbol_exposure,
+                    symbols=live_frame["symbol"],
+                    strength=0.018,
+                    max_loser_exposure=4.0,
+                )
             ic_score = sum(weights.get(name, 0.0) * ics[rebalance_days].get(name, 0.0) for name in names)
 
             for top_n in top_choices:
@@ -938,6 +1033,8 @@ def main() -> int:
             "sectorleader",
             "smoothquality",
             "decorrelated",
+            "relativeleader",
+            "relativerepair",
         ],
         default="mixed",
     )

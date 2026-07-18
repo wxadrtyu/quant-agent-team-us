@@ -49,6 +49,18 @@ def _normalize(values: pd.Series) -> pd.Series:
     return values / total
 
 
+def load_return_correlation(raw_dir: Path = RAW_DIR, lookback_days: int = 120) -> pd.DataFrame:
+    prices = pd.read_parquet(raw_dir / "us_market_daily.parquet")
+    prices["trade_date"] = pd.to_datetime(prices["trade_date"])
+    prices = prices.sort_values(["trade_date", "symbol"])
+    dates = sorted(prices["trade_date"].dropna().unique())
+    if len(dates) > lookback_days + 1:
+        prices = prices[prices["trade_date"].isin(dates[-(lookback_days + 1) :])].copy()
+    close = prices.pivot(index="trade_date", columns="symbol", values="close").sort_index()
+    returns = close.pct_change().dropna(how="all")
+    return returns.corr().fillna(0.0)
+
+
 def strategy_cluster_key(candidate_id: str) -> str:
     tokens = str(candidate_id or "").split("_")
     if not tokens or tokens == [""]:
@@ -137,6 +149,8 @@ def build_model_portfolio(
     max_source_strategies: int = 60,
     max_cluster_share: float = 0.65,
     max_allowed_cluster_share: float | None = None,
+    return_correlation: pd.DataFrame | None = None,
+    max_pairwise_correlation: float | None = None,
 ) -> pd.DataFrame:
     pool = strategies[
         strategies["入库至今持续跑赢"].astype(bool)
@@ -229,7 +243,30 @@ def build_model_portfolio(
         grouped = grouped[~grouped["is_drag_symbol"]].copy()
     if max_allowed_cluster_share is not None and int(grouped["max_cluster_share"].le(max_allowed_cluster_share).sum()) >= target_symbols:
         grouped = grouped[grouped["max_cluster_share"].le(max_allowed_cluster_share)].copy()
-    grouped = grouped.head(target_symbols).copy()
+    if max_pairwise_correlation is not None and return_correlation is not None:
+        selected_rows = []
+        deferred_rows = []
+        for row in grouped.to_dict(orient="records"):
+            symbol = str(row["股票代码"])
+            correlations = [
+                abs(float(return_correlation.loc[symbol, str(selected["股票代码"])]))
+                for selected in selected_rows
+                if symbol in return_correlation.index and str(selected["股票代码"]) in return_correlation.columns
+            ]
+            if not correlations or max(correlations) <= max_pairwise_correlation:
+                selected_rows.append(row)
+            else:
+                deferred_rows.append(row)
+            if len(selected_rows) >= target_symbols:
+                break
+        if len(selected_rows) < target_symbols:
+            for row in deferred_rows:
+                selected_rows.append(row)
+                if len(selected_rows) >= target_symbols:
+                    break
+        grouped = pd.DataFrame(selected_rows)
+    else:
+        grouped = grouped.head(target_symbols).copy()
     if len(grouped) < target_symbols:
         raise ValueError(f"only {len(grouped)} symbols available for target {target_symbols}")
 
@@ -257,6 +294,8 @@ def main() -> int:
     parser.add_argument("--max-sector-weight", type=float, default=0.30)
     parser.add_argument("--max-cluster-share", type=float, default=0.65)
     parser.add_argument("--max-allowed-cluster-share", type=float, default=None)
+    parser.add_argument("--max-pairwise-correlation", type=float, default=None)
+    parser.add_argument("--correlation-lookback-days", type=int, default=120)
     parser.add_argument("--exclude-drag-symbols", action="store_true")
     parser.add_argument("--date", default="20260717")
     args = parser.parse_args()
@@ -279,6 +318,10 @@ def main() -> int:
         max_sector_weight=args.max_sector_weight,
         max_cluster_share=args.max_cluster_share,
         max_allowed_cluster_share=args.max_allowed_cluster_share,
+        return_correlation=load_return_correlation(lookback_days=args.correlation_lookback_days)
+        if args.max_pairwise_correlation is not None
+        else None,
+        max_pairwise_correlation=args.max_pairwise_correlation,
     )
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     out_csv = OUT_DIR / f"us_current_model_portfolio_{args.date}.csv"
@@ -292,6 +335,7 @@ def main() -> int:
         "largest_weight": float(portfolio["目标权重"].max()),
         "largest_sector_weight": float(sector_weights.iloc[0]),
         "largest_cluster_share": float(portfolio["max_cluster_share"].max()),
+        "max_pairwise_correlation": args.max_pairwise_correlation,
         "min_cluster_count": int(portfolio["cluster_count"].min()),
         "max_allowed_cluster_share": args.max_allowed_cluster_share,
         "drag_symbols": portfolio.loc[portfolio["is_drag_symbol"], "股票代码"].tolist(),

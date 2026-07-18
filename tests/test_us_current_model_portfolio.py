@@ -269,5 +269,70 @@ class UsCurrentModelPortfolioTest(unittest.TestCase):
         self.assertNotIn("AAA", set(portfolio[symbol_col]))
         self.assertLessEqual(float(portfolio["max_cluster_share"].max()), 0.75)
 
+    def test_pairwise_return_correlation_filter_prefers_less_correlated_symbol(self) -> None:
+        persistent_col = "\u5165\u5e93\u81f3\u4eca\u6301\u7eed\u8dd1\u8d62"
+        excess_col = "\u5b9e\u76d8\u8d85\u57fa\u51c6\u6536\u76ca"
+        ir_col = "\u4fe1\u606f\u6bd4\u7387"
+        z_col = "\u53bb\u504f\u6807\u51c6\u5206"
+        symbol_col = "\u80a1\u7968\u4ee3\u7801"
+        weight_col = "\u76ee\u6807\u6743\u91cd"
+        strategies = pd.DataFrame(
+            [
+                {
+                    "monitor_key": key,
+                    "candidate_id": candidate_id,
+                    persistent_col: True,
+                    excess_col: excess,
+                    ir_col: 1.0,
+                    z_col: 1.8,
+                    "top_n_numeric": 5,
+                }
+                for key, candidate_id, excess in [
+                    ("S1", "qmv_ret_120d_px_to_ma20_mfi_14_a", 0.20),
+                    ("S2", "liquidity_close_pos_20d_turnover_stability_20d_a", 0.18),
+                    ("S3", "smoothquality_ret_60d_mfi_14_vol_20d_a", 0.12),
+                ]
+            ]
+        )
+        holdings = pd.DataFrame(
+            [
+                {"monitor_key": "S1", symbol_col: "AAA", weight_col: 1.0},
+                {"monitor_key": "S2", symbol_col: "BBB", weight_col: 1.0},
+                {"monitor_key": "S3", symbol_col: "CCC", weight_col: 1.0},
+            ]
+        )
+        metadata = pd.DataFrame(
+            [
+                {"symbol": "AAA", "sector": "Technology", "name": "AAA"},
+                {"symbol": "BBB", "sector": "Technology", "name": "BBB"},
+                {"symbol": "CCC", "sector": "Health Care", "name": "CCC"},
+            ]
+        )
+        return_correlation = pd.DataFrame(
+            [
+                [1.00, 0.96, 0.10],
+                [0.96, 1.00, 0.05],
+                [0.10, 0.05, 1.00],
+            ],
+            index=["AAA", "BBB", "CCC"],
+            columns=["AAA", "BBB", "CCC"],
+        )
+
+        portfolio = build_model_portfolio(
+            strategies,
+            holdings,
+            target_symbols=2,
+            max_symbol_weight=0.8,
+            metadata=metadata,
+            drag_symbols=set(),
+            max_sector_weight=None,
+            return_correlation=return_correlation,
+            max_pairwise_correlation=0.90,
+        )
+
+        self.assertIn("AAA", set(portfolio[symbol_col]))
+        self.assertNotIn("BBB", set(portfolio[symbol_col]))
+        self.assertIn("CCC", set(portfolio[symbol_col]))
+
 if __name__ == "__main__":
     unittest.main()
