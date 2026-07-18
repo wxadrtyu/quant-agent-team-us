@@ -35,6 +35,8 @@ from us_live_strength_strategy_exploration import (
     is_sector_leader_quality_set,
     is_quality_trend_factor_set,
     is_volume_confirmed_low_vol_extension_set,
+    pairwise_return_correlation_metrics,
+    passes_candidate_admission_risk_screen,
     passes_branch_structure,
     passes_factor_structure_screen,
     passes_live_strength_screen,
@@ -73,6 +75,44 @@ class UsLiveStrengthStrategyExplorationTest(unittest.TestCase):
         }
 
         self.assertGreater(candidate_quality_score(clean), candidate_quality_score(crowded))
+
+    def test_candidate_quality_penalizes_internal_correlation_and_recent_weak_symbols(self) -> None:
+        clean = {
+            "live_excess_return": 0.04,
+            "live_hit_rate": 0.80,
+            "live_median_excess": 0.025,
+            "max_current_signal_overlap": 0.10,
+            "drag_symbol_hits": 0,
+            "weak_symbol_hits": 0,
+            "max_pairwise_correlation": 0.25,
+            "short_reversal_fail_rate": 0.10,
+            "factory_prior_score": 2.0,
+            "factory_ic_score": 0.01,
+            "max_factor_weight": 0.40,
+            "top_n": 7,
+        }
+        correlated_weak = {**clean, "weak_symbol_hits": 2, "max_pairwise_correlation": 0.92}
+
+        self.assertGreater(candidate_quality_score(clean), candidate_quality_score(correlated_weak))
+
+    def test_pairwise_return_correlation_metrics_reports_max_internal_correlation(self) -> None:
+        return_correlation = pd.DataFrame(
+            [[1.00, 0.91, 0.20], [0.91, 1.00, 0.30], [0.20, 0.30, 1.00]],
+            index=["AAA", "BBB", "CCC"],
+            columns=["AAA", "BBB", "CCC"],
+        )
+
+        metrics = pairwise_return_correlation_metrics(["AAA", "BBB", "CCC"], return_correlation)
+
+        self.assertAlmostEqual(metrics["max_pairwise_correlation"], 0.91)
+
+    def test_candidate_admission_risk_screen_blocks_high_correlation_or_weak_concentration(self) -> None:
+        high_corr = {"max_pairwise_correlation": 0.91}
+        low_corr = {"max_pairwise_correlation": 0.35}
+
+        self.assertFalse(passes_candidate_admission_risk_screen(["AAA", "BBB"], high_corr, weak_symbol_hits=0))
+        self.assertFalse(passes_candidate_admission_risk_screen(["ALB", "MRVL", "CCC"], low_corr, weak_symbol_hits=2))
+        self.assertTrue(passes_candidate_admission_risk_screen(["AAA", "BBB"], low_corr, weak_symbol_hits=1))
 
     def test_screen_blocks_small_baskets_with_drag_or_weak_hit_rate(self) -> None:
         weak = pd.DataFrame(

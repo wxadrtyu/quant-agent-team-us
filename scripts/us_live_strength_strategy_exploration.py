@@ -8,6 +8,7 @@ import duckdb
 import pandas as pd
 
 import us_explore_strategy_rounds as rounds
+from us_audit_promoted_rounds_before_append import RECENT_WEAK_SYMBOLS, load_return_correlation
 from us_build_current_model_portfolio import strategy_cluster_key
 import us_live_pool
 import us_strategy_factory_loop as factory
@@ -293,6 +294,32 @@ def sector_rotation_metrics(
         "sector_breadth_bonus": float(sector_breadth_bonus),
         "sector_concentration_penalty": float(sector_concentration_penalty),
     }
+
+
+def pairwise_return_correlation_metrics(symbols: list[str], return_correlation: pd.DataFrame | None) -> dict[str, float]:
+    if return_correlation is None or len(symbols) < 2:
+        return {"max_pairwise_correlation": 0.0}
+    best = 0.0
+    unique_symbols = list(dict.fromkeys(str(symbol) for symbol in symbols))
+    for index, left in enumerate(unique_symbols):
+        for right in unique_symbols[index + 1 :]:
+            if left in return_correlation.index and right in return_correlation.columns:
+                best = max(best, abs(float(return_correlation.loc[left, right])))
+    return {"max_pairwise_correlation": float(best)}
+
+
+def passes_candidate_admission_risk_screen(
+    symbols: list[str],
+    correlation_metrics: dict[str, float],
+    weak_symbol_hits: int,
+    max_pairwise_correlation: float = 0.60,
+    max_weak_symbol_hits: int = 1,
+) -> bool:
+    if float(correlation_metrics.get("max_pairwise_correlation", 0.0)) > max_pairwise_correlation:
+        return False
+    if weak_symbol_hits > max_weak_symbol_hits:
+        return False
+    return True
 
 
 def top_choices_for_branch(branch: str) -> list[int]:
@@ -755,6 +782,8 @@ def candidate_quality_score(row: dict[str, float | int | str]) -> float:
         + float(row.get("sector_rotation_score", 0.0)) * 80.0
         + float(row.get("sector_breadth_bonus", 0.0))
         - float(row.get("sector_concentration_penalty", 0.0)) * 1.2
+        - max(0.0, float(row.get("max_pairwise_correlation", 0.0)) - 0.60) * 2.5
+        - float(row.get("weak_symbol_hits", 0.0)) * 0.9
         + branch_bonus
     )
 
@@ -809,6 +838,7 @@ def generate_live_strength_pool(
     symbol_exposure = load_current_symbol_exposure()
     sector_map = load_sector_map()
     sector_scores = sector_strength_scores(live_frame, sector_map, benchmark_ret)
+    return_correlation = load_return_correlation(RAW_DIR, lookback_days=120)
 
     for candidate_id, factors in factory.candidate_hypotheses(limit):
         prefix = candidate_id.split("_", 1)[0]
@@ -948,6 +978,10 @@ def generate_live_strength_pool(
                 decorrelation = decorrelation_metrics(symbol_list, current_baskets, symbol_counts, sector_map, top_n)
                 diagnostics = diagnostic_support_metrics(symbol_list, symbol_exposure, top_n)
                 sectors = sector_rotation_metrics(symbol_list, sector_map, sector_scores, top_n)
+                correlations = pairwise_return_correlation_metrics(symbol_list, return_correlation)
+                weak_symbol_hits = len({symbol.upper() for symbol in symbols} & RECENT_WEAK_SYMBOLS)
+                if not passes_candidate_admission_risk_screen(symbol_list, correlations, weak_symbol_hits):
+                    continue
                 row = {
                     "candidate_id": candidate_id[:180],
                     "factors": ";".join(names),
@@ -962,6 +996,7 @@ def generate_live_strength_pool(
                     "nearest_current_monitor_key": overlap_key,
                     "selected_symbols": json.dumps(symbol_list),
                     "drag_symbol_hits": len(symbols & DRAG_SYMBOLS),
+                    "weak_symbol_hits": weak_symbol_hits,
                     "live_strategy_return": strategy_ret,
                     "live_benchmark_return": benchmark_ret,
                     "live_excess_return": live_excess,
@@ -971,6 +1006,7 @@ def generate_live_strength_pool(
                     **decorrelation,
                     **diagnostics,
                     **sectors,
+                    **correlations,
                     **metrics,
                 }
                 row["final_score"] = candidate_quality_score(row)

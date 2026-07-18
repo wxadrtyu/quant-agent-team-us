@@ -9,6 +9,7 @@ import pandas as pd
 
 
 DB_PATH = Path(r"E:\quant-agent-team-us\research\us_strategy_research.duckdb")
+RAW_DIR = Path(r"E:\quant-agent-team-us\data\us\raw\2026-07-17-intraday-chart")
 DRAG_SYMBOLS = {
     "ARM",
     "ON",
@@ -25,6 +26,29 @@ DRAG_SYMBOLS = {
     "CLF",
     "DUOL",
     "IBKR",
+}
+RECENT_WEAK_SYMBOLS = {
+    "ALB",
+    "MRVL",
+    "AA",
+    "TSLA",
+    "BWA",
+    "AVGO",
+    "GOOGL",
+    "NWL",
+    "SMCI",
+    "MAR",
+    "META",
+    "GOOG",
+    "AMAT",
+    "FIX",
+    "AAPL",
+    "NVDA",
+    "AMZN",
+    "IRM",
+    "MSFT",
+    "ARW",
+    "WFRD",
 }
 
 
@@ -74,6 +98,30 @@ def max_current_overlap(symbols: set[str], current_baskets: dict[str, set[str]])
     return max(jaccard(symbols, basket) for basket in current_baskets.values())
 
 
+def load_return_correlation(raw_dir: Path, lookback_days: int) -> pd.DataFrame:
+    prices = pd.read_parquet(raw_dir / "us_market_daily.parquet")
+    prices["trade_date"] = pd.to_datetime(prices["trade_date"])
+    prices = prices.sort_values(["trade_date", "symbol"])
+    dates = sorted(prices["trade_date"].dropna().unique())
+    if len(dates) > lookback_days + 1:
+        prices = prices[prices["trade_date"].isin(dates[-(lookback_days + 1) :])].copy()
+    close = prices.pivot(index="trade_date", columns="symbol", values="close").sort_index()
+    returns = close.pct_change().dropna(how="all")
+    return returns.corr().fillna(0.0)
+
+
+def max_pairwise_correlation(symbols: list[str], return_correlation: pd.DataFrame | None) -> float:
+    if return_correlation is None or len(symbols) < 2:
+        return 0.0
+    best = 0.0
+    unique_symbols = list(dict.fromkeys(str(symbol) for symbol in symbols))
+    for index, left in enumerate(unique_symbols):
+        for right in unique_symbols[index + 1 :]:
+            if left in return_correlation.index and right in return_correlation.columns:
+                best = max(best, abs(float(return_correlation.loc[left, right])))
+    return float(best)
+
+
 def live_excess_column(frame: pd.DataFrame) -> str | None:
     for column in frame.columns:
         text = str(column)
@@ -90,7 +138,15 @@ def audit_promoted_frames(
     max_reuse_share: float,
     max_symbol_count: int,
     allowed_holdings: set[int],
+    return_correlation: pd.DataFrame | None = None,
+    max_pairwise_correlation_threshold: float | None = None,
+    weak_symbols: set[str] | None = None,
+    max_weak_symbol_hits: int = 1,
+    **compat_kwargs,
 ) -> pd.DataFrame:
+    if "max_pairwise_correlation" in compat_kwargs and max_pairwise_correlation_threshold is None:
+        max_pairwise_correlation_threshold = compat_kwargs["max_pairwise_correlation"]
+    weak_symbol_set = {symbol.upper() for symbol in (weak_symbols or RECENT_WEAK_SYMBOLS)}
     if strategies.empty:
         return pd.DataFrame(
             columns=[
@@ -103,6 +159,8 @@ def audit_promoted_frames(
                 "current_stock_reuse_share",
                 "max_current_symbol_count",
                 "drag_symbol_hits",
+                "weak_symbol_hits",
+                "max_pairwise_correlation",
             ]
         )
 
@@ -128,6 +186,8 @@ def audit_promoted_frames(
         reuse_share = sum(1 for value in symbol_counts if value > 0) / len(symbol_counts) if symbol_counts else 0.0
         max_count = max(symbol_counts) if symbol_counts else 0
         drag_hits = len(symbol_set & DRAG_SYMBOLS)
+        weak_hits = len({symbol.upper() for symbol in symbol_set} & weak_symbol_set)
+        pairwise_corr = max_pairwise_correlation(symbols, return_correlation)
         live_excess = float(strategy.get(excess_col, 0.0)) if excess_col else 0.0
 
         reasons = []
@@ -143,6 +203,10 @@ def audit_promoted_frames(
             reasons.append("high_single_stock_crowding")
         if top_n <= 7 and drag_hits > 0:
             reasons.append("drag_symbol_leakage")
+        if weak_hits > max_weak_symbol_hits:
+            reasons.append("recent_weak_symbol_concentration")
+        if max_pairwise_correlation_threshold is not None and pairwise_corr > max_pairwise_correlation_threshold:
+            reasons.append("high_pairwise_return_correlation")
 
         rows.append(
             {
@@ -155,6 +219,8 @@ def audit_promoted_frames(
                 "current_stock_reuse_share": reuse_share,
                 "max_current_symbol_count": max_count,
                 "drag_symbol_hits": drag_hits,
+                "weak_symbol_hits": weak_hits,
+                "max_pairwise_correlation": pairwise_corr,
             }
         )
     return pd.DataFrame(rows)
@@ -168,6 +234,10 @@ def audit_rounds(
     max_reuse_share: float,
     max_symbol_count: int,
     allowed_holdings: set[int],
+    return_correlation: pd.DataFrame | None = None,
+    max_pairwise_correlation_threshold: float | None = None,
+    weak_symbols: set[str] | None = None,
+    max_weak_symbol_hits: int = 1,
 ) -> pd.DataFrame:
     run_ids = [f"2026-07-13-monitor-round{round_no}-quality-stability" for round_no in range(start_round, end_round + 1)]
     con = duckdb.connect(str(db_path), read_only=True)
@@ -189,6 +259,10 @@ def audit_rounds(
         max_reuse_share=max_reuse_share,
         max_symbol_count=max_symbol_count,
         allowed_holdings=allowed_holdings,
+        return_correlation=return_correlation,
+        max_pairwise_correlation_threshold=max_pairwise_correlation_threshold,
+        weak_symbols=weak_symbols,
+        max_weak_symbol_hits=max_weak_symbol_hits,
     )
 
 
@@ -200,11 +274,18 @@ def main() -> int:
     parser.add_argument("--max-overlap", type=float, default=0.25)
     parser.add_argument("--max-reuse-share", type=float, default=0.40)
     parser.add_argument("--max-symbol-count", type=int, default=8)
+    parser.add_argument("--max-pairwise-correlation", type=float, default=0.60)
+    parser.add_argument("--correlation-lookback-days", type=int, default=120)
+    parser.add_argument("--raw-dir", default=str(RAW_DIR))
+    parser.add_argument("--max-weak-symbol-hits", type=int, default=1)
+    parser.add_argument("--weak-symbols", default=",".join(sorted(RECENT_WEAK_SYMBOLS)))
     parser.add_argument("--allowed-holdings", default="5,7,10,20")
     parser.add_argument("--out", required=True)
     args = parser.parse_args()
 
     allowed_holdings = {int(value.strip()) for value in args.allowed_holdings.split(",") if value.strip()}
+    weak_symbols = {value.strip().upper() for value in args.weak_symbols.split(",") if value.strip()}
+    return_correlation = load_return_correlation(Path(args.raw_dir), args.correlation_lookback_days)
     audit = audit_rounds(
         Path(args.db),
         args.start_round,
@@ -213,6 +294,10 @@ def main() -> int:
         args.max_reuse_share,
         args.max_symbol_count,
         allowed_holdings,
+        return_correlation=return_correlation,
+        max_pairwise_correlation_threshold=args.max_pairwise_correlation,
+        weak_symbols=weak_symbols,
+        max_weak_symbol_hits=args.max_weak_symbol_hits,
     )
     out_path = Path(args.out)
     out_path.parent.mkdir(parents=True, exist_ok=True)
