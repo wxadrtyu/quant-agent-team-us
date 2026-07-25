@@ -8,6 +8,35 @@ from pathlib import Path
 import duckdb
 
 
+def report_payload_quality(data: dict, tolerance: float = 1e-6) -> dict[str, int]:
+    missing_price_count = 0
+    contribution_mismatch_count = 0
+    duplicate_strategy_display_count = 0
+    empty_holding_strategy_count = 0
+    seen: set[str] = set()
+    for item in data.get("results", []):
+        sid = str(item.get("sid", ""))
+        if sid in seen:
+            duplicate_strategy_display_count += 1
+        seen.add(sid)
+        stocks = item.get("stocks", [])
+        if not stocks:
+            empty_holding_strategy_count += 1
+        contribution = 0.0
+        for stock in stocks:
+            if stock.get("buy_price") is None or stock.get("mtm_price") is None:
+                missing_price_count += 1
+            contribution += float(stock.get("contribution") or 0.0)
+        if stocks and abs(contribution - float(item.get("live_return") or 0.0)) > tolerance:
+            contribution_mismatch_count += 1
+    return {
+        "json_missing_price_count": missing_price_count,
+        "json_contribution_mismatch_count": contribution_mismatch_count,
+        "json_duplicate_strategy_display_count": duplicate_strategy_display_count,
+        "json_empty_holding_strategy_count": empty_holding_strategy_count,
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--db", default=r"E:\quant-agent-team-us\research\us_strategy_research.duckdb")
@@ -28,6 +57,7 @@ def main() -> int:
 
     text = report_path.read_text(encoding="utf-8")
     data = json.loads(json_path.read_text(encoding="utf-8"))
+    payload_quality = report_payload_quality(data)
     summary = {
         "current_strategies": int(len(strategies)),
         "current_holdings": int(len(holdings)),
@@ -44,6 +74,7 @@ def main() -> int:
         "has_age_fields": all(col in strategies.columns for col in ["入库日期", "入库天数", "入库至今持续跑赢", "当前诊断"]),
         "json_has_persistent_tab_data": any(item.get("persistent_outperformer") for item in data.get("results", [])),
         "json_underperformers_kept": sum(1 for item in data.get("results", []) if item.get("live_excess", 0) <= 0),
+        **payload_quality,
     }
     print(json.dumps(summary, ensure_ascii=False, indent=2))
 
@@ -61,6 +92,14 @@ def main() -> int:
         raise SystemExit("underperformer count mismatch")
     if set(summary["holding_distribution"]) - {"5", "7", "10", "20"}:
         raise SystemExit("holding distribution has invalid counts")
+    if summary["json_missing_price_count"] != 0:
+        raise SystemExit("report json has missing holding prices")
+    if summary["json_contribution_mismatch_count"] != 0:
+        raise SystemExit("report json live return does not match holding contributions")
+    if summary["json_duplicate_strategy_display_count"] != 0:
+        raise SystemExit("report json has duplicate strategy display ids")
+    if summary["json_empty_holding_strategy_count"] != 0:
+        raise SystemExit("report json has empty strategy holdings")
     return 0
 
 

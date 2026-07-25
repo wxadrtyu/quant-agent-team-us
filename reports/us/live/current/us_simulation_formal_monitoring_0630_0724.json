@@ -8,7 +8,8 @@
   "results": [
     {
       "monitor_key": "adaptive2_ret_120d_ret_5d_px_to_ma60_turnover_stability_20d_cmf_20_vol_20d_px_to_ma20__N5__R20",
-      "sid": "策略一",
+      "sid": "策略0001",
+      "source_sid": "策略一",
       "candidate_id": "adaptive2_ret_120d_ret_5d_px_to_ma60_turnover_stability_20d_cmf_20_vol_20d_px_to_ma20",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日波动率、二十日成交稳定性、相对二十日均线位置、相对六十日均线位置",
@@ -102,7 +103,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_px_to_ma20_ret_120d_kurtosis_20d_turnover_stability_20d__N10__R10",
-      "sid": "策略一",
+      "sid": "策略0002",
+      "source_sid": "策略一",
       "candidate_id": "pulltrend_ret_5d_px_to_ma20_ret_120d_kurtosis_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日成交稳定性、二十日收益峰度、相对二十日均线位置",
@@ -261,7 +263,8 @@
     },
     {
       "monitor_key": "adaptive2_ret_120d_ret_5d_px_to_ma60_turnover_stability_20d_cmf_10_parkinson_vol_20d_px_to_ma20_ma20_above_ma60__N7__R20",
-      "sid": "策略五",
+      "sid": "策略0003",
+      "source_sid": "策略五",
       "candidate_id": "adaptive2_ret_120d_ret_5d_px_to_ma60_turnover_stability_20d_cmf_10_parkinson_vol_20d_px_to_ma20_ma20_above_ma60",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日波动率、二十日高低价波动率、二十日成交稳定性、相对二十日均线位置、相对六十日均线位置、二十日均线相对六十日均线",
@@ -381,7 +384,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_px_to_ma60_ret_20d_ret_skew_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略八",
+      "sid": "策略0004",
+      "source_sid": "策略八",
       "candidate_id": "pulltrend_ret_5d_px_to_ma60_ret_20d_ret_skew_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日成交稳定性、二十日收益偏度、相对六十日均线位置",
@@ -540,7 +544,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_px_to_ma20_ret_120d_vol_60d_turnover_stability_20d__N5__R10",
-      "sid": "策略一",
+      "sid": "策略0005",
+      "source_sid": "策略一",
       "candidate_id": "pulltrend_ret_5d_px_to_ma20_ret_120d_vol_60d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "六十日波动率、二十日成交稳定性、相对二十日均线位置",
@@ -634,7 +639,8 @@
     },
     {
       "monitor_key": "adaptive2_ret_120d_ret_5d_px_to_ma60_turnover_stability_20d_cmf_20_parkinson_vol_20d_px_to_ma20__N10__R20",
-      "sid": "策略三",
+      "sid": "策略0006",
+      "source_sid": "策略三",
       "candidate_id": "adaptive2_ret_120d_ret_5d_px_to_ma60_turnover_stability_20d_cmf_20_parkinson_vol_20d_px_to_ma20",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日波动率、二十日高低价波动率、二十日成交稳定性、相对二十日均线位置、相对六十日均线位置",
@@ -793,7 +799,8 @@
     },
     {
       "monitor_key": "adaptive2_ret_120d_ret_5d_px_to_ma60_turnover_stability_20d_cmf_10_atr_20d_px_to_ma20_macd_hist__N5__R20",
-      "sid": "策略三",
+      "sid": "策略0007",
+      "source_sid": "策略三",
       "candidate_id": "adaptive2_ret_120d_ret_5d_px_to_ma60_turnover_stability_20d_cmf_10_atr_20d_px_to_ma20_macd_hist",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日真实波幅、二十日成交稳定性、相对二十日均线位置、相对六十日均线位置",
@@ -887,7 +894,8 @@
     },
     {
       "monitor_key": "balanced_ret_20d_ret_5d_px_to_ma20_cmf_10_vol_60d_turnover_stability_20d__N10__R20",
-      "sid": "策略二",
+      "sid": "策略0008",
+      "source_sid": "策略二",
       "candidate_id": "balanced_ret_20d_ret_5d_px_to_ma20_cmf_10_vol_60d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十日资金流强度、六十日波动率、二十日成交稳定性、相对二十日均线位置",
@@ -1046,7 +1054,8 @@
     },
     {
       "monitor_key": "balanced_ret_20d_ret_5d_px_to_ma20_volume_ma_ratio_5_20_ret_skew_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略六",
+      "sid": "策略0009",
+      "source_sid": "策略六",
       "candidate_id": "balanced_ret_20d_ret_5d_px_to_ma20_volume_ma_ratio_5_20_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日成交稳定性、五日与二十日成交量比、二十日收益偏度、相对二十日均线位置",
@@ -1205,7 +1214,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_px_to_ma20_ret_120d_vol_60d_turnover_stability_20d__N20__R10",
-      "sid": "策略二",
+      "sid": "策略0010",
+      "source_sid": "策略二",
       "candidate_id": "pulltrend_ret_5d_px_to_ma20_ret_120d_vol_60d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "六十日波动率、二十日成交稳定性、相对二十日均线位置",
@@ -1494,7 +1504,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_px_to_ma20_ret_120d_parkinson_vol_20d_turnover_stability_20d__N5__R10",
-      "sid": "策略四",
+      "sid": "策略0011",
+      "source_sid": "策略四",
       "candidate_id": "pulltrend_ret_5d_px_to_ma20_ret_120d_parkinson_vol_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日波动率、二十日高低价波动率、二十日成交稳定性、相对二十日均线位置",
@@ -1588,7 +1599,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_px_to_ma20_ret_20d_ret_skew_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略九",
+      "sid": "策略0012",
+      "source_sid": "策略九",
       "candidate_id": "pulltrend_ret_5d_px_to_ma20_ret_20d_ret_skew_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日成交稳定性、二十日收益偏度、相对二十日均线位置",
@@ -1747,7 +1759,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma60_mfi_7_vol_20d_turnover_stability_20d__N5__R20",
-      "sid": "策略十三",
+      "sid": "策略0013",
+      "source_sid": "策略十三",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma60_mfi_7_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日波动率、二十日成交稳定性、相对六十日均线位置",
@@ -1841,7 +1854,8 @@
     },
     {
       "monitor_key": "balanced_ret_20d_ret_5d_px_to_ma20_cmf_10_vol_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略三",
+      "sid": "策略0014",
+      "source_sid": "策略三",
       "candidate_id": "balanced_ret_20d_ret_5d_px_to_ma20_cmf_10_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日波动率、二十日成交稳定性、相对二十日均线位置",
@@ -2000,7 +2014,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma60_cmf_10_vol_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略一",
+      "sid": "策略0015",
+      "source_sid": "策略一",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma60_cmf_10_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日波动率、二十日成交稳定性、相对六十日均线位置",
@@ -2120,7 +2135,8 @@
     },
     {
       "monitor_key": "balanced_ret_20d_ret_5d_px_to_ma20_obv_change_20_vol_60d_turnover_stability_20d__N10__R20",
-      "sid": "策略七",
+      "sid": "策略0016",
+      "source_sid": "策略七",
       "candidate_id": "balanced_ret_20d_ret_5d_px_to_ma20_obv_change_20_vol_60d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日能量潮变化、六十日波动率、二十日成交稳定性、相对二十日均线位置",
@@ -2279,7 +2295,8 @@
     },
     {
       "monitor_key": "balanced_ret_20d_ret_5d_px_to_ma60_mfi_14_atr_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略七",
+      "sid": "策略0017",
+      "source_sid": "策略七",
       "candidate_id": "balanced_ret_20d_ret_5d_px_to_ma60_mfi_14_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十四日资金流指标、二十日真实波幅、二十日成交稳定性、相对六十日均线位置",
@@ -2438,7 +2455,8 @@
     },
     {
       "monitor_key": "balanced_ret_20d_ret_5d_px_to_ma20_obv_change_20_vol_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略六",
+      "sid": "策略0018",
+      "source_sid": "策略六",
       "candidate_id": "balanced_ret_20d_ret_5d_px_to_ma20_obv_change_20_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日能量潮变化、二十日波动率、二十日成交稳定性、相对二十日均线位置",
@@ -2597,7 +2615,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_px_to_ma20_ret_120d_vol_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略三",
+      "sid": "策略0019",
+      "source_sid": "策略三",
       "candidate_id": "pulltrend_ret_5d_px_to_ma20_ret_120d_vol_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日波动率、二十日成交稳定性、相对二十日均线位置",
@@ -2756,7 +2775,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma60_cmf_20_kurtosis_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略二",
+      "sid": "策略0020",
+      "source_sid": "策略二",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma60_cmf_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日成交稳定性、二十日收益峰度、相对六十日均线位置",
@@ -2876,7 +2896,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_px_to_ma60_ret_20d_vol_60d_turnover_stability_20d__N10__R20",
-      "sid": "策略十三",
+      "sid": "策略0021",
+      "source_sid": "策略十三",
       "candidate_id": "pulltrend_ret_5d_px_to_ma60_ret_20d_vol_60d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "六十日波动率、二十日成交稳定性、相对六十日均线位置",
@@ -3035,7 +3056,8 @@
     },
     {
       "monitor_key": "balanced_ret_20d_ret_5d_px_to_ma60_mfi_7_parkinson_vol_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略四",
+      "sid": "策略0022",
+      "source_sid": "策略四",
       "candidate_id": "balanced_ret_20d_ret_5d_px_to_ma60_mfi_7_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日波动率、二十日高低价波动率、二十日成交稳定性、相对六十日均线位置",
@@ -3194,7 +3216,8 @@
     },
     {
       "monitor_key": "balanced_mom_252_21_ret_5d_px_to_ma60_mfi_14_parkinson_vol_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略十三",
+      "sid": "策略0023",
+      "source_sid": "策略十三",
       "candidate_id": "balanced_mom_252_21_ret_5d_px_to_ma60_mfi_14_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十四日资金流指标、二十日波动率、二十日高低价波动率、二十日成交稳定性、相对六十日均线位置",
@@ -3353,7 +3376,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma60_mfi_14_vol_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略十",
+      "sid": "策略0024",
+      "source_sid": "策略十",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma60_mfi_14_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十四日资金流指标、二十日波动率、二十日成交稳定性、相对六十日均线位置",
@@ -3512,7 +3536,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma60_obv_change_20_vol_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略七",
+      "sid": "策略0025",
+      "source_sid": "策略七",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma60_obv_change_20_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日能量潮变化、二十日波动率、二十日成交稳定性、相对六十日均线位置",
@@ -3671,7 +3696,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma60_cmf_10_parkinson_vol_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略七",
+      "sid": "策略0026",
+      "source_sid": "策略七",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma60_cmf_10_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日波动率、二十日高低价波动率、二十日成交稳定性、相对六十日均线位置",
@@ -3791,7 +3817,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma60_mfi_14_kurtosis_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略六",
+      "sid": "策略0027",
+      "source_sid": "策略六",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma60_mfi_14_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十四日资金流指标、二十日成交稳定性、二十日收益峰度、相对六十日均线位置",
@@ -3950,7 +3977,8 @@
     },
     {
       "monitor_key": "balanced_mom_252_21_ret_5d_px_to_ma60_mfi_14_vol_20d_turnover_stability_20d__N7__R5",
-      "sid": "策略十五",
+      "sid": "策略0028",
+      "source_sid": "策略十五",
       "candidate_id": "balanced_mom_252_21_ret_5d_px_to_ma60_mfi_14_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十四日资金流指标、二十日波动率、二十日成交稳定性、相对六十日均线位置",
@@ -4070,7 +4098,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma60_volume_ma_ratio_5_20_vol_20d_turnover_stability_20d__N5__R5",
-      "sid": "策略一",
+      "sid": "策略0029",
+      "source_sid": "策略一",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma60_volume_ma_ratio_5_20_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日波动率、二十日成交稳定性、五日与二十日成交量比、相对六十日均线位置",
@@ -4164,7 +4193,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_px_to_ma60_ret_120d_kurtosis_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略四",
+      "sid": "策略0030",
+      "source_sid": "策略四",
       "candidate_id": "pulltrend_ret_5d_px_to_ma60_ret_120d_kurtosis_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日成交稳定性、二十日收益峰度、相对六十日均线位置",
@@ -4323,7 +4353,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma60_obv_change_20_atr_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略十一",
+      "sid": "策略0031",
+      "source_sid": "策略十一",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma60_obv_change_20_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日能量潮变化、二十日真实波幅、二十日成交稳定性、相对六十日均线位置",
@@ -4443,7 +4474,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma60_cmf_10_vol_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略八",
+      "sid": "策略0032",
+      "source_sid": "策略八",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma60_cmf_10_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日波动率、二十日成交稳定性、相对六十日均线位置",
@@ -4602,7 +4634,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma60_cmf_20_kurtosis_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略九",
+      "sid": "策略0033",
+      "source_sid": "策略九",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma60_cmf_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日成交稳定性、二十日收益峰度、相对六十日均线位置",
@@ -4761,7 +4794,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_px_to_ma60_ret_120d_vol_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略二",
+      "sid": "策略0034",
+      "source_sid": "策略二",
       "candidate_id": "pulltrend_ret_5d_px_to_ma60_ret_120d_vol_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日波动率、二十日成交稳定性、相对六十日均线位置",
@@ -4920,7 +4954,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma60_mfi_7_atr_20d_turnover_stability_20d__N5__R20",
-      "sid": "策略十五",
+      "sid": "策略0035",
+      "source_sid": "策略十五",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma60_mfi_7_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日真实波幅、二十日成交稳定性、相对六十日均线位置",
@@ -5014,7 +5049,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_ma20_above_ma60_ret_120d_vol_60d_turnover_stability_20d__N20__R10",
-      "sid": "策略一",
+      "sid": "策略0036",
+      "source_sid": "策略一",
       "candidate_id": "pulltrend_ret_5d_ma20_above_ma60_ret_120d_vol_60d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "六十日波动率、二十日成交稳定性、二十日均线相对六十日均线",
@@ -5303,7 +5339,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_px_to_ma20_ret_120d_ret_skew_20d_dollar_volume_20d__N20__R10",
-      "sid": "策略一",
+      "sid": "策略0037",
+      "source_sid": "策略一",
       "candidate_id": "pulltrend_ret_5d_px_to_ma20_ret_120d_ret_skew_20d_dollar_volume_20d",
       "category": "回调趋势型",
       "factors": "二十日成交额、二十日收益偏度、相对二十日均线位置",
@@ -5592,7 +5629,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_px_to_ma60_ret_120d_vol_60d_turnover_stability_20d__N7__R20",
-      "sid": "策略九",
+      "sid": "策略0038",
+      "source_sid": "策略九",
       "candidate_id": "pulltrend_ret_5d_px_to_ma60_ret_120d_vol_60d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "六十日波动率、二十日成交稳定性、相对六十日均线位置",
@@ -5712,7 +5750,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma60_mfi_14_atr_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略十四",
+      "sid": "策略0039",
+      "source_sid": "策略十四",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma60_mfi_14_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十四日资金流指标、二十日真实波幅、二十日成交稳定性、相对六十日均线位置",
@@ -5871,7 +5910,8 @@
     },
     {
       "monitor_key": "balanced_ret_20d_ret_5d_px_to_ma60_mfi_7_kurtosis_20d_turnover_stability_20d__N20__R20",
-      "sid": "策略五",
+      "sid": "策略0040",
+      "source_sid": "策略五",
       "candidate_id": "balanced_ret_20d_ret_5d_px_to_ma60_mfi_7_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日成交稳定性、二十日收益峰度、相对六十日均线位置",
@@ -6160,7 +6200,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma60_obv_change_20_atr_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略十七",
+      "sid": "策略0041",
+      "source_sid": "策略十七",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma60_obv_change_20_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日能量潮变化、二十日真实波幅、二十日成交稳定性、相对六十日均线位置",
@@ -6319,7 +6360,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma60_mfi_7_ret_skew_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略十八",
+      "sid": "策略0042",
+      "source_sid": "策略十八",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma60_mfi_7_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日成交稳定性、二十日收益偏度、相对六十日均线位置",
@@ -6439,7 +6481,8 @@
     },
     {
       "monitor_key": "balanced_mom_252_21_ret_10d_px_to_ma60_mfi_14_vol_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略十二",
+      "sid": "策略0043",
+      "source_sid": "策略十二",
       "candidate_id": "balanced_mom_252_21_ret_10d_px_to_ma60_mfi_14_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十四日资金流指标、二十日波动率、二十日成交稳定性、相对六十日均线位置",
@@ -6598,7 +6641,8 @@
     },
     {
       "monitor_key": "balanced_ret_20d_ret_5d_px_to_ma60_mfi_7_ret_skew_20d_turnover_stability_20d__N20__R20",
-      "sid": "策略十九",
+      "sid": "策略0044",
+      "source_sid": "策略十九",
       "candidate_id": "balanced_ret_20d_ret_5d_px_to_ma60_mfi_7_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日成交稳定性、二十日收益偏度、相对六十日均线位置",
@@ -6887,7 +6931,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_px_to_ma20_ret_120d_ret_skew_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略十四",
+      "sid": "策略0045",
+      "source_sid": "策略十四",
       "candidate_id": "pulltrend_ret_5d_px_to_ma20_ret_120d_ret_skew_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日成交稳定性、二十日收益偏度、相对二十日均线位置",
@@ -7046,7 +7091,8 @@
     },
     {
       "monitor_key": "microtrend_overnight_gap_1d_px_to_ma60_ret_120d_ret_skew_20d_turnover_stability_20d__N20__R20",
-      "sid": "策略五",
+      "sid": "策略0046",
+      "source_sid": "策略五",
       "candidate_id": "microtrend_overnight_gap_1d_px_to_ma60_ret_120d_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日成交稳定性、二十日收益偏度、相对六十日均线位置、隔夜跳空",
@@ -7335,7 +7381,8 @@
     },
     {
       "monitor_key": "balanced_ret_20d_ret_5d_px_to_ma20_mfi_14_ret_skew_20d_turnover_stability_20d__N20__R20",
-      "sid": "策略一",
+      "sid": "策略0047",
+      "source_sid": "策略一",
       "candidate_id": "balanced_ret_20d_ret_5d_px_to_ma20_mfi_14_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十四日资金流指标、二十日成交稳定性、二十日收益偏度、相对二十日均线位置",
@@ -7624,7 +7671,8 @@
     },
     {
       "monitor_key": "microtrend_overnight_gap_1d_px_to_ma60_ret_120d_ret_skew_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略十",
+      "sid": "策略0048",
+      "source_sid": "策略十",
       "candidate_id": "microtrend_overnight_gap_1d_px_to_ma60_ret_120d_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日成交稳定性、二十日收益偏度、相对六十日均线位置、隔夜跳空",
@@ -7783,7 +7831,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_px_to_ma60_ret_120d_parkinson_vol_20d_turnover_stability_20d__N20__R5",
-      "sid": "策略十七",
+      "sid": "策略0049",
+      "source_sid": "策略十七",
       "candidate_id": "pulltrend_ret_5d_px_to_ma60_ret_120d_parkinson_vol_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日波动率、二十日高低价波动率、二十日成交稳定性、相对六十日均线位置",
@@ -8072,7 +8121,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_px_to_ma60_ret_120d_ret_skew_20d_turnover_stability_20d__N20__R5",
-      "sid": "策略十五",
+      "sid": "策略0050",
+      "source_sid": "策略十五",
       "candidate_id": "pulltrend_ret_5d_px_to_ma60_ret_120d_ret_skew_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日成交稳定性、二十日收益偏度、相对六十日均线位置",
@@ -8361,7 +8411,8 @@
     },
     {
       "monitor_key": "balanced_ret_20d_ret_5d_px_to_ma60_mfi_14_vol_60d_dollar_volume_20d__N20__R20",
-      "sid": "策略二十",
+      "sid": "策略0051",
+      "source_sid": "策略二十",
       "candidate_id": "balanced_ret_20d_ret_5d_px_to_ma60_mfi_14_vol_60d_dollar_volume_20d",
       "category": "均衡回调型",
       "factors": "十四日资金流指标、六十日波动率、二十日成交额、相对六十日均线位置",
@@ -8650,7 +8701,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma60_volume_ma_ratio_5_20_parkinson_vol_20d_turnover_stability_20d__N5__R10",
-      "sid": "策略十二",
+      "sid": "策略0052",
+      "source_sid": "策略十二",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma60_volume_ma_ratio_5_20_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日波动率、二十日高低价波动率、二十日成交稳定性、五日与二十日成交量比、相对六十日均线位置",
@@ -8744,7 +8796,8 @@
     },
     {
       "monitor_key": "balanced_mom_252_21_ret_10d_px_to_ma60_mfi_14_kurtosis_20d_turnover_stability_20d__N7__R5",
-      "sid": "策略六",
+      "sid": "策略0053",
+      "source_sid": "策略六",
       "candidate_id": "balanced_mom_252_21_ret_10d_px_to_ma60_mfi_14_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十四日资金流指标、二十日成交稳定性、二十日收益峰度、相对六十日均线位置",
@@ -8864,7 +8917,8 @@
     },
     {
       "monitor_key": "adaptive3_ret_120d_ret_5d_px_to_ma60_turnover_stability_20d_mfi_14_kurtosis_20d_ma20_above_ma60__N10__R5",
-      "sid": "策略一",
+      "sid": "策略0054",
+      "source_sid": "策略一",
       "candidate_id": "adaptive3_ret_120d_ret_5d_px_to_ma60_turnover_stability_20d_mfi_14_kurtosis_20d_ma20_above_ma60",
       "category": "均衡回调型",
       "factors": "十四日资金流指标、二十日成交稳定性、二十日收益峰度、相对六十日均线位置、二十日均线相对六十日均线",
@@ -9023,7 +9077,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma60_obv_change_20_kurtosis_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略八",
+      "sid": "策略0055",
+      "source_sid": "策略八",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma60_obv_change_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日能量潮变化、二十日成交稳定性、二十日收益峰度、相对六十日均线位置",
@@ -9182,7 +9237,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma60_cmf_10_kurtosis_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略六",
+      "sid": "策略0056",
+      "source_sid": "策略六",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma60_cmf_10_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日成交稳定性、二十日收益峰度、相对六十日均线位置",
@@ -9341,7 +9397,8 @@
     },
     {
       "monitor_key": "balanced_ret_20d_ret_5d_px_to_ma20_mfi_14_vol_60d_dollar_volume_20d__N10__R20",
-      "sid": "策略二十二",
+      "sid": "策略0057",
+      "source_sid": "策略二十二",
       "candidate_id": "balanced_ret_20d_ret_5d_px_to_ma20_mfi_14_vol_60d_dollar_volume_20d",
       "category": "均衡回调型",
       "factors": "十四日资金流指标、六十日波动率、二十日成交额、相对二十日均线位置",
@@ -9500,7 +9557,8 @@
     },
     {
       "monitor_key": "adaptive_ret_120d_ret_5d_px_to_ma60_turnover_stability_20d_mfi_14_ret_skew_20d_px_to_ma20__N7__R5",
-      "sid": "策略一",
+      "sid": "策略0058",
+      "source_sid": "策略一",
       "candidate_id": "adaptive_ret_120d_ret_5d_px_to_ma60_turnover_stability_20d_mfi_14_ret_skew_20d_px_to_ma20",
       "category": "均衡回调型",
       "factors": "十四日资金流指标、二十日成交稳定性、二十日收益偏度、相对二十日均线位置、相对六十日均线位置",
@@ -9620,7 +9678,8 @@
     },
     {
       "monitor_key": "adaptive2_ret_60d_ret_5d_px_to_ma60_turnover_stability_20d_cmf_10_parkinson_vol_20d_px_to_ma20__N10__R5",
-      "sid": "策略六",
+      "sid": "策略0059",
+      "source_sid": "策略六",
       "candidate_id": "adaptive2_ret_60d_ret_5d_px_to_ma60_turnover_stability_20d_cmf_10_parkinson_vol_20d_px_to_ma20",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日波动率、二十日高低价波动率、二十日成交稳定性、相对二十日均线位置、相对六十日均线位置",
@@ -9779,7 +9838,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_px_to_ma60_ret_60d_parkinson_vol_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略十一",
+      "sid": "策略0060",
+      "source_sid": "策略十一",
       "candidate_id": "pulltrend_ret_5d_px_to_ma60_ret_60d_parkinson_vol_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日波动率、二十日高低价波动率、二十日成交稳定性、相对六十日均线位置",
@@ -9938,7 +9998,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_px_to_ma20_ret_20d_kurtosis_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略十八",
+      "sid": "策略0061",
+      "source_sid": "策略十八",
       "candidate_id": "pulltrend_ret_5d_px_to_ma20_ret_20d_kurtosis_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日成交稳定性、二十日收益峰度、相对二十日均线位置",
@@ -10097,7 +10158,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_ma20_above_ma60_ret_120d_vol_20d_turnover_stability_20d__N10__R10",
-      "sid": "策略五",
+      "sid": "策略0062",
+      "source_sid": "策略五",
       "candidate_id": "pulltrend_ret_5d_ma20_above_ma60_ret_120d_vol_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日波动率、二十日成交稳定性、二十日均线相对六十日均线",
@@ -10256,7 +10318,8 @@
     },
     {
       "monitor_key": "balanced_ret_20d_ret_5d_px_to_ma20_mfi_14_vol_20d_dollar_volume_20d__N20__R20",
-      "sid": "策略二十一",
+      "sid": "策略0063",
+      "source_sid": "策略二十一",
       "candidate_id": "balanced_ret_20d_ret_5d_px_to_ma20_mfi_14_vol_20d_dollar_volume_20d",
       "category": "均衡回调型",
       "factors": "十四日资金流指标、二十日波动率、二十日成交额、相对二十日均线位置",
@@ -10545,7 +10608,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_px_to_ma20_ret_20d_ret_skew_20d_dollar_volume_20d__N20__R20",
-      "sid": "策略十四",
+      "sid": "策略0064",
+      "source_sid": "策略十四",
       "candidate_id": "pulltrend_ret_5d_px_to_ma20_ret_20d_ret_skew_20d_dollar_volume_20d",
       "category": "回调趋势型",
       "factors": "二十日成交额、二十日收益偏度、相对二十日均线位置",
@@ -10834,7 +10898,8 @@
     },
     {
       "monitor_key": "adaptive3_ret_60d_drawdown_5d_px_to_ma60_turnover_stability_20d_cmf_10_vol_20d_px_to_ma20__N10__R5",
-      "sid": "策略二",
+      "sid": "策略0065",
+      "source_sid": "策略二",
       "candidate_id": "adaptive3_ret_60d_drawdown_5d_px_to_ma60_turnover_stability_20d_cmf_10_vol_20d_px_to_ma20",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日波动率、二十日成交稳定性、相对二十日均线位置、相对六十日均线位置",
@@ -10993,7 +11058,8 @@
     },
     {
       "monitor_key": "adaptive2_ret_120d_ret_5d_px_to_ma60_turnover_stability_20d_cmf_10_atr_20d_macd_hist__N7__R20",
-      "sid": "策略九",
+      "sid": "策略0066",
+      "source_sid": "策略九",
       "candidate_id": "adaptive2_ret_120d_ret_5d_px_to_ma60_turnover_stability_20d_cmf_10_atr_20d_macd_hist",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日真实波幅、二十日成交稳定性、相对六十日均线位置",
@@ -11113,7 +11179,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_px_to_ma20_ret_60d_ret_skew_20d_dollar_volume_20d__N10__R20",
-      "sid": "策略十四",
+      "sid": "策略0067",
+      "source_sid": "策略十四",
       "candidate_id": "pulltrend_ret_5d_px_to_ma20_ret_60d_ret_skew_20d_dollar_volume_20d",
       "category": "回调趋势型",
       "factors": "二十日成交额、二十日收益偏度、相对二十日均线位置",
@@ -11272,7 +11339,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_ma20_above_ma60_ret_120d_vol_60d_turnover_stability_20d__N10__R5",
-      "sid": "策略八",
+      "sid": "策略0068",
+      "source_sid": "策略八",
       "candidate_id": "pulltrend_ret_5d_ma20_above_ma60_ret_120d_vol_60d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "六十日波动率、二十日成交稳定性、二十日均线相对六十日均线",
@@ -11431,7 +11499,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_px_to_ma60_ret_20d_ret_skew_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略一",
+      "sid": "策略0069",
+      "source_sid": "策略一",
       "candidate_id": "pulltrend_ret_5d_px_to_ma60_ret_20d_ret_skew_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日成交稳定性、二十日收益偏度、相对六十日均线位置",
@@ -11590,7 +11659,8 @@
     },
     {
       "monitor_key": "balanced_ret_20d_ret_5d_px_to_ma20_obv_change_20_ret_skew_20d_dollar_volume_20d__N10__R20",
-      "sid": "策略七",
+      "sid": "策略0070",
+      "source_sid": "策略七",
       "candidate_id": "balanced_ret_20d_ret_5d_px_to_ma20_obv_change_20_ret_skew_20d_dollar_volume_20d",
       "category": "均衡回调型",
       "factors": "二十日能量潮变化、二十日成交额、二十日收益偏度、相对二十日均线位置",
@@ -11749,7 +11819,8 @@
     },
     {
       "monitor_key": "balanced_ret_20d_ret_5d_px_to_ma20_volume_ma_ratio_5_20_ret_skew_20d_dollar_volume_20d__N10__R20",
-      "sid": "策略二十九",
+      "sid": "策略0071",
+      "source_sid": "策略二十九",
       "candidate_id": "balanced_ret_20d_ret_5d_px_to_ma20_volume_ma_ratio_5_20_ret_skew_20d_dollar_volume_20d",
       "category": "均衡回调型",
       "factors": "二十日成交额、五日与二十日成交量比、二十日收益偏度、相对二十日均线位置",
@@ -11908,7 +11979,8 @@
     },
     {
       "monitor_key": "microrev_overnight_gap_1d_ret_5d_volume_ma_ratio_5_20_kurtosis_20d_dollar_volume_20d__N10__R20",
-      "sid": "策略十五",
+      "sid": "策略0072",
+      "source_sid": "策略十五",
       "candidate_id": "microrev_overnight_gap_1d_ret_5d_volume_ma_ratio_5_20_kurtosis_20d_dollar_volume_20d",
       "category": "微观反转型",
       "factors": "二十日成交额、五日与二十日成交量比、二十日收益峰度、隔夜跳空",
@@ -12067,7 +12139,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_px_to_ma60_ret_60d_atr_20d_turnover_stability_20d__N20__R5",
-      "sid": "策略十三",
+      "sid": "策略0073",
+      "source_sid": "策略十三",
       "candidate_id": "pulltrend_ret_5d_px_to_ma60_ret_60d_atr_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日真实波幅、二十日成交稳定性、相对六十日均线位置",
@@ -12356,7 +12429,8 @@
     },
     {
       "monitor_key": "balanced_mom_252_21_ret_10d_px_to_ma60_mfi_14_kurtosis_20d_turnover_stability_20d__N5__R5",
-      "sid": "策略六",
+      "sid": "策略0074",
+      "source_sid": "策略六",
       "candidate_id": "balanced_mom_252_21_ret_10d_px_to_ma60_mfi_14_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十四日资金流指标、二十日成交稳定性、二十日收益峰度、相对六十日均线位置",
@@ -12450,7 +12524,8 @@
     },
     {
       "monitor_key": "pulltrend_drawdown_5d_px_to_ma60_ret_120d_vol_20d_turnover_stability_20d__N10__R10",
-      "sid": "策略十四",
+      "sid": "策略0075",
+      "source_sid": "策略十四",
       "candidate_id": "pulltrend_drawdown_5d_px_to_ma60_ret_120d_vol_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日波动率、二十日成交稳定性、相对六十日均线位置",
@@ -12609,7 +12684,8 @@
     },
     {
       "monitor_key": "pulltrend_drawdown_5d_px_to_ma60_ret_120d_parkinson_vol_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略六",
+      "sid": "策略0076",
+      "source_sid": "策略六",
       "candidate_id": "pulltrend_drawdown_5d_px_to_ma60_ret_120d_parkinson_vol_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日波动率、二十日高低价波动率、二十日成交稳定性、相对六十日均线位置",
@@ -12768,7 +12844,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_10d_px_to_ma60_volume_ma_ratio_5_20_vol_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略六",
+      "sid": "策略0077",
+      "source_sid": "策略六",
       "candidate_id": "balanced_ret_120d_ret_10d_px_to_ma60_volume_ma_ratio_5_20_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日波动率、二十日成交稳定性、五日与二十日成交量比、相对六十日均线位置",
@@ -12927,7 +13004,8 @@
     },
     {
       "monitor_key": "microtrend_overnight_gap_1d_px_to_ma60_ret_120d_vol_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略一",
+      "sid": "策略0078",
+      "source_sid": "策略一",
       "candidate_id": "microtrend_overnight_gap_1d_px_to_ma60_ret_120d_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日波动率、二十日成交稳定性、相对六十日均线位置、隔夜跳空",
@@ -13047,7 +13125,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_cmf_10_ret_skew_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略二",
+      "sid": "策略0079",
+      "source_sid": "策略二",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_cmf_10_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日成交稳定性、二十日收益偏度、相对六十日均线位置",
@@ -13206,7 +13285,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_cmf_10_kurtosis_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略三",
+      "sid": "策略0080",
+      "source_sid": "策略三",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_cmf_10_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日成交稳定性、二十日收益峰度、相对六十日均线位置",
@@ -13365,7 +13445,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_px_to_ma60_ret_60d_kurtosis_20d_turnover_stability_20d__N10__R10",
-      "sid": "策略一",
+      "sid": "策略0081",
+      "source_sid": "策略一",
       "candidate_id": "pulltrend_ret_5d_px_to_ma60_ret_60d_kurtosis_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日成交稳定性、二十日收益峰度、相对六十日均线位置",
@@ -13524,7 +13605,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_drawdown_5d_px_to_ma60_volume_ma_ratio_5_20_ret_skew_20d_turnover_stability_20d__N10__R10",
-      "sid": "策略二",
+      "sid": "策略0082",
+      "source_sid": "策略二",
       "candidate_id": "balanced_ret_120d_drawdown_5d_px_to_ma60_volume_ma_ratio_5_20_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日成交稳定性、五日与二十日成交量比、二十日收益偏度、相对六十日均线位置",
@@ -13683,7 +13765,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_drawdown_5d_px_to_ma60_cmf_20_kurtosis_20d_turnover_stability_20d__N10__R10",
-      "sid": "策略七",
+      "sid": "策略0083",
+      "source_sid": "策略七",
       "candidate_id": "balanced_ret_120d_drawdown_5d_px_to_ma60_cmf_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日成交稳定性、二十日收益峰度、相对六十日均线位置",
@@ -13842,7 +13925,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_drawdown_5d_px_to_ma60_cmf_20_kurtosis_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略二",
+      "sid": "策略0084",
+      "source_sid": "策略二",
       "candidate_id": "balanced_ret_120d_drawdown_5d_px_to_ma60_cmf_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日成交稳定性、二十日收益峰度、相对六十日均线位置",
@@ -14001,7 +14085,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_drawdown_5d_px_to_ma60_volume_ma_ratio_5_20_atr_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略四",
+      "sid": "策略0085",
+      "source_sid": "策略四",
       "candidate_id": "balanced_ret_120d_drawdown_5d_px_to_ma60_volume_ma_ratio_5_20_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日真实波幅、二十日成交稳定性、五日与二十日成交量比、相对六十日均线位置",
@@ -14160,7 +14245,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_drawdown_5d_px_to_ma60_volume_ma_ratio_5_20_kurtosis_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略五",
+      "sid": "策略0086",
+      "source_sid": "策略五",
       "candidate_id": "balanced_ret_120d_drawdown_5d_px_to_ma60_volume_ma_ratio_5_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日成交稳定性、五日与二十日成交量比、二十日收益峰度、相对六十日均线位置",
@@ -14319,7 +14405,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_drawdown_5d_px_to_ma60_volume_ma_ratio_5_20_ret_skew_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略六",
+      "sid": "策略0087",
+      "source_sid": "策略六",
       "candidate_id": "balanced_ret_120d_drawdown_5d_px_to_ma60_volume_ma_ratio_5_20_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日成交稳定性、五日与二十日成交量比、二十日收益偏度、相对六十日均线位置",
@@ -14478,7 +14565,8 @@
     },
     {
       "monitor_key": "pulltrend_drawdown_5d_px_to_ma60_ret_120d_ret_skew_20d_turnover_stability_20d__N7__R5",
-      "sid": "策略七",
+      "sid": "策略0088",
+      "source_sid": "策略七",
       "candidate_id": "pulltrend_drawdown_5d_px_to_ma60_ret_120d_ret_skew_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日成交稳定性、二十日收益偏度、相对六十日均线位置",
@@ -14598,7 +14686,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_drawdown_5d_px_to_ma60_cmf_20_ret_skew_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略八",
+      "sid": "策略0089",
+      "source_sid": "策略八",
       "candidate_id": "balanced_ret_120d_drawdown_5d_px_to_ma60_cmf_20_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日成交稳定性、二十日收益偏度、相对六十日均线位置",
@@ -14757,7 +14846,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_drawdown_5d_px_to_ma60_cmf_20_parkinson_vol_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略九",
+      "sid": "策略0090",
+      "source_sid": "策略九",
       "candidate_id": "balanced_ret_120d_drawdown_5d_px_to_ma60_cmf_20_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日波动率、二十日高低价波动率、二十日成交稳定性、相对六十日均线位置",
@@ -14916,7 +15006,8 @@
     },
     {
       "monitor_key": "balanced_mom_252_21_ret_5d_ma20_above_ma60_mfi_7_parkinson_vol_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略十三",
+      "sid": "策略0091",
+      "source_sid": "策略十三",
       "candidate_id": "balanced_mom_252_21_ret_5d_ma20_above_ma60_mfi_7_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日波动率、二十日高低价波动率、二十日成交稳定性、二十日均线相对六十日均线",
@@ -15075,7 +15166,8 @@
     },
     {
       "monitor_key": "balanced_mom_252_21_ret_5d_ma20_above_ma60_mfi_14_vol_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略五",
+      "sid": "策略0092",
+      "source_sid": "策略五",
       "candidate_id": "balanced_mom_252_21_ret_5d_ma20_above_ma60_mfi_14_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十四日资金流指标、二十日波动率、二十日成交稳定性、二十日均线相对六十日均线",
@@ -15234,7 +15326,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_px_to_ma60_ret_60d_ret_skew_20d_turnover_stability_20d__N7__R10",
-      "sid": "策略六",
+      "sid": "策略0093",
+      "source_sid": "策略六",
       "candidate_id": "pulltrend_ret_5d_px_to_ma60_ret_60d_ret_skew_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日成交稳定性、二十日收益偏度、相对六十日均线位置",
@@ -15354,7 +15447,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_px_to_ma60_ret_60d_kurtosis_20d_turnover_stability_20d__N5__R5",
-      "sid": "策略三",
+      "sid": "策略0094",
+      "source_sid": "策略三",
       "candidate_id": "pulltrend_ret_5d_px_to_ma60_ret_60d_kurtosis_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日成交稳定性、二十日收益峰度、相对六十日均线位置",
@@ -15448,7 +15542,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_cmf_20_kurtosis_20d_turnover_stability_20d__N7__R5",
-      "sid": "策略四",
+      "sid": "策略0095",
+      "source_sid": "策略四",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_cmf_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日成交稳定性、二十日收益峰度、相对六十日均线位置",
@@ -15568,7 +15663,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_volume_ma_ratio_5_20_vol_20d_turnover_stability_20d__N7__R5",
-      "sid": "策略六",
+      "sid": "策略0096",
+      "source_sid": "策略六",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_volume_ma_ratio_5_20_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日波动率、二十日成交稳定性、五日与二十日成交量比、相对六十日均线位置",
@@ -15688,7 +15784,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_px_to_ma60_ret_60d_parkinson_vol_20d_turnover_stability_20d__N5__R5",
-      "sid": "策略七",
+      "sid": "策略0097",
+      "source_sid": "策略七",
       "candidate_id": "pulltrend_ret_5d_px_to_ma60_ret_60d_parkinson_vol_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日波动率、二十日高低价波动率、二十日成交稳定性、相对六十日均线位置",
@@ -15782,7 +15879,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_volume_ma_ratio_5_20_parkinson_vol_20d_turnover_stability_20d__N7__R5",
-      "sid": "策略八",
+      "sid": "策略0098",
+      "source_sid": "策略八",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_volume_ma_ratio_5_20_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日波动率、二十日高低价波动率、二十日成交稳定性、五日与二十日成交量比、相对六十日均线位置",
@@ -15902,7 +16000,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_volume_ma_ratio_5_20_ret_skew_20d_turnover_stability_20d__N7__R5",
-      "sid": "策略九",
+      "sid": "策略0099",
+      "source_sid": "策略九",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_volume_ma_ratio_5_20_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日成交稳定性、五日与二十日成交量比、二十日收益偏度、相对六十日均线位置",
@@ -16022,7 +16121,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_cmf_20_vol_20d_turnover_stability_20d__N7__R5",
-      "sid": "策略十",
+      "sid": "策略0100",
+      "source_sid": "策略十",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_cmf_20_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日波动率、二十日成交稳定性、相对六十日均线位置",
@@ -16142,7 +16242,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_cmf_20_ret_skew_20d_turnover_stability_20d__N7__R5",
-      "sid": "策略十一",
+      "sid": "策略0101",
+      "source_sid": "策略十一",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_cmf_20_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日成交稳定性、二十日收益偏度、相对六十日均线位置",
@@ -16262,7 +16363,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_volume_ma_ratio_5_20_atr_20d_turnover_stability_20d__N7__R5",
-      "sid": "策略十二",
+      "sid": "策略0102",
+      "source_sid": "策略十二",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_volume_ma_ratio_5_20_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日真实波幅、二十日成交稳定性、五日与二十日成交量比、相对六十日均线位置",
@@ -16382,7 +16484,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_mfi_7_vol_20d_turnover_stability_20d__N5__R10",
-      "sid": "策略十三",
+      "sid": "策略0103",
+      "source_sid": "策略十三",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_mfi_7_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日波动率、二十日成交稳定性、相对六十日均线位置",
@@ -16476,7 +16579,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_volume_ma_ratio_5_20_kurtosis_20d_turnover_stability_20d__N7__R5",
-      "sid": "策略十四",
+      "sid": "策略0104",
+      "source_sid": "策略十四",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_volume_ma_ratio_5_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日成交稳定性、五日与二十日成交量比、二十日收益峰度、相对六十日均线位置",
@@ -16596,7 +16700,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_mfi_7_atr_20d_turnover_stability_20d__N5__R10",
-      "sid": "策略十五",
+      "sid": "策略0105",
+      "source_sid": "策略十五",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_mfi_7_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日真实波幅、二十日成交稳定性、相对六十日均线位置",
@@ -16690,7 +16795,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_drawdown_5d_px_to_ma60_volume_ma_ratio_5_20_kurtosis_20d_turnover_stability_20d__N7__R10",
-      "sid": "策略六",
+      "sid": "策略0106",
+      "source_sid": "策略六",
       "candidate_id": "balanced_ret_120d_drawdown_5d_px_to_ma60_volume_ma_ratio_5_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日成交稳定性、五日与二十日成交量比、二十日收益峰度、相对六十日均线位置",
@@ -16810,7 +16916,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_drawdown_5d_px_to_ma60_volume_ma_ratio_5_20_vol_20d_turnover_stability_20d__N7__R10",
-      "sid": "策略七",
+      "sid": "策略0107",
+      "source_sid": "策略七",
       "candidate_id": "balanced_ret_120d_drawdown_5d_px_to_ma60_volume_ma_ratio_5_20_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日波动率、二十日成交稳定性、五日与二十日成交量比、相对六十日均线位置",
@@ -16930,7 +17037,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_drawdown_5d_px_to_ma60_volume_ma_ratio_5_20_kurtosis_20d_turnover_stability_20d__N7__R5",
-      "sid": "策略十二",
+      "sid": "策略0108",
+      "source_sid": "策略十二",
       "candidate_id": "balanced_ret_120d_drawdown_5d_px_to_ma60_volume_ma_ratio_5_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日成交稳定性、五日与二十日成交量比、二十日收益峰度、相对六十日均线位置",
@@ -17050,7 +17158,8 @@
     },
     {
       "monitor_key": "balanced_mom_252_21_ret_5d_px_to_ma20_mfi_7_vol_20d_turnover_stability_20d__N7__R5",
-      "sid": "策略十三",
+      "sid": "策略0109",
+      "source_sid": "策略十三",
       "candidate_id": "balanced_mom_252_21_ret_5d_px_to_ma20_mfi_7_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日波动率、二十日成交稳定性、相对二十日均线位置",
@@ -17170,7 +17279,8 @@
     },
     {
       "monitor_key": "balanced_mom_252_21_ret_5d_px_to_ma20_mfi_7_parkinson_vol_20d_turnover_stability_20d__N7__R5",
-      "sid": "策略十五",
+      "sid": "策略0110",
+      "source_sid": "策略十五",
       "candidate_id": "balanced_mom_252_21_ret_5d_px_to_ma20_mfi_7_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日波动率、二十日高低价波动率、二十日成交稳定性、相对二十日均线位置",
@@ -17290,7 +17400,8 @@
     },
     {
       "monitor_key": "balanced_mom_252_21_ret_5d_ma20_above_ma60_mfi_7_parkinson_vol_20d_turnover_stability_20d__N7__R5",
-      "sid": "策略八",
+      "sid": "策略0111",
+      "source_sid": "策略八",
       "candidate_id": "balanced_mom_252_21_ret_5d_ma20_above_ma60_mfi_7_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日波动率、二十日高低价波动率、二十日成交稳定性、二十日均线相对六十日均线",
@@ -17410,7 +17521,8 @@
     },
     {
       "monitor_key": "balanced_mom_252_21_ret_5d_ma20_above_ma60_mfi_7_vol_20d_turnover_stability_20d__N7__R5",
-      "sid": "策略十",
+      "sid": "策略0112",
+      "source_sid": "策略十",
       "candidate_id": "balanced_mom_252_21_ret_5d_ma20_above_ma60_mfi_7_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日波动率、二十日成交稳定性、二十日均线相对六十日均线",
@@ -17530,7 +17642,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_10d_px_to_ma60_volume_ma_ratio_5_20_ret_skew_20d_turnover_stability_20d__N5__R5",
-      "sid": "策略三",
+      "sid": "策略0113",
+      "source_sid": "策略三",
       "candidate_id": "balanced_ret_120d_ret_10d_px_to_ma60_volume_ma_ratio_5_20_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日成交稳定性、五日与二十日成交量比、二十日收益偏度、相对六十日均线位置",
@@ -17624,7 +17737,8 @@
     },
     {
       "monitor_key": "balanced_mom_252_21_ret_5d_px_to_ma20_mfi_14_vol_20d_turnover_stability_20d__N7__R5",
-      "sid": "策略一",
+      "sid": "策略0114",
+      "source_sid": "策略一",
       "candidate_id": "balanced_mom_252_21_ret_5d_px_to_ma20_mfi_14_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十四日资金流指标、二十日波动率、二十日成交稳定性、相对二十日均线位置",
@@ -17744,7 +17858,8 @@
     },
     {
       "monitor_key": "balanced_mom_252_21_ret_5d_px_to_ma20_mfi_14_parkinson_vol_20d_turnover_stability_20d__N7__R5",
-      "sid": "策略七",
+      "sid": "策略0115",
+      "source_sid": "策略七",
       "candidate_id": "balanced_mom_252_21_ret_5d_px_to_ma20_mfi_14_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十四日资金流指标、二十日波动率、二十日高低价波动率、二十日成交稳定性、相对二十日均线位置",
@@ -17864,7 +17979,8 @@
     },
     {
       "monitor_key": "balanced_mom_252_21_ret_5d_macd_hist_mfi_14_vol_20d_turnover_stability_20d__N7__R5",
-      "sid": "策略二十",
+      "sid": "策略0116",
+      "source_sid": "策略二十",
       "candidate_id": "balanced_mom_252_21_ret_5d_macd_hist_mfi_14_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十四日资金流指标、二十日波动率、二十日成交稳定性",
@@ -17984,7 +18100,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_cmf_20_kurtosis_20d_turnover_stability_20d__N5__R5",
-      "sid": "策略一",
+      "sid": "策略0117",
+      "source_sid": "策略一",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_cmf_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日成交稳定性、二十日收益峰度、相对六十日均线位置",
@@ -18078,7 +18195,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_volume_ma_ratio_5_20_kurtosis_20d_turnover_stability_20d__N7__R10",
-      "sid": "策略二",
+      "sid": "策略0118",
+      "source_sid": "策略二",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_volume_ma_ratio_5_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日成交稳定性、五日与二十日成交量比、二十日收益峰度、相对六十日均线位置",
@@ -18198,7 +18316,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_obv_change_20_kurtosis_20d_turnover_stability_20d__N7__R10",
-      "sid": "策略三",
+      "sid": "策略0119",
+      "source_sid": "策略三",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_obv_change_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日能量潮变化、二十日成交稳定性、二十日收益峰度、相对六十日均线位置",
@@ -18318,7 +18437,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_cmf_20_kurtosis_20d_turnover_stability_20d__N7__R10",
-      "sid": "策略四",
+      "sid": "策略0120",
+      "source_sid": "策略四",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_cmf_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日成交稳定性、二十日收益峰度、相对六十日均线位置",
@@ -18438,7 +18558,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_obv_change_20_vol_20d_turnover_stability_20d__N7__R10",
-      "sid": "策略五",
+      "sid": "策略0121",
+      "source_sid": "策略五",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_obv_change_20_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日能量潮变化、二十日波动率、二十日成交稳定性、相对六十日均线位置",
@@ -18558,7 +18679,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_volume_ma_ratio_5_20_vol_20d_turnover_stability_20d__N7__R10",
-      "sid": "策略六",
+      "sid": "策略0122",
+      "source_sid": "策略六",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_volume_ma_ratio_5_20_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日波动率、二十日成交稳定性、五日与二十日成交量比、相对六十日均线位置",
@@ -18678,7 +18800,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_drawdown_5d_px_to_ma60_volume_ma_ratio_5_20_kurtosis_20d_turnover_stability_20d__N5__R10",
-      "sid": "策略一",
+      "sid": "策略0123",
+      "source_sid": "策略一",
       "candidate_id": "balanced_ret_120d_drawdown_5d_px_to_ma60_volume_ma_ratio_5_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日成交稳定性、五日与二十日成交量比、二十日收益峰度、相对六十日均线位置",
@@ -18772,7 +18895,8 @@
     },
     {
       "monitor_key": "pulltrend_drawdown_5d_px_to_ma60_ret_120d_parkinson_vol_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略一",
+      "sid": "策略0124",
+      "source_sid": "策略一",
       "candidate_id": "pulltrend_drawdown_5d_px_to_ma60_ret_120d_parkinson_vol_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日波动率、二十日高低价波动率、二十日成交稳定性、相对六十日均线位置",
@@ -18931,7 +19055,8 @@
     },
     {
       "monitor_key": "pulltrend_drawdown_5d_px_to_ma60_ret_120d_vol_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略四",
+      "sid": "策略0125",
+      "source_sid": "策略四",
       "candidate_id": "pulltrend_drawdown_5d_px_to_ma60_ret_120d_vol_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日波动率、二十日成交稳定性、相对六十日均线位置",
@@ -19090,7 +19215,8 @@
     },
     {
       "monitor_key": "balanced_mom_252_21_ret_5d_ma20_above_ma60_mfi_7_atr_20d_turnover_stability_20d__N5__R5",
-      "sid": "策略三",
+      "sid": "策略0126",
+      "source_sid": "策略三",
       "candidate_id": "balanced_mom_252_21_ret_5d_ma20_above_ma60_mfi_7_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日真实波幅、二十日成交稳定性、二十日均线相对六十日均线",
@@ -19184,7 +19310,8 @@
     },
     {
       "monitor_key": "balanced_mom_252_21_ret_5d_ma20_above_ma60_mfi_7_kurtosis_20d_turnover_stability_20d__N5__R5",
-      "sid": "策略八",
+      "sid": "策略0127",
+      "source_sid": "策略八",
       "candidate_id": "balanced_mom_252_21_ret_5d_ma20_above_ma60_mfi_7_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日成交稳定性、二十日收益峰度、二十日均线相对六十日均线",
@@ -19278,7 +19405,8 @@
     },
     {
       "monitor_key": "balanced_mom_252_21_ret_5d_ma20_above_ma60_mfi_7_parkinson_vol_20d_turnover_stability_20d__N5__R5",
-      "sid": "策略九",
+      "sid": "策略0128",
+      "source_sid": "策略九",
       "candidate_id": "balanced_mom_252_21_ret_5d_ma20_above_ma60_mfi_7_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日波动率、二十日高低价波动率、二十日成交稳定性、二十日均线相对六十日均线",
@@ -19372,7 +19500,8 @@
     },
     {
       "monitor_key": "balanced_mom_252_21_ret_5d_ma20_above_ma60_mfi_7_ret_skew_20d_turnover_stability_20d__N5__R5",
-      "sid": "策略十一",
+      "sid": "策略0129",
+      "source_sid": "策略十一",
       "candidate_id": "balanced_mom_252_21_ret_5d_ma20_above_ma60_mfi_7_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日成交稳定性、二十日收益偏度、二十日均线相对六十日均线",
@@ -19466,7 +19595,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_drawdown_10d_px_to_ma60_obv_change_20_ret_skew_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略一",
+      "sid": "策略0130",
+      "source_sid": "策略一",
       "candidate_id": "balanced_ret_120d_drawdown_10d_px_to_ma60_obv_change_20_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日能量潮变化、二十日成交稳定性、二十日收益偏度、相对六十日均线位置",
@@ -19625,7 +19755,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_drawdown_10d_px_to_ma60_cmf_20_ret_skew_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略二",
+      "sid": "策略0131",
+      "source_sid": "策略二",
       "candidate_id": "balanced_ret_120d_drawdown_10d_px_to_ma60_cmf_20_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日成交稳定性、二十日收益偏度、相对六十日均线位置",
@@ -19784,7 +19915,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_drawdown_5d_px_to_ma60_mfi_7_kurtosis_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略九",
+      "sid": "策略0132",
+      "source_sid": "策略九",
       "candidate_id": "balanced_ret_120d_drawdown_5d_px_to_ma60_mfi_7_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日成交稳定性、二十日收益峰度、相对六十日均线位置",
@@ -19943,7 +20075,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_drawdown_5d_px_to_ma60_mfi_7_atr_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略十一",
+      "sid": "策略0133",
+      "source_sid": "策略十一",
       "candidate_id": "balanced_ret_120d_drawdown_5d_px_to_ma60_mfi_7_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日真实波幅、二十日成交稳定性、相对六十日均线位置",
@@ -20102,7 +20235,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_drawdown_5d_px_to_ma60_mfi_7_parkinson_vol_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略十二",
+      "sid": "策略0134",
+      "source_sid": "策略十二",
       "candidate_id": "balanced_ret_120d_drawdown_5d_px_to_ma60_mfi_7_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日波动率、二十日高低价波动率、二十日成交稳定性、相对六十日均线位置",
@@ -20261,7 +20395,8 @@
     },
     {
       "monitor_key": "balanced_mom_252_21_ret_5d_ma20_above_ma60_mfi_14_atr_20d_turnover_stability_20d__N5__R5",
-      "sid": "策略一",
+      "sid": "策略0135",
+      "source_sid": "策略一",
       "candidate_id": "balanced_mom_252_21_ret_5d_ma20_above_ma60_mfi_14_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十四日资金流指标、二十日真实波幅、二十日成交稳定性、二十日均线相对六十日均线",
@@ -20355,7 +20490,8 @@
     },
     {
       "monitor_key": "balanced_mom_252_21_ret_5d_ma20_above_ma60_mfi_14_kurtosis_20d_turnover_stability_20d__N5__R5",
-      "sid": "策略四",
+      "sid": "策略0136",
+      "source_sid": "策略四",
       "candidate_id": "balanced_mom_252_21_ret_5d_ma20_above_ma60_mfi_14_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十四日资金流指标、二十日成交稳定性、二十日收益峰度、二十日均线相对六十日均线",
@@ -20449,7 +20585,8 @@
     },
     {
       "monitor_key": "balanced_mom_252_21_ret_5d_ma20_above_ma60_mfi_14_parkinson_vol_20d_turnover_stability_20d__N5__R5",
-      "sid": "策略五",
+      "sid": "策略0137",
+      "source_sid": "策略五",
       "candidate_id": "balanced_mom_252_21_ret_5d_ma20_above_ma60_mfi_14_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十四日资金流指标、二十日波动率、二十日高低价波动率、二十日成交稳定性、二十日均线相对六十日均线",
@@ -20543,7 +20680,8 @@
     },
     {
       "monitor_key": "balanced_mom_252_21_ret_5d_ma20_above_ma60_mfi_14_ret_skew_20d_turnover_stability_20d__N5__R5",
-      "sid": "策略六",
+      "sid": "策略0138",
+      "source_sid": "策略六",
       "candidate_id": "balanced_mom_252_21_ret_5d_ma20_above_ma60_mfi_14_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十四日资金流指标、二十日成交稳定性、二十日收益偏度、二十日均线相对六十日均线",
@@ -20637,7 +20775,8 @@
     },
     {
       "monitor_key": "pulltrend_drawdown_10d_px_to_ma60_ret_120d_atr_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略十",
+      "sid": "策略0139",
+      "source_sid": "策略十",
       "candidate_id": "pulltrend_drawdown_10d_px_to_ma60_ret_120d_atr_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日真实波幅、二十日成交稳定性、相对六十日均线位置",
@@ -20796,7 +20935,8 @@
     },
     {
       "monitor_key": "pulltrend_drawdown_10d_px_to_ma60_ret_120d_vol_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略十二",
+      "sid": "策略0140",
+      "source_sid": "策略十二",
       "candidate_id": "pulltrend_drawdown_10d_px_to_ma60_ret_120d_vol_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日波动率、二十日成交稳定性、相对六十日均线位置",
@@ -20955,7 +21095,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_px_to_ma60_ret_60d_atr_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略四",
+      "sid": "策略0141",
+      "source_sid": "策略四",
       "candidate_id": "pulltrend_ret_5d_px_to_ma60_ret_60d_atr_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日真实波幅、二十日成交稳定性、相对六十日均线位置",
@@ -21114,7 +21255,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_px_to_ma60_ret_60d_kurtosis_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略五",
+      "sid": "策略0142",
+      "source_sid": "策略五",
       "candidate_id": "pulltrend_ret_5d_px_to_ma60_ret_60d_kurtosis_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日成交稳定性、二十日收益峰度、相对六十日均线位置",
@@ -21273,7 +21415,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_drawdown_5d_px_to_ma60_obv_change_20_ret_skew_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略七",
+      "sid": "策略0143",
+      "source_sid": "策略七",
       "candidate_id": "balanced_ret_120d_drawdown_5d_px_to_ma60_obv_change_20_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日能量潮变化、二十日成交稳定性、二十日收益偏度、相对六十日均线位置",
@@ -21393,7 +21536,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_px_to_ma60_ret_60d_parkinson_vol_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略八",
+      "sid": "策略0144",
+      "source_sid": "策略八",
       "candidate_id": "pulltrend_ret_5d_px_to_ma60_ret_60d_parkinson_vol_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日波动率、二十日高低价波动率、二十日成交稳定性、相对六十日均线位置",
@@ -21552,7 +21696,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_drawdown_5d_px_to_ma60_cmf_10_ret_skew_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略九",
+      "sid": "策略0145",
+      "source_sid": "策略九",
       "candidate_id": "balanced_ret_120d_drawdown_5d_px_to_ma60_cmf_10_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日成交稳定性、二十日收益偏度、相对六十日均线位置",
@@ -21672,7 +21817,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_px_to_ma60_ret_60d_vol_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略十",
+      "sid": "策略0146",
+      "source_sid": "策略十",
       "candidate_id": "pulltrend_ret_5d_px_to_ma60_ret_60d_vol_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日波动率、二十日成交稳定性、相对六十日均线位置",
@@ -21831,7 +21977,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_drawdown_5d_px_to_ma60_mfi_14_ret_skew_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略十一",
+      "sid": "策略0147",
+      "source_sid": "策略十一",
       "candidate_id": "balanced_ret_120d_drawdown_5d_px_to_ma60_mfi_14_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十四日资金流指标、二十日成交稳定性、二十日收益偏度、相对六十日均线位置",
@@ -21951,7 +22098,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_drawdown_5d_px_to_ma60_volume_ma_ratio_5_20_ret_skew_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略十二",
+      "sid": "策略0148",
+      "source_sid": "策略十二",
       "candidate_id": "balanced_ret_120d_drawdown_5d_px_to_ma60_volume_ma_ratio_5_20_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日成交稳定性、五日与二十日成交量比、二十日收益偏度、相对六十日均线位置",
@@ -22071,7 +22219,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_drawdown_5d_px_to_ma60_volume_ma_ratio_5_20_atr_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略六",
+      "sid": "策略0149",
+      "source_sid": "策略六",
       "candidate_id": "balanced_ret_120d_drawdown_5d_px_to_ma60_volume_ma_ratio_5_20_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日真实波幅、二十日成交稳定性、五日与二十日成交量比、相对六十日均线位置",
@@ -22230,7 +22379,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_drawdown_5d_px_to_ma60_volume_ma_ratio_5_20_kurtosis_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略七",
+      "sid": "策略0150",
+      "source_sid": "策略七",
       "candidate_id": "balanced_ret_120d_drawdown_5d_px_to_ma60_volume_ma_ratio_5_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日成交稳定性、五日与二十日成交量比、二十日收益峰度、相对六十日均线位置",
@@ -22389,7 +22539,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_drawdown_5d_px_to_ma60_volume_ma_ratio_5_20_parkinson_vol_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略八",
+      "sid": "策略0151",
+      "source_sid": "策略八",
       "candidate_id": "balanced_ret_120d_drawdown_5d_px_to_ma60_volume_ma_ratio_5_20_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日波动率、二十日高低价波动率、二十日成交稳定性、五日与二十日成交量比、相对六十日均线位置",
@@ -22548,7 +22699,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_drawdown_10d_px_to_ma60_cmf_20_kurtosis_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略七",
+      "sid": "策略0152",
+      "source_sid": "策略七",
       "candidate_id": "balanced_ret_60d_drawdown_10d_px_to_ma60_cmf_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日成交稳定性、二十日收益峰度、相对六十日均线位置",
@@ -22707,7 +22859,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_px_to_ma20_ret_120d_vol_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略一",
+      "sid": "策略0153",
+      "source_sid": "策略一",
       "candidate_id": "pulltrend_ret_5d_px_to_ma20_ret_120d_vol_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日波动率、二十日成交稳定性、相对二十日均线位置",
@@ -22866,7 +23019,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_px_to_ma20_ret_120d_atr_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略二",
+      "sid": "策略0154",
+      "source_sid": "策略二",
       "candidate_id": "pulltrend_ret_5d_px_to_ma20_ret_120d_atr_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日真实波幅、二十日成交稳定性、相对二十日均线位置",
@@ -23025,7 +23179,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_mfi_7_vol_20d_turnover_stability_20d__N10__R10",
-      "sid": "策略三",
+      "sid": "策略0155",
+      "source_sid": "策略三",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_mfi_7_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日波动率、二十日成交稳定性、相对二十日均线位置",
@@ -23184,7 +23339,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_ma20_above_ma60_mfi_7_atr_20d_turnover_stability_20d__N10__R10",
-      "sid": "策略四",
+      "sid": "策略0156",
+      "source_sid": "策略四",
       "candidate_id": "balanced_ret_120d_ret_5d_ma20_above_ma60_mfi_7_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日真实波幅、二十日成交稳定性、二十日均线相对六十日均线",
@@ -23343,7 +23499,8 @@
     },
     {
       "monitor_key": "pulltrend_drawdown_5d_px_to_ma60_ret_60d_atr_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略一",
+      "sid": "策略0157",
+      "source_sid": "策略一",
       "candidate_id": "pulltrend_drawdown_5d_px_to_ma60_ret_60d_atr_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日真实波幅、二十日成交稳定性、相对六十日均线位置",
@@ -23502,7 +23659,8 @@
     },
     {
       "monitor_key": "pulltrend_drawdown_5d_px_to_ma60_ret_60d_kurtosis_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略二",
+      "sid": "策略0158",
+      "source_sid": "策略二",
       "candidate_id": "pulltrend_drawdown_5d_px_to_ma60_ret_60d_kurtosis_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日成交稳定性、二十日收益峰度、相对六十日均线位置",
@@ -23661,7 +23819,8 @@
     },
     {
       "monitor_key": "pulltrend_drawdown_5d_px_to_ma60_ret_60d_vol_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略三",
+      "sid": "策略0159",
+      "source_sid": "策略三",
       "candidate_id": "pulltrend_drawdown_5d_px_to_ma60_ret_60d_vol_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日波动率、二十日成交稳定性、相对六十日均线位置",
@@ -23820,7 +23979,8 @@
     },
     {
       "monitor_key": "pulltrend_drawdown_5d_px_to_ma60_ret_60d_parkinson_vol_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略四",
+      "sid": "策略0160",
+      "source_sid": "策略四",
       "candidate_id": "pulltrend_drawdown_5d_px_to_ma60_ret_60d_parkinson_vol_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日波动率、二十日高低价波动率、二十日成交稳定性、相对六十日均线位置",
@@ -23979,7 +24139,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_mfi_14_kurtosis_20d_turnover_stability_20d__N7__R5",
-      "sid": "策略六",
+      "sid": "策略0161",
+      "source_sid": "策略六",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_mfi_14_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十四日资金流指标、二十日成交稳定性、二十日收益峰度、相对二十日均线位置",
@@ -24099,7 +24260,8 @@
     },
     {
       "monitor_key": "microtrend_overnight_gap_1d_px_to_ma60_ret_60d_ret_skew_20d_turnover_stability_20d__N5__R20",
-      "sid": "策略四",
+      "sid": "策略0162",
+      "source_sid": "策略四",
       "candidate_id": "microtrend_overnight_gap_1d_px_to_ma60_ret_60d_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日成交稳定性、二十日收益偏度、相对六十日均线位置、隔夜跳空",
@@ -24193,7 +24355,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_drawdown_10d_px_to_ma60_obv_change_20_kurtosis_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略一",
+      "sid": "策略0163",
+      "source_sid": "策略一",
       "candidate_id": "balanced_ret_120d_drawdown_10d_px_to_ma60_obv_change_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日能量潮变化、二十日成交稳定性、二十日收益峰度、相对六十日均线位置",
@@ -24352,7 +24515,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_cmf_20_kurtosis_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略一",
+      "sid": "策略0164",
+      "source_sid": "策略一",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_cmf_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日成交稳定性、二十日收益峰度、相对六十日均线位置",
@@ -24511,7 +24675,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_obv_change_20_kurtosis_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略二",
+      "sid": "策略0165",
+      "source_sid": "策略二",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_obv_change_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日能量潮变化、二十日成交稳定性、二十日收益峰度、相对六十日均线位置",
@@ -24670,7 +24835,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_cmf_10_kurtosis_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略三",
+      "sid": "策略0166",
+      "source_sid": "策略三",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_cmf_10_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日成交稳定性、二十日收益峰度、相对六十日均线位置",
@@ -24829,7 +24995,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_volume_ma_ratio_5_20_kurtosis_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略四",
+      "sid": "策略0167",
+      "source_sid": "策略四",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_volume_ma_ratio_5_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日成交稳定性、五日与二十日成交量比、二十日收益峰度、相对六十日均线位置",
@@ -24988,7 +25155,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_obv_change_20_vol_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略五",
+      "sid": "策略0168",
+      "source_sid": "策略五",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_obv_change_20_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日能量潮变化、二十日波动率、二十日成交稳定性、相对六十日均线位置",
@@ -25147,7 +25315,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_volume_ma_ratio_5_20_atr_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略六",
+      "sid": "策略0169",
+      "source_sid": "策略六",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_volume_ma_ratio_5_20_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日真实波幅、二十日成交稳定性、五日与二十日成交量比、相对六十日均线位置",
@@ -25306,7 +25475,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_cmf_20_vol_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略七",
+      "sid": "策略0170",
+      "source_sid": "策略七",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_cmf_20_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日波动率、二十日成交稳定性、相对六十日均线位置",
@@ -25465,7 +25635,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_drawdown_5d_px_to_ma60_mfi_14_kurtosis_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略一",
+      "sid": "策略0171",
+      "source_sid": "策略一",
       "candidate_id": "balanced_ret_120d_drawdown_5d_px_to_ma60_mfi_14_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十四日资金流指标、二十日成交稳定性、二十日收益峰度、相对六十日均线位置",
@@ -25585,7 +25756,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_drawdown_5d_px_to_ma60_cmf_10_vol_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略二",
+      "sid": "策略0172",
+      "source_sid": "策略二",
       "candidate_id": "balanced_ret_120d_drawdown_5d_px_to_ma60_cmf_10_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日波动率、二十日成交稳定性、相对六十日均线位置",
@@ -25705,7 +25877,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_drawdown_5d_px_to_ma60_mfi_14_vol_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略三",
+      "sid": "策略0173",
+      "source_sid": "策略三",
       "candidate_id": "balanced_ret_120d_drawdown_5d_px_to_ma60_mfi_14_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十四日资金流指标、二十日波动率、二十日成交稳定性、相对六十日均线位置",
@@ -25825,7 +25998,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_drawdown_5d_px_to_ma60_mfi_14_atr_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略四",
+      "sid": "策略0174",
+      "source_sid": "策略四",
       "candidate_id": "balanced_ret_120d_drawdown_5d_px_to_ma60_mfi_14_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十四日资金流指标、二十日真实波幅、二十日成交稳定性、相对六十日均线位置",
@@ -25945,7 +26119,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_drawdown_5d_px_to_ma60_mfi_14_parkinson_vol_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略五",
+      "sid": "策略0175",
+      "source_sid": "策略五",
       "candidate_id": "balanced_ret_120d_drawdown_5d_px_to_ma60_mfi_14_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十四日资金流指标、二十日波动率、二十日高低价波动率、二十日成交稳定性、相对六十日均线位置",
@@ -26065,7 +26240,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_drawdown_5d_px_to_ma60_cmf_10_atr_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略六",
+      "sid": "策略0176",
+      "source_sid": "策略六",
       "candidate_id": "balanced_ret_120d_drawdown_5d_px_to_ma60_cmf_10_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日真实波幅、二十日成交稳定性、相对六十日均线位置",
@@ -26185,7 +26361,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_drawdown_5d_px_to_ma60_cmf_10_parkinson_vol_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略七",
+      "sid": "策略0177",
+      "source_sid": "策略七",
       "candidate_id": "balanced_ret_120d_drawdown_5d_px_to_ma60_cmf_10_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日波动率、二十日高低价波动率、二十日成交稳定性、相对六十日均线位置",
@@ -26305,7 +26482,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_10_ret_skew_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略一",
+      "sid": "策略0178",
+      "source_sid": "策略一",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_10_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日成交稳定性、二十日收益偏度、相对二十日均线位置",
@@ -26464,7 +26642,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_10_kurtosis_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略二",
+      "sid": "策略0179",
+      "source_sid": "策略二",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_10_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日成交稳定性、二十日收益峰度、相对二十日均线位置",
@@ -26623,7 +26802,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_10_parkinson_vol_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略四",
+      "sid": "策略0180",
+      "source_sid": "策略四",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_10_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日波动率、二十日高低价波动率、二十日成交稳定性、相对二十日均线位置",
@@ -26782,7 +26962,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_macd_hist_cmf_10_kurtosis_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略五",
+      "sid": "策略0181",
+      "source_sid": "策略五",
       "candidate_id": "balanced_ret_120d_ret_5d_macd_hist_cmf_10_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日成交稳定性、二十日收益峰度",
@@ -26941,7 +27122,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_drawdown_5d_px_to_ma60_cmf_10_atr_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略一",
+      "sid": "策略0182",
+      "source_sid": "策略一",
       "candidate_id": "balanced_ret_60d_drawdown_5d_px_to_ma60_cmf_10_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日真实波幅、二十日成交稳定性、相对六十日均线位置",
@@ -27100,7 +27282,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_drawdown_5d_px_to_ma60_cmf_10_parkinson_vol_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略二",
+      "sid": "策略0183",
+      "source_sid": "策略二",
       "candidate_id": "balanced_ret_60d_drawdown_5d_px_to_ma60_cmf_10_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日波动率、二十日高低价波动率、二十日成交稳定性、相对六十日均线位置",
@@ -27259,7 +27442,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_mfi_14_kurtosis_20d_turnover_stability_20d__N10__R10",
-      "sid": "策略三",
+      "sid": "策略0184",
+      "source_sid": "策略三",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_mfi_14_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十四日资金流指标、二十日成交稳定性、二十日收益峰度、相对二十日均线位置",
@@ -27418,7 +27602,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_px_to_ma20_ret_120d_ret_skew_20d_turnover_stability_20d__N10__R10",
-      "sid": "策略一",
+      "sid": "策略0185",
+      "source_sid": "策略一",
       "candidate_id": "pulltrend_ret_5d_px_to_ma20_ret_120d_ret_skew_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日成交稳定性、二十日收益偏度、相对二十日均线位置",
@@ -27577,7 +27762,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_macd_hist_ret_120d_ret_skew_20d_turnover_stability_20d__N10__R10",
-      "sid": "策略二",
+      "sid": "策略0186",
+      "source_sid": "策略二",
       "candidate_id": "pulltrend_ret_5d_macd_hist_ret_120d_ret_skew_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日成交稳定性、二十日收益偏度",
@@ -27736,7 +27922,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_ma20_above_ma60_ret_120d_ret_skew_20d_turnover_stability_20d__N10__R10",
-      "sid": "策略六",
+      "sid": "策略0187",
+      "source_sid": "策略六",
       "candidate_id": "pulltrend_ret_5d_ma20_above_ma60_ret_120d_ret_skew_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日成交稳定性、二十日收益偏度、二十日均线相对六十日均线",
@@ -27895,7 +28082,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_ma20_above_ma60_volume_ma_ratio_5_20_ret_skew_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略九",
+      "sid": "策略0188",
+      "source_sid": "策略九",
       "candidate_id": "balanced_ret_120d_ret_5d_ma20_above_ma60_volume_ma_ratio_5_20_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日成交稳定性、五日与二十日成交量比、二十日收益偏度、二十日均线相对六十日均线",
@@ -28054,7 +28242,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_px_to_ma20_ret_120d_vol_20d_turnover_stability_20d__N10__R10",
-      "sid": "策略一",
+      "sid": "策略0189",
+      "source_sid": "策略一",
       "candidate_id": "pulltrend_ret_5d_px_to_ma20_ret_120d_vol_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日波动率、二十日成交稳定性、相对二十日均线位置",
@@ -28213,7 +28402,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_px_to_ma20_ret_120d_atr_20d_turnover_stability_20d__N10__R10",
-      "sid": "策略二",
+      "sid": "策略0190",
+      "source_sid": "策略二",
       "candidate_id": "pulltrend_ret_5d_px_to_ma20_ret_120d_atr_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日真实波幅、二十日成交稳定性、相对二十日均线位置",
@@ -28372,7 +28562,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_px_to_ma20_ret_120d_parkinson_vol_20d_turnover_stability_20d__N10__R10",
-      "sid": "策略三",
+      "sid": "策略0191",
+      "source_sid": "策略三",
       "candidate_id": "pulltrend_ret_5d_px_to_ma20_ret_120d_parkinson_vol_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日波动率、二十日高低价波动率、二十日成交稳定性、相对二十日均线位置",
@@ -28531,7 +28722,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_volume_ma_ratio_5_20_vol_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略四",
+      "sid": "策略0192",
+      "source_sid": "策略四",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_volume_ma_ratio_5_20_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日波动率、二十日成交稳定性、五日与二十日成交量比、相对二十日均线位置",
@@ -28690,7 +28882,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_20_kurtosis_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略五",
+      "sid": "策略0193",
+      "source_sid": "策略五",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日成交稳定性、二十日收益峰度、相对二十日均线位置",
@@ -28849,7 +29042,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_macd_hist_ret_120d_kurtosis_20d_turnover_stability_20d__N10__R10",
-      "sid": "策略六",
+      "sid": "策略0194",
+      "source_sid": "策略六",
       "candidate_id": "pulltrend_ret_5d_macd_hist_ret_120d_kurtosis_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日成交稳定性、二十日收益峰度",
@@ -29008,7 +29202,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_volume_ma_ratio_5_20_kurtosis_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略七",
+      "sid": "策略0195",
+      "source_sid": "策略七",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_volume_ma_ratio_5_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日成交稳定性、五日与二十日成交量比、二十日收益峰度、相对二十日均线位置",
@@ -29167,7 +29362,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_20_ret_skew_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略八",
+      "sid": "策略0196",
+      "source_sid": "策略八",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_20_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日成交稳定性、二十日收益偏度、相对二十日均线位置",
@@ -29326,7 +29522,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_volume_ma_ratio_5_20_ret_skew_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略九",
+      "sid": "策略0197",
+      "source_sid": "策略九",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_volume_ma_ratio_5_20_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日成交稳定性、五日与二十日成交量比、二十日收益偏度、相对二十日均线位置",
@@ -29485,7 +29682,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_ma20_above_ma60_ret_120d_kurtosis_20d_turnover_stability_20d__N10__R10",
-      "sid": "策略十",
+      "sid": "策略0198",
+      "source_sid": "策略十",
       "candidate_id": "pulltrend_ret_5d_ma20_above_ma60_ret_120d_kurtosis_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日成交稳定性、二十日收益峰度、二十日均线相对六十日均线",
@@ -29644,7 +29842,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_volume_ma_ratio_5_20_atr_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略十一",
+      "sid": "策略0199",
+      "source_sid": "策略十一",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_volume_ma_ratio_5_20_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日真实波幅、二十日成交稳定性、五日与二十日成交量比、相对二十日均线位置",
@@ -29803,7 +30002,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_volume_ma_ratio_5_20_parkinson_vol_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略十二",
+      "sid": "策略0200",
+      "source_sid": "策略十二",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_volume_ma_ratio_5_20_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日波动率、二十日高低价波动率、二十日成交稳定性、五日与二十日成交量比、相对二十日均线位置",
@@ -29962,7 +30162,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_20_parkinson_vol_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略十三",
+      "sid": "策略0201",
+      "source_sid": "策略十三",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_20_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日波动率、二十日高低价波动率、二十日成交稳定性、相对二十日均线位置",
@@ -30121,7 +30322,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_ma20_above_ma60_ret_120d_parkinson_vol_20d_turnover_stability_20d__N10__R10",
-      "sid": "策略十四",
+      "sid": "策略0202",
+      "source_sid": "策略十四",
       "candidate_id": "pulltrend_ret_5d_ma20_above_ma60_ret_120d_parkinson_vol_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日波动率、二十日高低价波动率、二十日成交稳定性、二十日均线相对六十日均线",
@@ -30280,7 +30482,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_ma20_above_ma60_ret_120d_atr_20d_turnover_stability_20d__N10__R10",
-      "sid": "策略十五",
+      "sid": "策略0203",
+      "source_sid": "策略十五",
       "candidate_id": "pulltrend_ret_5d_ma20_above_ma60_ret_120d_atr_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日真实波幅、二十日成交稳定性、二十日均线相对六十日均线",
@@ -30439,7 +30642,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_ma20_above_ma60_mfi_7_kurtosis_20d_turnover_stability_20d__N7__R10",
-      "sid": "策略十一",
+      "sid": "策略0204",
+      "source_sid": "策略十一",
       "candidate_id": "balanced_ret_120d_ret_5d_ma20_above_ma60_mfi_7_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日成交稳定性、二十日收益峰度、二十日均线相对六十日均线",
@@ -30559,7 +30763,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_ma20_above_ma60_mfi_7_atr_20d_turnover_stability_20d__N7__R10",
-      "sid": "策略十二",
+      "sid": "策略0205",
+      "source_sid": "策略十二",
       "candidate_id": "balanced_ret_120d_ret_5d_ma20_above_ma60_mfi_7_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日真实波幅、二十日成交稳定性、二十日均线相对六十日均线",
@@ -30679,7 +30884,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_ma20_above_ma60_mfi_7_parkinson_vol_20d_turnover_stability_20d__N7__R10",
-      "sid": "策略十三",
+      "sid": "策略0206",
+      "source_sid": "策略十三",
       "candidate_id": "balanced_ret_120d_ret_5d_ma20_above_ma60_mfi_7_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日波动率、二十日高低价波动率、二十日成交稳定性、二十日均线相对六十日均线",
@@ -30799,7 +31005,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_drawdown_5d_px_to_ma60_volume_ma_ratio_5_20_atr_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略一",
+      "sid": "策略0207",
+      "source_sid": "策略一",
       "candidate_id": "balanced_ret_60d_drawdown_5d_px_to_ma60_volume_ma_ratio_5_20_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日真实波幅、二十日成交稳定性、五日与二十日成交量比、相对六十日均线位置",
@@ -30958,7 +31165,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_drawdown_5d_px_to_ma60_cmf_20_kurtosis_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略二",
+      "sid": "策略0208",
+      "source_sid": "策略二",
       "candidate_id": "balanced_ret_60d_drawdown_5d_px_to_ma60_cmf_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日成交稳定性、二十日收益峰度、相对六十日均线位置",
@@ -31117,7 +31325,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_drawdown_5d_px_to_ma60_cmf_20_ret_skew_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略三",
+      "sid": "策略0209",
+      "source_sid": "策略三",
       "candidate_id": "balanced_ret_60d_drawdown_5d_px_to_ma60_cmf_20_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日成交稳定性、二十日收益偏度、相对六十日均线位置",
@@ -31276,7 +31485,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_drawdown_5d_px_to_ma60_volume_ma_ratio_5_20_ret_skew_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略五",
+      "sid": "策略0210",
+      "source_sid": "策略五",
       "candidate_id": "balanced_ret_60d_drawdown_5d_px_to_ma60_volume_ma_ratio_5_20_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日成交稳定性、五日与二十日成交量比、二十日收益偏度、相对六十日均线位置",
@@ -31435,7 +31645,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_drawdown_5d_px_to_ma60_cmf_20_atr_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略六",
+      "sid": "策略0211",
+      "source_sid": "策略六",
       "candidate_id": "balanced_ret_60d_drawdown_5d_px_to_ma60_cmf_20_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日真实波幅、二十日成交稳定性、相对六十日均线位置",
@@ -31594,7 +31805,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_drawdown_5d_px_to_ma60_volume_ma_ratio_5_20_parkinson_vol_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略七",
+      "sid": "策略0212",
+      "source_sid": "策略七",
       "candidate_id": "balanced_ret_60d_drawdown_5d_px_to_ma60_volume_ma_ratio_5_20_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日波动率、二十日高低价波动率、二十日成交稳定性、五日与二十日成交量比、相对六十日均线位置",
@@ -31753,7 +31965,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_drawdown_5d_px_to_ma60_volume_ma_ratio_5_20_vol_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略八",
+      "sid": "策略0213",
+      "source_sid": "策略八",
       "candidate_id": "balanced_ret_60d_drawdown_5d_px_to_ma60_volume_ma_ratio_5_20_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日波动率、二十日成交稳定性、五日与二十日成交量比、相对六十日均线位置",
@@ -31912,7 +32125,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_drawdown_5d_px_to_ma60_cmf_20_vol_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略九",
+      "sid": "策略0214",
+      "source_sid": "策略九",
       "candidate_id": "balanced_ret_60d_drawdown_5d_px_to_ma60_cmf_20_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日波动率、二十日成交稳定性、相对六十日均线位置",
@@ -32071,7 +32285,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_drawdown_5d_px_to_ma60_cmf_20_parkinson_vol_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略十",
+      "sid": "策略0215",
+      "source_sid": "策略十",
       "candidate_id": "balanced_ret_60d_drawdown_5d_px_to_ma60_cmf_20_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日波动率、二十日高低价波动率、二十日成交稳定性、相对六十日均线位置",
@@ -32230,7 +32445,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_mfi_7_ret_skew_20d_turnover_stability_20d__N7__R10",
-      "sid": "策略十二",
+      "sid": "策略0216",
+      "source_sid": "策略十二",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_mfi_7_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日成交稳定性、二十日收益偏度、相对二十日均线位置",
@@ -32350,7 +32566,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_ma20_above_ma60_mfi_7_ret_skew_20d_turnover_stability_20d__N7__R10",
-      "sid": "策略十三",
+      "sid": "策略0217",
+      "source_sid": "策略十三",
       "candidate_id": "balanced_ret_120d_ret_5d_ma20_above_ma60_mfi_7_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日成交稳定性、二十日收益偏度、二十日均线相对六十日均线",
@@ -32470,7 +32687,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_mfi_7_vol_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略一",
+      "sid": "策略0218",
+      "source_sid": "策略一",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_mfi_7_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日波动率、二十日成交稳定性、相对六十日均线位置",
@@ -32590,7 +32808,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_mfi_7_parkinson_vol_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略二",
+      "sid": "策略0219",
+      "source_sid": "策略二",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_mfi_7_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日波动率、二十日高低价波动率、二十日成交稳定性、相对六十日均线位置",
@@ -32710,7 +32929,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_mfi_7_kurtosis_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略三",
+      "sid": "策略0220",
+      "source_sid": "策略三",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_mfi_7_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日成交稳定性、二十日收益峰度、相对六十日均线位置",
@@ -32830,7 +33050,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_mfi_7_atr_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略四",
+      "sid": "策略0221",
+      "source_sid": "策略四",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_mfi_7_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日真实波幅、二十日成交稳定性、相对六十日均线位置",
@@ -32950,7 +33171,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_mfi_14_kurtosis_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略一",
+      "sid": "策略0222",
+      "source_sid": "策略一",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_mfi_14_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十四日资金流指标、二十日成交稳定性、二十日收益峰度、相对六十日均线位置",
@@ -33070,7 +33292,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_cmf_20_kurtosis_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略二",
+      "sid": "策略0223",
+      "source_sid": "策略二",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_cmf_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日成交稳定性、二十日收益峰度、相对六十日均线位置",
@@ -33190,7 +33413,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_px_to_ma60_ret_60d_parkinson_vol_20d_turnover_stability_20d__N5__R20",
-      "sid": "策略三",
+      "sid": "策略0224",
+      "source_sid": "策略三",
       "candidate_id": "pulltrend_ret_5d_px_to_ma60_ret_60d_parkinson_vol_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日波动率、二十日高低价波动率、二十日成交稳定性、相对六十日均线位置",
@@ -33284,7 +33508,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_mfi_14_vol_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略四",
+      "sid": "策略0225",
+      "source_sid": "策略四",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_mfi_14_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十四日资金流指标、二十日波动率、二十日成交稳定性、相对六十日均线位置",
@@ -33404,7 +33629,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_px_to_ma60_ret_60d_atr_20d_turnover_stability_20d__N5__R20",
-      "sid": "策略五",
+      "sid": "策略0226",
+      "source_sid": "策略五",
       "candidate_id": "pulltrend_ret_5d_px_to_ma60_ret_60d_atr_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日真实波幅、二十日成交稳定性、相对六十日均线位置",
@@ -33498,7 +33724,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_cmf_10_kurtosis_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略六",
+      "sid": "策略0227",
+      "source_sid": "策略六",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_cmf_10_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日成交稳定性、二十日收益峰度、相对六十日均线位置",
@@ -33618,7 +33845,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_cmf_10_vol_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略七",
+      "sid": "策略0228",
+      "source_sid": "策略七",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_cmf_10_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日波动率、二十日成交稳定性、相对六十日均线位置",
@@ -33738,7 +33966,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_px_to_ma60_ret_60d_kurtosis_20d_turnover_stability_20d__N5__R20",
-      "sid": "策略八",
+      "sid": "策略0229",
+      "source_sid": "策略八",
       "candidate_id": "pulltrend_ret_5d_px_to_ma60_ret_60d_kurtosis_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日成交稳定性、二十日收益峰度、相对六十日均线位置",
@@ -33832,7 +34061,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_mfi_14_atr_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略九",
+      "sid": "策略0230",
+      "source_sid": "策略九",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_mfi_14_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十四日资金流指标、二十日真实波幅、二十日成交稳定性、相对六十日均线位置",
@@ -33952,7 +34182,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_obv_change_20_vol_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略十",
+      "sid": "策略0231",
+      "source_sid": "策略十",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_obv_change_20_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日能量潮变化、二十日波动率、二十日成交稳定性、相对六十日均线位置",
@@ -34072,7 +34303,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_px_to_ma60_ret_60d_vol_20d_turnover_stability_20d__N5__R20",
-      "sid": "策略十一",
+      "sid": "策略0232",
+      "source_sid": "策略十一",
       "candidate_id": "pulltrend_ret_5d_px_to_ma60_ret_60d_vol_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日波动率、二十日成交稳定性、相对六十日均线位置",
@@ -34166,7 +34398,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_mfi_14_parkinson_vol_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略十二",
+      "sid": "策略0233",
+      "source_sid": "策略十二",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_mfi_14_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十四日资金流指标、二十日波动率、二十日高低价波动率、二十日成交稳定性、相对六十日均线位置",
@@ -34286,7 +34519,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_10_kurtosis_20d_turnover_stability_20d__N7__R5",
-      "sid": "策略一",
+      "sid": "策略0234",
+      "source_sid": "策略一",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_10_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日成交稳定性、二十日收益峰度、相对二十日均线位置",
@@ -34406,7 +34640,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_10_parkinson_vol_20d_turnover_stability_20d__N7__R5",
-      "sid": "策略二",
+      "sid": "策略0235",
+      "source_sid": "策略二",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_10_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日波动率、二十日高低价波动率、二十日成交稳定性、相对二十日均线位置",
@@ -34526,7 +34761,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_10_ret_skew_20d_turnover_stability_20d__N7__R5",
-      "sid": "策略四",
+      "sid": "策略0236",
+      "source_sid": "策略四",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_10_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日成交稳定性、二十日收益偏度、相对二十日均线位置",
@@ -34646,7 +34882,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_mfi_14_kurtosis_20d_turnover_stability_20d__N7__R10",
-      "sid": "策略五",
+      "sid": "策略0237",
+      "source_sid": "策略五",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_mfi_14_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十四日资金流指标、二十日成交稳定性、二十日收益峰度、相对二十日均线位置",
@@ -34766,7 +35003,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_drawdown_5d_px_to_ma60_cmf_10_vol_20d_turnover_stability_20d__N7__R5",
-      "sid": "策略六",
+      "sid": "策略0238",
+      "source_sid": "策略六",
       "candidate_id": "balanced_ret_60d_drawdown_5d_px_to_ma60_cmf_10_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日波动率、二十日成交稳定性、相对六十日均线位置",
@@ -34886,7 +35124,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_drawdown_5d_px_to_ma60_cmf_10_atr_20d_turnover_stability_20d__N7__R5",
-      "sid": "策略七",
+      "sid": "策略0239",
+      "source_sid": "策略七",
       "candidate_id": "balanced_ret_60d_drawdown_5d_px_to_ma60_cmf_10_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日真实波幅、二十日成交稳定性、相对六十日均线位置",
@@ -35006,7 +35245,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_drawdown_5d_px_to_ma60_cmf_10_parkinson_vol_20d_turnover_stability_20d__N7__R5",
-      "sid": "策略八",
+      "sid": "策略0240",
+      "source_sid": "策略八",
       "candidate_id": "balanced_ret_60d_drawdown_5d_px_to_ma60_cmf_10_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日波动率、二十日高低价波动率、二十日成交稳定性、相对六十日均线位置",
@@ -35126,7 +35366,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_px_to_ma20_ret_120d_ret_skew_20d_turnover_stability_20d__N7__R10",
-      "sid": "策略一",
+      "sid": "策略0241",
+      "source_sid": "策略一",
       "candidate_id": "pulltrend_ret_5d_px_to_ma20_ret_120d_ret_skew_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日成交稳定性、二十日收益偏度、相对二十日均线位置",
@@ -35246,7 +35487,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_ma20_above_ma60_volume_ma_ratio_5_20_parkinson_vol_20d_turnover_stability_20d__N7__R5",
-      "sid": "策略二",
+      "sid": "策略0242",
+      "source_sid": "策略二",
       "candidate_id": "balanced_ret_120d_ret_5d_ma20_above_ma60_volume_ma_ratio_5_20_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日波动率、二十日高低价波动率、二十日成交稳定性、五日与二十日成交量比、二十日均线相对六十日均线",
@@ -35366,7 +35608,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_ma20_above_ma60_volume_ma_ratio_5_20_ret_skew_20d_turnover_stability_20d__N7__R5",
-      "sid": "策略四",
+      "sid": "策略0243",
+      "source_sid": "策略四",
       "candidate_id": "balanced_ret_120d_ret_5d_ma20_above_ma60_volume_ma_ratio_5_20_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日成交稳定性、五日与二十日成交量比、二十日收益偏度、二十日均线相对六十日均线",
@@ -35486,7 +35729,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_10d_px_to_ma60_mfi_7_vol_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略五",
+      "sid": "策略0244",
+      "source_sid": "策略五",
       "candidate_id": "balanced_ret_120d_ret_10d_px_to_ma60_mfi_7_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日波动率、二十日成交稳定性、相对六十日均线位置",
@@ -35645,7 +35889,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_10d_px_to_ma60_mfi_7_parkinson_vol_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略六",
+      "sid": "策略0245",
+      "source_sid": "策略六",
       "candidate_id": "balanced_ret_120d_ret_10d_px_to_ma60_mfi_7_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日波动率、二十日高低价波动率、二十日成交稳定性、相对六十日均线位置",
@@ -35804,7 +36049,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_10d_px_to_ma60_mfi_7_atr_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略七",
+      "sid": "策略0246",
+      "source_sid": "策略七",
       "candidate_id": "balanced_ret_120d_ret_10d_px_to_ma60_mfi_7_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日真实波幅、二十日成交稳定性、相对六十日均线位置",
@@ -35963,7 +36209,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_10_atr_20d_turnover_stability_20d__N10__R10",
-      "sid": "策略一",
+      "sid": "策略0247",
+      "source_sid": "策略一",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_10_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日真实波幅、二十日成交稳定性、相对二十日均线位置",
@@ -36122,7 +36369,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_10_vol_20d_turnover_stability_20d__N10__R10",
-      "sid": "策略二",
+      "sid": "策略0248",
+      "source_sid": "策略二",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_10_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日波动率、二十日成交稳定性、相对二十日均线位置",
@@ -36281,7 +36529,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_10_kurtosis_20d_turnover_stability_20d__N10__R10",
-      "sid": "策略三",
+      "sid": "策略0249",
+      "source_sid": "策略三",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_10_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日成交稳定性、二十日收益峰度、相对二十日均线位置",
@@ -36440,7 +36689,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_10_parkinson_vol_20d_turnover_stability_20d__N10__R10",
-      "sid": "策略四",
+      "sid": "策略0250",
+      "source_sid": "策略四",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_10_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日波动率、二十日高低价波动率、二十日成交稳定性、相对二十日均线位置",
@@ -36599,7 +36849,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_20_vol_20d_turnover_stability_20d__N10__R10",
-      "sid": "策略五",
+      "sid": "策略0251",
+      "source_sid": "策略五",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_20_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日波动率、二十日成交稳定性、相对二十日均线位置",
@@ -36758,7 +37009,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_20_atr_20d_turnover_stability_20d__N10__R10",
-      "sid": "策略六",
+      "sid": "策略0252",
+      "source_sid": "策略六",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_20_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日真实波幅、二十日成交稳定性、相对二十日均线位置",
@@ -36917,7 +37169,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_macd_hist_obv_change_20_kurtosis_20d_turnover_stability_20d__N10__R10",
-      "sid": "策略一",
+      "sid": "策略0253",
+      "source_sid": "策略一",
       "candidate_id": "balanced_ret_120d_ret_5d_macd_hist_obv_change_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日能量潮变化、二十日成交稳定性、二十日收益峰度",
@@ -37076,7 +37329,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_macd_hist_volume_ma_ratio_5_20_kurtosis_20d_turnover_stability_20d__N10__R10",
-      "sid": "策略二",
+      "sid": "策略0254",
+      "source_sid": "策略二",
       "candidate_id": "balanced_ret_120d_ret_5d_macd_hist_volume_ma_ratio_5_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日成交稳定性、五日与二十日成交量比、二十日收益峰度",
@@ -37235,7 +37489,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_macd_hist_cmf_20_kurtosis_20d_turnover_stability_20d__N10__R10",
-      "sid": "策略三",
+      "sid": "策略0255",
+      "source_sid": "策略三",
       "candidate_id": "balanced_ret_120d_ret_5d_macd_hist_cmf_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日成交稳定性、二十日收益峰度",
@@ -37394,7 +37649,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_macd_hist_cmf_10_kurtosis_20d_turnover_stability_20d__N10__R10",
-      "sid": "策略四",
+      "sid": "策略0256",
+      "source_sid": "策略四",
       "candidate_id": "balanced_ret_120d_ret_5d_macd_hist_cmf_10_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日成交稳定性、二十日收益峰度",
@@ -37553,7 +37809,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_ma20_above_ma60_volume_ma_ratio_5_20_kurtosis_20d_turnover_stability_20d__N10__R10",
-      "sid": "策略五",
+      "sid": "策略0257",
+      "source_sid": "策略五",
       "candidate_id": "balanced_ret_120d_ret_5d_ma20_above_ma60_volume_ma_ratio_5_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日成交稳定性、五日与二十日成交量比、二十日收益峰度、二十日均线相对六十日均线",
@@ -37712,7 +37969,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_macd_hist_volume_ma_ratio_5_20_vol_20d_turnover_stability_20d__N10__R10",
-      "sid": "策略六",
+      "sid": "策略0258",
+      "source_sid": "策略六",
       "candidate_id": "balanced_ret_120d_ret_5d_macd_hist_volume_ma_ratio_5_20_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日波动率、二十日成交稳定性、五日与二十日成交量比",
@@ -37871,7 +38129,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_macd_hist_volume_ma_ratio_5_20_parkinson_vol_20d_turnover_stability_20d__N10__R10",
-      "sid": "策略七",
+      "sid": "策略0259",
+      "source_sid": "策略七",
       "candidate_id": "balanced_ret_120d_ret_5d_macd_hist_volume_ma_ratio_5_20_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日波动率、二十日高低价波动率、二十日成交稳定性、五日与二十日成交量比",
@@ -38030,7 +38289,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_macd_hist_volume_ma_ratio_5_20_atr_20d_turnover_stability_20d__N10__R10",
-      "sid": "策略八",
+      "sid": "策略0260",
+      "source_sid": "策略八",
       "candidate_id": "balanced_ret_120d_ret_5d_macd_hist_volume_ma_ratio_5_20_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日真实波幅、二十日成交稳定性、五日与二十日成交量比",
@@ -38189,7 +38449,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_ma20_above_ma60_volume_ma_ratio_5_20_parkinson_vol_20d_turnover_stability_20d__N10__R10",
-      "sid": "策略九",
+      "sid": "策略0261",
+      "source_sid": "策略九",
       "candidate_id": "balanced_ret_120d_ret_5d_ma20_above_ma60_volume_ma_ratio_5_20_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日波动率、二十日高低价波动率、二十日成交稳定性、五日与二十日成交量比、二十日均线相对六十日均线",
@@ -38348,7 +38609,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_ma20_above_ma60_volume_ma_ratio_5_20_atr_20d_turnover_stability_20d__N10__R10",
-      "sid": "策略十",
+      "sid": "策略0262",
+      "source_sid": "策略十",
       "candidate_id": "balanced_ret_120d_ret_5d_ma20_above_ma60_volume_ma_ratio_5_20_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日真实波幅、二十日成交稳定性、五日与二十日成交量比、二十日均线相对六十日均线",
@@ -38507,7 +38769,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_macd_hist_cmf_20_vol_20d_turnover_stability_20d__N10__R10",
-      "sid": "策略十一",
+      "sid": "策略0263",
+      "source_sid": "策略十一",
       "candidate_id": "balanced_ret_120d_ret_5d_macd_hist_cmf_20_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日波动率、二十日成交稳定性",
@@ -38666,7 +38929,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_ma20_above_ma60_volume_ma_ratio_5_20_vol_20d_turnover_stability_20d__N10__R10",
-      "sid": "策略十二",
+      "sid": "策略0264",
+      "source_sid": "策略十二",
       "candidate_id": "balanced_ret_120d_ret_5d_ma20_above_ma60_volume_ma_ratio_5_20_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日波动率、二十日成交稳定性、五日与二十日成交量比、二十日均线相对六十日均线",
@@ -38825,7 +39089,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_macd_hist_obv_change_20_vol_20d_turnover_stability_20d__N10__R10",
-      "sid": "策略十三",
+      "sid": "策略0265",
+      "source_sid": "策略十三",
       "candidate_id": "balanced_ret_120d_ret_5d_macd_hist_obv_change_20_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日能量潮变化、二十日波动率、二十日成交稳定性",
@@ -38984,7 +39249,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_px_to_ma20_ret_120d_kurtosis_20d_turnover_stability_20d__N5__R5",
-      "sid": "策略一",
+      "sid": "策略0266",
+      "source_sid": "策略一",
       "candidate_id": "pulltrend_ret_5d_px_to_ma20_ret_120d_kurtosis_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日成交稳定性、二十日收益峰度、相对二十日均线位置",
@@ -39078,7 +39344,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_mfi_7_atr_20d_turnover_stability_20d__N5__R10",
-      "sid": "策略二",
+      "sid": "策略0267",
+      "source_sid": "策略二",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_mfi_7_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日真实波幅、二十日成交稳定性、相对二十日均线位置",
@@ -39172,7 +39439,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_mfi_7_vol_20d_turnover_stability_20d__N5__R10",
-      "sid": "策略三",
+      "sid": "策略0268",
+      "source_sid": "策略三",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_mfi_7_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日波动率、二十日成交稳定性、相对二十日均线位置",
@@ -39266,7 +39534,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_mfi_7_kurtosis_20d_turnover_stability_20d__N5__R10",
-      "sid": "策略四",
+      "sid": "策略0269",
+      "source_sid": "策略四",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_mfi_7_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日成交稳定性、二十日收益峰度、相对二十日均线位置",
@@ -39360,7 +39629,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_mfi_7_parkinson_vol_20d_turnover_stability_20d__N5__R10",
-      "sid": "策略五",
+      "sid": "策略0270",
+      "source_sid": "策略五",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_mfi_7_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日波动率、二十日高低价波动率、二十日成交稳定性、相对二十日均线位置",
@@ -39454,7 +39724,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_px_to_ma20_ret_120d_ret_skew_20d_turnover_stability_20d__N5__R5",
-      "sid": "策略六",
+      "sid": "策略0271",
+      "source_sid": "策略六",
       "candidate_id": "pulltrend_ret_5d_px_to_ma20_ret_120d_ret_skew_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日成交稳定性、二十日收益偏度、相对二十日均线位置",
@@ -39548,7 +39819,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_ma20_above_ma60_mfi_7_vol_20d_turnover_stability_20d__N5__R10",
-      "sid": "策略七",
+      "sid": "策略0272",
+      "source_sid": "策略七",
       "candidate_id": "balanced_ret_120d_ret_5d_ma20_above_ma60_mfi_7_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日波动率、二十日成交稳定性、二十日均线相对六十日均线",
@@ -39642,7 +39914,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_mfi_7_ret_skew_20d_turnover_stability_20d__N5__R10",
-      "sid": "策略一",
+      "sid": "策略0273",
+      "source_sid": "策略一",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_mfi_7_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日成交稳定性、二十日收益偏度、相对二十日均线位置",
@@ -39736,7 +40009,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_drawdown_5d_px_to_ma60_obv_change_20_ret_skew_20d_turnover_stability_20d__N7__R5",
-      "sid": "策略二",
+      "sid": "策略0274",
+      "source_sid": "策略二",
       "candidate_id": "balanced_ret_60d_drawdown_5d_px_to_ma60_obv_change_20_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日能量潮变化、二十日成交稳定性、二十日收益偏度、相对六十日均线位置",
@@ -39856,7 +40130,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_drawdown_5d_px_to_ma60_volume_ma_ratio_5_20_kurtosis_20d_turnover_stability_20d__N7__R10",
-      "sid": "策略三",
+      "sid": "策略0275",
+      "source_sid": "策略三",
       "candidate_id": "balanced_ret_60d_drawdown_5d_px_to_ma60_volume_ma_ratio_5_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日成交稳定性、五日与二十日成交量比、二十日收益峰度、相对六十日均线位置",
@@ -39976,7 +40251,8 @@
     },
     {
       "monitor_key": "pulltrend_drawdown_5d_px_to_ma60_ret_60d_kurtosis_20d_turnover_stability_20d__N5__R10",
-      "sid": "策略四",
+      "sid": "策略0276",
+      "source_sid": "策略四",
       "candidate_id": "pulltrend_drawdown_5d_px_to_ma60_ret_60d_kurtosis_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日成交稳定性、二十日收益峰度、相对六十日均线位置",
@@ -40070,7 +40346,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_mfi_7_vol_20d_turnover_stability_20d__N5__R20",
-      "sid": "策略一",
+      "sid": "策略0277",
+      "source_sid": "策略一",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_mfi_7_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日波动率、二十日成交稳定性、相对六十日均线位置",
@@ -40164,7 +40441,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_mfi_7_kurtosis_20d_turnover_stability_20d__N5__R20",
-      "sid": "策略二",
+      "sid": "策略0278",
+      "source_sid": "策略二",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_mfi_7_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日成交稳定性、二十日收益峰度、相对六十日均线位置",
@@ -40258,7 +40536,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_mfi_7_atr_20d_turnover_stability_20d__N5__R20",
-      "sid": "策略三",
+      "sid": "策略0279",
+      "source_sid": "策略三",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_mfi_7_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日真实波幅、二十日成交稳定性、相对六十日均线位置",
@@ -40352,7 +40631,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_mfi_7_parkinson_vol_20d_turnover_stability_20d__N5__R20",
-      "sid": "策略四",
+      "sid": "策略0280",
+      "source_sid": "策略四",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_mfi_7_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日波动率、二十日高低价波动率、二十日成交稳定性、相对六十日均线位置",
@@ -40446,7 +40726,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_mfi_14_parkinson_vol_20d_turnover_stability_20d__N5__R20",
-      "sid": "策略一",
+      "sid": "策略0281",
+      "source_sid": "策略一",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_mfi_14_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十四日资金流指标、二十日波动率、二十日高低价波动率、二十日成交稳定性、相对六十日均线位置",
@@ -40540,7 +40821,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_mfi_14_kurtosis_20d_turnover_stability_20d__N5__R20",
-      "sid": "策略二",
+      "sid": "策略0282",
+      "source_sid": "策略二",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_mfi_14_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十四日资金流指标、二十日成交稳定性、二十日收益峰度、相对六十日均线位置",
@@ -40634,7 +40916,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_volume_ma_ratio_5_20_vol_20d_turnover_stability_20d__N5__R20",
-      "sid": "策略三",
+      "sid": "策略0283",
+      "source_sid": "策略三",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_volume_ma_ratio_5_20_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日波动率、二十日成交稳定性、五日与二十日成交量比、相对六十日均线位置",
@@ -40728,7 +41011,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_volume_ma_ratio_5_20_parkinson_vol_20d_turnover_stability_20d__N5__R20",
-      "sid": "策略四",
+      "sid": "策略0284",
+      "source_sid": "策略四",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_volume_ma_ratio_5_20_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日波动率、二十日高低价波动率、二十日成交稳定性、五日与二十日成交量比、相对六十日均线位置",
@@ -40822,7 +41106,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_obv_change_20_kurtosis_20d_turnover_stability_20d__N5__R20",
-      "sid": "策略五",
+      "sid": "策略0285",
+      "source_sid": "策略五",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_obv_change_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日能量潮变化、二十日成交稳定性、二十日收益峰度、相对六十日均线位置",
@@ -40916,7 +41201,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_cmf_10_vol_20d_turnover_stability_20d__N5__R20",
-      "sid": "策略六",
+      "sid": "策略0286",
+      "source_sid": "策略六",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_cmf_10_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日波动率、二十日成交稳定性、相对六十日均线位置",
@@ -41010,7 +41296,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_volume_ma_ratio_5_20_atr_20d_turnover_stability_20d__N5__R20",
-      "sid": "策略七",
+      "sid": "策略0287",
+      "source_sid": "策略七",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_volume_ma_ratio_5_20_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日真实波幅、二十日成交稳定性、五日与二十日成交量比、相对六十日均线位置",
@@ -41104,7 +41391,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma60_cmf_20_kurtosis_20d_turnover_stability_20d__N5__R20",
-      "sid": "策略八",
+      "sid": "策略0288",
+      "source_sid": "策略八",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma60_cmf_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日成交稳定性、二十日收益峰度、相对六十日均线位置",
@@ -41198,7 +41486,8 @@
     },
     {
       "monitor_key": "pulltrend_drawdown_10d_px_to_ma60_ret_60d_ret_skew_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略一",
+      "sid": "策略0289",
+      "source_sid": "策略一",
       "candidate_id": "pulltrend_drawdown_10d_px_to_ma60_ret_60d_ret_skew_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日成交稳定性、二十日收益偏度、相对六十日均线位置",
@@ -41357,7 +41646,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_px_to_ma20_ret_120d_ret_skew_20d_turnover_stability_20d__N5__R10",
-      "sid": "策略一",
+      "sid": "策略0290",
+      "source_sid": "策略一",
       "candidate_id": "pulltrend_ret_5d_px_to_ma20_ret_120d_ret_skew_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日成交稳定性、二十日收益偏度、相对二十日均线位置",
@@ -41451,7 +41741,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_px_to_ma20_ret_120d_ret_skew_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略二",
+      "sid": "策略0291",
+      "source_sid": "策略二",
       "candidate_id": "pulltrend_ret_5d_px_to_ma20_ret_120d_ret_skew_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日成交稳定性、二十日收益偏度、相对二十日均线位置",
@@ -41610,7 +41901,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_10d_px_to_ma60_mfi_7_vol_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略四",
+      "sid": "策略0292",
+      "source_sid": "策略四",
       "candidate_id": "balanced_ret_120d_ret_10d_px_to_ma60_mfi_7_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日波动率、二十日成交稳定性、相对六十日均线位置",
@@ -41730,7 +42022,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_10d_px_to_ma60_mfi_7_kurtosis_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略五",
+      "sid": "策略0293",
+      "source_sid": "策略五",
       "candidate_id": "balanced_ret_120d_ret_10d_px_to_ma60_mfi_7_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日成交稳定性、二十日收益峰度、相对六十日均线位置",
@@ -41850,7 +42143,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_10_kurtosis_20d_turnover_stability_20d__N7__R10",
-      "sid": "策略一",
+      "sid": "策略0294",
+      "source_sid": "策略一",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_10_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日成交稳定性、二十日收益峰度、相对二十日均线位置",
@@ -41970,7 +42264,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_20_kurtosis_20d_turnover_stability_20d__N7__R10",
-      "sid": "策略二",
+      "sid": "策略0295",
+      "source_sid": "策略二",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日成交稳定性、二十日收益峰度、相对二十日均线位置",
@@ -42090,7 +42385,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_10_vol_20d_turnover_stability_20d__N7__R10",
-      "sid": "策略三",
+      "sid": "策略0296",
+      "source_sid": "策略三",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_10_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日波动率、二十日成交稳定性、相对二十日均线位置",
@@ -42210,7 +42506,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_20_vol_20d_turnover_stability_20d__N7__R10",
-      "sid": "策略四",
+      "sid": "策略0297",
+      "source_sid": "策略四",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_20_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日波动率、二十日成交稳定性、相对二十日均线位置",
@@ -42330,7 +42627,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_20_atr_20d_turnover_stability_20d__N7__R10",
-      "sid": "策略五",
+      "sid": "策略0298",
+      "source_sid": "策略五",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_20_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日真实波幅、二十日成交稳定性、相对二十日均线位置",
@@ -42450,7 +42748,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_obv_change_20_vol_20d_turnover_stability_20d__N7__R10",
-      "sid": "策略六",
+      "sid": "策略0299",
+      "source_sid": "策略六",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_obv_change_20_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日能量潮变化、二十日波动率、二十日成交稳定性、相对二十日均线位置",
@@ -42570,7 +42869,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_drawdown_5d_px_to_ma60_mfi_14_ret_skew_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略七",
+      "sid": "策略0300",
+      "source_sid": "策略七",
       "candidate_id": "balanced_ret_60d_drawdown_5d_px_to_ma60_mfi_14_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十四日资金流指标、二十日成交稳定性、二十日收益偏度、相对六十日均线位置",
@@ -42729,7 +43029,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_10_atr_20d_turnover_stability_20d__N7__R10",
-      "sid": "策略八",
+      "sid": "策略0301",
+      "source_sid": "策略八",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_10_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日真实波幅、二十日成交稳定性、相对二十日均线位置",
@@ -42849,7 +43150,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_px_to_ma20_ret_120d_kurtosis_20d_turnover_stability_20d__N5__R10",
-      "sid": "策略一",
+      "sid": "策略0302",
+      "source_sid": "策略一",
       "candidate_id": "pulltrend_ret_5d_px_to_ma20_ret_120d_kurtosis_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日成交稳定性、二十日收益峰度、相对二十日均线位置",
@@ -42943,7 +43245,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_macd_hist_cmf_20_kurtosis_20d_turnover_stability_20d__N7__R10",
-      "sid": "策略二",
+      "sid": "策略0303",
+      "source_sid": "策略二",
       "candidate_id": "balanced_ret_120d_ret_5d_macd_hist_cmf_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日成交稳定性、二十日收益峰度",
@@ -43063,7 +43366,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_ma20_above_ma60_volume_ma_ratio_5_20_kurtosis_20d_turnover_stability_20d__N7__R10",
-      "sid": "策略三",
+      "sid": "策略0304",
+      "source_sid": "策略三",
       "candidate_id": "balanced_ret_120d_ret_5d_ma20_above_ma60_volume_ma_ratio_5_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日成交稳定性、五日与二十日成交量比、二十日收益峰度、二十日均线相对六十日均线",
@@ -43183,7 +43487,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_macd_hist_volume_ma_ratio_5_20_kurtosis_20d_turnover_stability_20d__N7__R10",
-      "sid": "策略四",
+      "sid": "策略0305",
+      "source_sid": "策略四",
       "candidate_id": "balanced_ret_120d_ret_5d_macd_hist_volume_ma_ratio_5_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日成交稳定性、五日与二十日成交量比、二十日收益峰度",
@@ -43303,7 +43608,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_macd_hist_cmf_10_kurtosis_20d_turnover_stability_20d__N7__R10",
-      "sid": "策略五",
+      "sid": "策略0306",
+      "source_sid": "策略五",
       "candidate_id": "balanced_ret_120d_ret_5d_macd_hist_cmf_10_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日成交稳定性、二十日收益峰度",
@@ -43423,7 +43729,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_macd_hist_obv_change_20_kurtosis_20d_turnover_stability_20d__N7__R10",
-      "sid": "策略七",
+      "sid": "策略0307",
+      "source_sid": "策略七",
       "candidate_id": "balanced_ret_120d_ret_5d_macd_hist_obv_change_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日能量潮变化、二十日成交稳定性、二十日收益峰度",
@@ -43543,7 +43850,8 @@
     },
     {
       "monitor_key": "pulltrend_drawdown_5d_px_to_ma60_ret_60d_kurtosis_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略一",
+      "sid": "策略0308",
+      "source_sid": "策略一",
       "candidate_id": "pulltrend_drawdown_5d_px_to_ma60_ret_60d_kurtosis_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日成交稳定性、二十日收益峰度、相对六十日均线位置",
@@ -43702,7 +44010,8 @@
     },
     {
       "monitor_key": "pulltrend_drawdown_5d_px_to_ma60_ret_60d_atr_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略二",
+      "sid": "策略0309",
+      "source_sid": "策略二",
       "candidate_id": "pulltrend_drawdown_5d_px_to_ma60_ret_60d_atr_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日真实波幅、二十日成交稳定性、相对六十日均线位置",
@@ -43861,7 +44170,8 @@
     },
     {
       "monitor_key": "pulltrend_drawdown_5d_px_to_ma60_ret_60d_parkinson_vol_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略三",
+      "sid": "策略0310",
+      "source_sid": "策略三",
       "candidate_id": "pulltrend_drawdown_5d_px_to_ma60_ret_60d_parkinson_vol_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日波动率、二十日高低价波动率、二十日成交稳定性、相对六十日均线位置",
@@ -44020,7 +44330,8 @@
     },
     {
       "monitor_key": "pulltrend_drawdown_5d_px_to_ma60_ret_60d_vol_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略四",
+      "sid": "策略0311",
+      "source_sid": "策略四",
       "candidate_id": "pulltrend_drawdown_5d_px_to_ma60_ret_60d_vol_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日波动率、二十日成交稳定性、相对六十日均线位置",
@@ -44179,7 +44490,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_volume_ma_ratio_5_20_ret_skew_20d_turnover_stability_20d__N5__R10",
-      "sid": "策略一",
+      "sid": "策略0312",
+      "source_sid": "策略一",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_volume_ma_ratio_5_20_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日成交稳定性、五日与二十日成交量比、二十日收益偏度、相对二十日均线位置",
@@ -44273,7 +44585,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_macd_hist_volume_ma_ratio_5_20_ret_skew_20d_turnover_stability_20d__N5__R10",
-      "sid": "策略二",
+      "sid": "策略0313",
+      "source_sid": "策略二",
       "candidate_id": "balanced_ret_120d_ret_5d_macd_hist_volume_ma_ratio_5_20_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日成交稳定性、五日与二十日成交量比、二十日收益偏度",
@@ -44367,7 +44680,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_20_ret_skew_20d_turnover_stability_20d__N5__R10",
-      "sid": "策略三",
+      "sid": "策略0314",
+      "source_sid": "策略三",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_20_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日成交稳定性、二十日收益偏度、相对二十日均线位置",
@@ -44461,7 +44775,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_obv_change_20_ret_skew_20d_turnover_stability_20d__N5__R10",
-      "sid": "策略五",
+      "sid": "策略0315",
+      "source_sid": "策略五",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_obv_change_20_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日能量潮变化、二十日成交稳定性、二十日收益偏度、相对二十日均线位置",
@@ -44555,7 +44870,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_10_ret_skew_20d_turnover_stability_20d__N5__R10",
-      "sid": "策略六",
+      "sid": "策略0316",
+      "source_sid": "策略六",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_10_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日成交稳定性、二十日收益偏度、相对二十日均线位置",
@@ -44649,7 +44965,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_ma20_above_ma60_volume_ma_ratio_5_20_ret_skew_20d_turnover_stability_20d__N5__R10",
-      "sid": "策略七",
+      "sid": "策略0317",
+      "source_sid": "策略七",
       "candidate_id": "balanced_ret_120d_ret_5d_ma20_above_ma60_volume_ma_ratio_5_20_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日成交稳定性、五日与二十日成交量比、二十日收益偏度、二十日均线相对六十日均线",
@@ -44743,7 +45060,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_macd_hist_cmf_20_ret_skew_20d_turnover_stability_20d__N5__R10",
-      "sid": "策略八",
+      "sid": "策略0318",
+      "source_sid": "策略八",
       "candidate_id": "balanced_ret_120d_ret_5d_macd_hist_cmf_20_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日成交稳定性、二十日收益偏度",
@@ -44837,7 +45155,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_volume_ma_ratio_5_20_kurtosis_20d_turnover_stability_20d__N5__R10",
-      "sid": "策略一",
+      "sid": "策略0319",
+      "source_sid": "策略一",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_volume_ma_ratio_5_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日成交稳定性、五日与二十日成交量比、二十日收益峰度、相对二十日均线位置",
@@ -44931,7 +45250,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_ma20_above_ma60_cmf_10_vol_20d_turnover_stability_20d__N5__R10",
-      "sid": "策略二",
+      "sid": "策略0320",
+      "source_sid": "策略二",
       "candidate_id": "balanced_ret_120d_ret_5d_ma20_above_ma60_cmf_10_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日波动率、二十日成交稳定性、二十日均线相对六十日均线",
@@ -45025,7 +45345,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_ma20_above_ma60_cmf_20_kurtosis_20d_turnover_stability_20d__N5__R10",
-      "sid": "策略三",
+      "sid": "策略0321",
+      "source_sid": "策略三",
       "candidate_id": "balanced_ret_120d_ret_5d_ma20_above_ma60_cmf_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日成交稳定性、二十日收益峰度、二十日均线相对六十日均线",
@@ -45119,7 +45440,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_ma20_above_ma60_volume_ma_ratio_5_20_vol_20d_turnover_stability_20d__N5__R10",
-      "sid": "策略四",
+      "sid": "策略0322",
+      "source_sid": "策略四",
       "candidate_id": "balanced_ret_120d_ret_5d_ma20_above_ma60_volume_ma_ratio_5_20_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日波动率、二十日成交稳定性、五日与二十日成交量比、二十日均线相对六十日均线",
@@ -45213,7 +45535,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_drawdown_5d_px_to_ma60_cmf_20_kurtosis_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略一",
+      "sid": "策略0323",
+      "source_sid": "策略一",
       "candidate_id": "balanced_ret_60d_drawdown_5d_px_to_ma60_cmf_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日成交稳定性、二十日收益峰度、相对六十日均线位置",
@@ -45372,7 +45695,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_drawdown_5d_px_to_ma60_obv_change_20_kurtosis_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略二",
+      "sid": "策略0324",
+      "source_sid": "策略二",
       "candidate_id": "balanced_ret_60d_drawdown_5d_px_to_ma60_obv_change_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日能量潮变化、二十日成交稳定性、二十日收益峰度、相对六十日均线位置",
@@ -45531,7 +45855,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_drawdown_5d_px_to_ma60_volume_ma_ratio_5_20_kurtosis_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略三",
+      "sid": "策略0325",
+      "source_sid": "策略三",
       "candidate_id": "balanced_ret_60d_drawdown_5d_px_to_ma60_volume_ma_ratio_5_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日成交稳定性、五日与二十日成交量比、二十日收益峰度、相对六十日均线位置",
@@ -45690,7 +46015,8 @@
     },
     {
       "monitor_key": "pulltrend_drawdown_5d_px_to_ma60_ret_60d_kurtosis_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略七",
+      "sid": "策略0326",
+      "source_sid": "策略七",
       "candidate_id": "pulltrend_drawdown_5d_px_to_ma60_ret_60d_kurtosis_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日成交稳定性、二十日收益峰度、相对六十日均线位置",
@@ -45810,7 +46136,8 @@
     },
     {
       "monitor_key": "pulltrend_drawdown_5d_px_to_ma60_ret_60d_atr_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略八",
+      "sid": "策略0327",
+      "source_sid": "策略八",
       "candidate_id": "pulltrend_drawdown_5d_px_to_ma60_ret_60d_atr_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日真实波幅、二十日成交稳定性、相对六十日均线位置",
@@ -45930,7 +46257,8 @@
     },
     {
       "monitor_key": "pulltrend_drawdown_5d_px_to_ma60_ret_60d_vol_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略九",
+      "sid": "策略0328",
+      "source_sid": "策略九",
       "candidate_id": "pulltrend_drawdown_5d_px_to_ma60_ret_60d_vol_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日波动率、二十日成交稳定性、相对六十日均线位置",
@@ -46050,7 +46378,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_drawdown_5d_px_to_ma60_volume_ma_ratio_5_20_parkinson_vol_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略十",
+      "sid": "策略0329",
+      "source_sid": "策略十",
       "candidate_id": "balanced_ret_60d_drawdown_5d_px_to_ma60_volume_ma_ratio_5_20_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日波动率、二十日高低价波动率、二十日成交稳定性、五日与二十日成交量比、相对六十日均线位置",
@@ -46209,7 +46538,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_drawdown_5d_px_to_ma60_volume_ma_ratio_5_20_atr_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略十一",
+      "sid": "策略0330",
+      "source_sid": "策略十一",
       "candidate_id": "balanced_ret_60d_drawdown_5d_px_to_ma60_volume_ma_ratio_5_20_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日真实波幅、二十日成交稳定性、五日与二十日成交量比、相对六十日均线位置",
@@ -46368,7 +46698,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_drawdown_5d_px_to_ma60_cmf_20_vol_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略十二",
+      "sid": "策略0331",
+      "source_sid": "策略十二",
       "candidate_id": "balanced_ret_60d_drawdown_5d_px_to_ma60_cmf_20_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日波动率、二十日成交稳定性、相对六十日均线位置",
@@ -46527,7 +46858,8 @@
     },
     {
       "monitor_key": "pulltrend_drawdown_5d_px_to_ma60_ret_60d_parkinson_vol_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略十三",
+      "sid": "策略0332",
+      "source_sid": "策略十三",
       "candidate_id": "pulltrend_drawdown_5d_px_to_ma60_ret_60d_parkinson_vol_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日波动率、二十日高低价波动率、二十日成交稳定性、相对六十日均线位置",
@@ -46647,7 +46979,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_drawdown_5d_px_to_ma60_cmf_20_atr_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略十四",
+      "sid": "策略0333",
+      "source_sid": "策略十四",
       "candidate_id": "balanced_ret_60d_drawdown_5d_px_to_ma60_cmf_20_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日真实波幅、二十日成交稳定性、相对六十日均线位置",
@@ -46806,7 +47139,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_drawdown_5d_px_to_ma60_volume_ma_ratio_5_20_vol_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略十五",
+      "sid": "策略0334",
+      "source_sid": "策略十五",
       "candidate_id": "balanced_ret_60d_drawdown_5d_px_to_ma60_volume_ma_ratio_5_20_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日波动率、二十日成交稳定性、五日与二十日成交量比、相对六十日均线位置",
@@ -46965,7 +47299,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_drawdown_5d_px_to_ma60_obv_change_20_atr_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略十六",
+      "sid": "策略0335",
+      "source_sid": "策略十六",
       "candidate_id": "balanced_ret_60d_drawdown_5d_px_to_ma60_obv_change_20_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日能量潮变化、二十日真实波幅、二十日成交稳定性、相对六十日均线位置",
@@ -47124,7 +47459,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_drawdown_5d_px_to_ma60_obv_change_20_parkinson_vol_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略十七",
+      "sid": "策略0336",
+      "source_sid": "策略十七",
       "candidate_id": "balanced_ret_60d_drawdown_5d_px_to_ma60_obv_change_20_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日能量潮变化、二十日波动率、二十日高低价波动率、二十日成交稳定性、相对六十日均线位置",
@@ -47283,7 +47619,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_drawdown_5d_px_to_ma60_obv_change_20_vol_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略十八",
+      "sid": "策略0337",
+      "source_sid": "策略十八",
       "candidate_id": "balanced_ret_60d_drawdown_5d_px_to_ma60_obv_change_20_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日能量潮变化、二十日波动率、二十日成交稳定性、相对六十日均线位置",
@@ -47442,7 +47779,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_drawdown_5d_px_to_ma60_cmf_20_parkinson_vol_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略十九",
+      "sid": "策略0338",
+      "source_sid": "策略十九",
       "candidate_id": "balanced_ret_60d_drawdown_5d_px_to_ma60_cmf_20_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日波动率、二十日高低价波动率、二十日成交稳定性、相对六十日均线位置",
@@ -47601,7 +47939,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_mfi_7_atr_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略十六",
+      "sid": "策略0339",
+      "source_sid": "策略十六",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_mfi_7_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日真实波幅、二十日成交稳定性、相对二十日均线位置",
@@ -47760,7 +48099,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_mfi_7_vol_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略十七",
+      "sid": "策略0340",
+      "source_sid": "策略十七",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_mfi_7_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日波动率、二十日成交稳定性、相对二十日均线位置",
@@ -47919,7 +48259,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_20_kurtosis_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略一",
+      "sid": "策略0341",
+      "source_sid": "策略一",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日成交稳定性、二十日收益峰度、相对二十日均线位置",
@@ -48078,7 +48419,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_volume_ma_ratio_5_20_atr_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略二",
+      "sid": "策略0342",
+      "source_sid": "策略二",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_volume_ma_ratio_5_20_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日真实波幅、二十日成交稳定性、五日与二十日成交量比、相对二十日均线位置",
@@ -48237,7 +48579,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_volume_ma_ratio_5_20_parkinson_vol_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略三",
+      "sid": "策略0343",
+      "source_sid": "策略三",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_volume_ma_ratio_5_20_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日波动率、二十日高低价波动率、二十日成交稳定性、五日与二十日成交量比、相对二十日均线位置",
@@ -48396,7 +48739,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_obv_change_20_kurtosis_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略五",
+      "sid": "策略0344",
+      "source_sid": "策略五",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_obv_change_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日能量潮变化、二十日成交稳定性、二十日收益峰度、相对二十日均线位置",
@@ -48555,7 +48899,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_20_parkinson_vol_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略六",
+      "sid": "策略0345",
+      "source_sid": "策略六",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_20_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日波动率、二十日高低价波动率、二十日成交稳定性、相对二十日均线位置",
@@ -48714,7 +49059,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_obv_change_20_atr_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略八",
+      "sid": "策略0346",
+      "source_sid": "策略八",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_obv_change_20_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日能量潮变化、二十日真实波幅、二十日成交稳定性、相对二十日均线位置",
@@ -48873,7 +49219,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_obv_change_20_vol_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略九",
+      "sid": "策略0347",
+      "source_sid": "策略九",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_obv_change_20_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日能量潮变化、二十日波动率、二十日成交稳定性、相对二十日均线位置",
@@ -49032,7 +49379,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_obv_change_20_parkinson_vol_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略十",
+      "sid": "策略0348",
+      "source_sid": "策略十",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_obv_change_20_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日能量潮变化、二十日波动率、二十日高低价波动率、二十日成交稳定性、相对二十日均线位置",
@@ -49191,7 +49539,8 @@
     },
     {
       "monitor_key": "pulltrend_ret_5d_px_to_ma20_ret_120d_ret_skew_20d_turnover_stability_20d__N5__R20",
-      "sid": "策略一",
+      "sid": "策略0349",
+      "source_sid": "策略一",
       "candidate_id": "pulltrend_ret_5d_px_to_ma20_ret_120d_ret_skew_20d_turnover_stability_20d",
       "category": "回调趋势型",
       "factors": "二十日成交稳定性、二十日收益偏度、相对二十日均线位置",
@@ -49285,7 +49634,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_drawdown_5d_px_to_ma60_mfi_7_kurtosis_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略二",
+      "sid": "策略0350",
+      "source_sid": "策略二",
       "candidate_id": "balanced_ret_60d_drawdown_5d_px_to_ma60_mfi_7_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日成交稳定性、二十日收益峰度、相对六十日均线位置",
@@ -49405,7 +49755,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_obv_change_20_ret_skew_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略五",
+      "sid": "策略0351",
+      "source_sid": "策略五",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_obv_change_20_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日能量潮变化、二十日成交稳定性、二十日收益偏度、相对二十日均线位置",
@@ -49525,7 +49876,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_volume_ma_ratio_5_20_ret_skew_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略六",
+      "sid": "策略0352",
+      "source_sid": "策略六",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_volume_ma_ratio_5_20_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日成交稳定性、五日与二十日成交量比、二十日收益偏度、相对二十日均线位置",
@@ -49645,7 +49997,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_10_ret_skew_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略七",
+      "sid": "策略0353",
+      "source_sid": "策略七",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_10_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日成交稳定性、二十日收益偏度、相对二十日均线位置",
@@ -49765,7 +50118,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_mfi_14_ret_skew_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略八",
+      "sid": "策略0354",
+      "source_sid": "策略八",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_mfi_14_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十四日资金流指标、二十日成交稳定性、二十日收益偏度、相对二十日均线位置",
@@ -49885,7 +50239,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_20_ret_skew_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略九",
+      "sid": "策略0355",
+      "source_sid": "策略九",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_20_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日成交稳定性、二十日收益偏度、相对二十日均线位置",
@@ -50005,7 +50360,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_drawdown_10d_px_to_ma60_mfi_14_atr_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略十一",
+      "sid": "策略0356",
+      "source_sid": "策略十一",
       "candidate_id": "balanced_ret_60d_drawdown_10d_px_to_ma60_mfi_14_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十四日资金流指标、二十日真实波幅、二十日成交稳定性、相对六十日均线位置",
@@ -50164,7 +50520,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_drawdown_10d_px_to_ma60_cmf_10_atr_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略十二",
+      "sid": "策略0357",
+      "source_sid": "策略十二",
       "candidate_id": "balanced_ret_60d_drawdown_10d_px_to_ma60_cmf_10_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日真实波幅、二十日成交稳定性、相对六十日均线位置",
@@ -50323,7 +50680,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_drawdown_10d_px_to_ma60_mfi_14_parkinson_vol_20d_turnover_stability_20d__N10__R20",
-      "sid": "策略十六",
+      "sid": "策略0358",
+      "source_sid": "策略十六",
       "candidate_id": "balanced_ret_60d_drawdown_10d_px_to_ma60_mfi_14_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十四日资金流指标、二十日波动率、二十日高低价波动率、二十日成交稳定性、相对六十日均线位置",
@@ -50482,7 +50840,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_mfi_7_ret_skew_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略八",
+      "sid": "策略0359",
+      "source_sid": "策略八",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_mfi_7_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日成交稳定性、二十日收益偏度、相对二十日均线位置",
@@ -50602,7 +50961,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_drawdown_5d_px_to_ma60_mfi_14_kurtosis_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略十",
+      "sid": "策略0360",
+      "source_sid": "策略十",
       "candidate_id": "balanced_ret_60d_drawdown_5d_px_to_ma60_mfi_14_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十四日资金流指标、二十日成交稳定性、二十日收益峰度、相对六十日均线位置",
@@ -50722,7 +51082,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_drawdown_5d_px_to_ma60_mfi_14_atr_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略十一",
+      "sid": "策略0361",
+      "source_sid": "策略十一",
       "candidate_id": "balanced_ret_60d_drawdown_5d_px_to_ma60_mfi_14_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十四日资金流指标、二十日真实波幅、二十日成交稳定性、相对六十日均线位置",
@@ -50842,7 +51203,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_drawdown_5d_px_to_ma60_mfi_14_parkinson_vol_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略十二",
+      "sid": "策略0362",
+      "source_sid": "策略十二",
       "candidate_id": "balanced_ret_60d_drawdown_5d_px_to_ma60_mfi_14_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十四日资金流指标、二十日波动率、二十日高低价波动率、二十日成交稳定性、相对六十日均线位置",
@@ -50962,7 +51324,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_drawdown_5d_px_to_ma60_mfi_14_vol_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略十三",
+      "sid": "策略0363",
+      "source_sid": "策略十三",
       "candidate_id": "balanced_ret_60d_drawdown_5d_px_to_ma60_mfi_14_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十四日资金流指标、二十日波动率、二十日成交稳定性、相对六十日均线位置",
@@ -51082,7 +51445,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_drawdown_5d_px_to_ma60_volume_ma_ratio_5_20_ret_skew_20d_turnover_stability_20d__N5__R20",
-      "sid": "策略十四",
+      "sid": "策略0364",
+      "source_sid": "策略十四",
       "candidate_id": "balanced_ret_60d_drawdown_5d_px_to_ma60_volume_ma_ratio_5_20_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日成交稳定性、五日与二十日成交量比、二十日收益偏度、相对六十日均线位置",
@@ -51176,7 +51540,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_mfi_7_kurtosis_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略三",
+      "sid": "策略0365",
+      "source_sid": "策略三",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_mfi_7_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日成交稳定性、二十日收益峰度、相对二十日均线位置",
@@ -51296,7 +51661,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_mfi_7_parkinson_vol_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略九",
+      "sid": "策略0366",
+      "source_sid": "策略九",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_mfi_7_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日波动率、二十日高低价波动率、二十日成交稳定性、相对二十日均线位置",
@@ -51416,7 +51782,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_mfi_7_atr_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略十一",
+      "sid": "策略0367",
+      "source_sid": "策略十一",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_mfi_7_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日真实波幅、二十日成交稳定性、相对二十日均线位置",
@@ -51536,7 +51903,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_obv_change_20_atr_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略二",
+      "sid": "策略0368",
+      "source_sid": "策略二",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_obv_change_20_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日能量潮变化、二十日真实波幅、二十日成交稳定性、相对二十日均线位置",
@@ -51656,7 +52024,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_obv_change_20_kurtosis_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略四",
+      "sid": "策略0369",
+      "source_sid": "策略四",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_obv_change_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日能量潮变化、二十日成交稳定性、二十日收益峰度、相对二十日均线位置",
@@ -51776,7 +52145,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_volume_ma_ratio_5_20_atr_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略五",
+      "sid": "策略0370",
+      "source_sid": "策略五",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_volume_ma_ratio_5_20_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日真实波幅、二十日成交稳定性、五日与二十日成交量比、相对二十日均线位置",
@@ -51896,7 +52266,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_20_kurtosis_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略六",
+      "sid": "策略0371",
+      "source_sid": "策略六",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日成交稳定性、二十日收益峰度、相对二十日均线位置",
@@ -52016,7 +52387,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_20_parkinson_vol_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略八",
+      "sid": "策略0372",
+      "source_sid": "策略八",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_20_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日波动率、二十日高低价波动率、二十日成交稳定性、相对二十日均线位置",
@@ -52136,7 +52508,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_obv_change_20_parkinson_vol_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略九",
+      "sid": "策略0373",
+      "source_sid": "策略九",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_obv_change_20_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日能量潮变化、二十日波动率、二十日高低价波动率、二十日成交稳定性、相对二十日均线位置",
@@ -52256,7 +52629,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_volume_ma_ratio_5_20_parkinson_vol_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略十",
+      "sid": "策略0374",
+      "source_sid": "策略十",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_volume_ma_ratio_5_20_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日波动率、二十日高低价波动率、二十日成交稳定性、五日与二十日成交量比、相对二十日均线位置",
@@ -52376,7 +52750,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_20_atr_20d_turnover_stability_20d__N7__R20",
-      "sid": "策略十二",
+      "sid": "策略0375",
+      "source_sid": "策略十二",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_20_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日真实波幅、二十日成交稳定性、相对二十日均线位置",
@@ -52496,7 +52871,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_drawdown_5d_px_to_ma60_mfi_7_kurtosis_20d_turnover_stability_20d__N5__R20",
-      "sid": "策略十三",
+      "sid": "策略0376",
+      "source_sid": "策略十三",
       "candidate_id": "balanced_ret_60d_drawdown_5d_px_to_ma60_mfi_7_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日成交稳定性、二十日收益峰度、相对六十日均线位置",
@@ -52590,7 +52966,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_volume_ma_ratio_5_20_ret_skew_20d_turnover_stability_20d__N5__R20",
-      "sid": "策略七",
+      "sid": "策略0377",
+      "source_sid": "策略七",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_volume_ma_ratio_5_20_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日成交稳定性、五日与二十日成交量比、二十日收益偏度、相对二十日均线位置",
@@ -52684,7 +53061,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_mfi_14_ret_skew_20d_turnover_stability_20d__N5__R20",
-      "sid": "策略十",
+      "sid": "策略0378",
+      "source_sid": "策略十",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_mfi_14_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十四日资金流指标、二十日成交稳定性、二十日收益偏度、相对二十日均线位置",
@@ -52778,7 +53156,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_10_ret_skew_20d_turnover_stability_20d__N5__R20",
-      "sid": "策略十一",
+      "sid": "策略0379",
+      "source_sid": "策略十一",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_10_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日成交稳定性、二十日收益偏度、相对二十日均线位置",
@@ -52872,7 +53251,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_20_ret_skew_20d_turnover_stability_20d__N5__R20",
-      "sid": "策略十二",
+      "sid": "策略0380",
+      "source_sid": "策略十二",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_20_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日成交稳定性、二十日收益偏度、相对二十日均线位置",
@@ -52966,7 +53346,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_obv_change_20_ret_skew_20d_turnover_stability_20d__N5__R20",
-      "sid": "策略十四",
+      "sid": "策略0381",
+      "source_sid": "策略十四",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_obv_change_20_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日能量潮变化、二十日成交稳定性、二十日收益偏度、相对二十日均线位置",
@@ -53060,7 +53441,8 @@
     },
     {
       "monitor_key": "microtrend_overnight_gap_1d_ma20_above_ma60_ret_60d_kurtosis_20d_dollar_volume_20d__N7__R5",
-      "sid": "策略一",
+      "sid": "策略0382",
+      "source_sid": "策略一",
       "candidate_id": "microtrend_overnight_gap_1d_ma20_above_ma60_ret_60d_kurtosis_20d_dollar_volume_20d",
       "category": "均衡回调型",
       "factors": "二十日成交额、二十日收益峰度、二十日均线相对六十日均线、隔夜跳空",
@@ -53180,7 +53562,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_drawdown_5d_px_to_ma60_volume_ma_ratio_5_20_kurtosis_20d_turnover_stability_20d__N5__R20",
-      "sid": "策略十七",
+      "sid": "策略0383",
+      "source_sid": "策略十七",
       "candidate_id": "balanced_ret_60d_drawdown_5d_px_to_ma60_volume_ma_ratio_5_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日成交稳定性、五日与二十日成交量比、二十日收益峰度、相对六十日均线位置",
@@ -53274,7 +53657,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_mfi_7_parkinson_vol_20d_turnover_stability_20d__N5__R20",
-      "sid": "策略十五",
+      "sid": "策略0384",
+      "source_sid": "策略十五",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_mfi_7_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日波动率、二十日高低价波动率、二十日成交稳定性、相对二十日均线位置",
@@ -53368,7 +53752,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_mfi_7_atr_20d_turnover_stability_20d__N5__R20",
-      "sid": "策略十六",
+      "sid": "策略0385",
+      "source_sid": "策略十六",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_mfi_7_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日真实波幅、二十日成交稳定性、相对二十日均线位置",
@@ -53462,7 +53847,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_mfi_7_kurtosis_20d_turnover_stability_20d__N5__R20",
-      "sid": "策略十七",
+      "sid": "策略0386",
+      "source_sid": "策略十七",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_mfi_7_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日成交稳定性、二十日收益峰度、相对二十日均线位置",
@@ -53556,7 +53942,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_mfi_7_vol_20d_turnover_stability_20d__N5__R20",
-      "sid": "策略十八",
+      "sid": "策略0387",
+      "source_sid": "策略十八",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_mfi_7_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日波动率、二十日成交稳定性、相对二十日均线位置",
@@ -53650,7 +54037,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_10_parkinson_vol_20d_turnover_stability_20d__N5__R20",
-      "sid": "策略四",
+      "sid": "策略0388",
+      "source_sid": "策略四",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_10_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日波动率、二十日高低价波动率、二十日成交稳定性、相对二十日均线位置",
@@ -53744,7 +54132,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_20_parkinson_vol_20d_turnover_stability_20d__N5__R20",
-      "sid": "策略五",
+      "sid": "策略0389",
+      "source_sid": "策略五",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_20_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日波动率、二十日高低价波动率、二十日成交稳定性、相对二十日均线位置",
@@ -53838,7 +54227,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_20_atr_20d_turnover_stability_20d__N5__R20",
-      "sid": "策略七",
+      "sid": "策略0390",
+      "source_sid": "策略七",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_20_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日真实波幅、二十日成交稳定性、相对二十日均线位置",
@@ -53932,7 +54322,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_obv_change_20_atr_20d_turnover_stability_20d__N5__R20",
-      "sid": "策略八",
+      "sid": "策略0391",
+      "source_sid": "策略八",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_obv_change_20_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日能量潮变化、二十日真实波幅、二十日成交稳定性、相对二十日均线位置",
@@ -54026,7 +54417,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_10_kurtosis_20d_turnover_stability_20d__N5__R20",
-      "sid": "策略十一",
+      "sid": "策略0392",
+      "source_sid": "策略十一",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_10_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "十日资金流强度、二十日成交稳定性、二十日收益峰度、相对二十日均线位置",
@@ -54120,7 +54512,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_20_kurtosis_20d_turnover_stability_20d__N5__R20",
-      "sid": "策略十三",
+      "sid": "策略0393",
+      "source_sid": "策略十三",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_20_kurtosis_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日成交稳定性、二十日收益峰度、相对二十日均线位置",
@@ -54214,7 +54607,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_20_vol_20d_turnover_stability_20d__N5__R20",
-      "sid": "策略十四",
+      "sid": "策略0394",
+      "source_sid": "策略十四",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_cmf_20_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日波动率、二十日成交稳定性、相对二十日均线位置",
@@ -54308,7 +54702,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_5d_px_to_ma20_obv_change_20_vol_20d_turnover_stability_20d__N5__R20",
-      "sid": "策略十五",
+      "sid": "策略0395",
+      "source_sid": "策略十五",
       "candidate_id": "balanced_ret_120d_ret_5d_px_to_ma20_obv_change_20_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日能量潮变化、二十日波动率、二十日成交稳定性、相对二十日均线位置",
@@ -54402,7 +54797,8 @@
     },
     {
       "monitor_key": "qmv_ret_120d_px_to_ma20_mfi_14_vol_60d_turnover_stability_20d__N10__R5",
-      "sid": "策略一",
+      "sid": "策略0396",
+      "source_sid": "策略一",
       "candidate_id": "qmv_ret_120d_px_to_ma20_mfi_14_vol_60d_turnover_stability_20d",
       "category": "质量动量低波型",
       "factors": "十四日资金流指标、六十日波动率、二十日成交稳定性、相对二十日均线位置",
@@ -54561,7 +54957,8 @@
     },
     {
       "monitor_key": "qmv_ret_120d_px_to_ma20_mfi_14_atr_20d_turnover_stability_20d__N7__R5",
-      "sid": "策略二",
+      "sid": "策略0397",
+      "source_sid": "策略二",
       "candidate_id": "qmv_ret_120d_px_to_ma20_mfi_14_atr_20d_turnover_stability_20d",
       "category": "质量动量低波型",
       "factors": "十四日资金流指标、二十日真实波幅、二十日成交稳定性、相对二十日均线位置",
@@ -54681,7 +55078,8 @@
     },
     {
       "monitor_key": "qmv_ret_120d_px_to_ma20_mfi_14_parkinson_vol_20d_turnover_stability_20d__N7__R10",
-      "sid": "策略三",
+      "sid": "策略0398",
+      "source_sid": "策略三",
       "candidate_id": "qmv_ret_120d_px_to_ma20_mfi_14_parkinson_vol_20d_turnover_stability_20d",
       "category": "质量动量低波型",
       "factors": "十四日资金流指标、二十日波动率、二十日高低价波动率、二十日成交稳定性、相对二十日均线位置",
@@ -54801,7 +55199,8 @@
     },
     {
       "monitor_key": "qmv_ret_120d_px_to_ma20_mfi_14_parkinson_vol_20d_turnover_stability_20d__N7__R5",
-      "sid": "策略四",
+      "sid": "策略0399",
+      "source_sid": "策略四",
       "candidate_id": "qmv_ret_120d_px_to_ma20_mfi_14_parkinson_vol_20d_turnover_stability_20d",
       "category": "质量动量低波型",
       "factors": "十四日资金流指标、二十日波动率、二十日高低价波动率、二十日成交稳定性、相对二十日均线位置",
@@ -54921,7 +55320,8 @@
     },
     {
       "monitor_key": "qmv_ret_120d_px_to_ma20_mfi_14_vol_60d_turnover_stability_20d__N10__R10",
-      "sid": "策略五",
+      "sid": "策略0400",
+      "source_sid": "策略五",
       "candidate_id": "qmv_ret_120d_px_to_ma20_mfi_14_vol_60d_turnover_stability_20d",
       "category": "质量动量低波型",
       "factors": "十四日资金流指标、六十日波动率、二十日成交稳定性、相对二十日均线位置",
@@ -55080,7 +55480,8 @@
     },
     {
       "monitor_key": "qmv_ret_120d_px_to_ma20_mfi_14_ret_skew_20d_turnover_stability_20d__N10__R10",
-      "sid": "策略六",
+      "sid": "策略0401",
+      "source_sid": "策略六",
       "candidate_id": "qmv_ret_120d_px_to_ma20_mfi_14_ret_skew_20d_turnover_stability_20d",
       "category": "质量动量低波型",
       "factors": "十四日资金流指标、二十日成交稳定性、二十日收益偏度、相对二十日均线位置",
@@ -55239,7 +55640,8 @@
     },
     {
       "monitor_key": "qmv_ret_120d_px_to_ma20_mfi_14_atr_20d_turnover_stability_20d__N7__R10",
-      "sid": "策略七",
+      "sid": "策略0402",
+      "source_sid": "策略七",
       "candidate_id": "qmv_ret_120d_px_to_ma20_mfi_14_atr_20d_turnover_stability_20d",
       "category": "质量动量低波型",
       "factors": "十四日资金流指标、二十日真实波幅、二十日成交稳定性、相对二十日均线位置",
@@ -55359,7 +55761,8 @@
     },
     {
       "monitor_key": "qmv_ret_120d_px_to_ma20_mfi_14_parkinson_vol_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略八",
+      "sid": "策略0403",
+      "source_sid": "策略八",
       "candidate_id": "qmv_ret_120d_px_to_ma20_mfi_14_parkinson_vol_20d_turnover_stability_20d",
       "category": "质量动量低波型",
       "factors": "十四日资金流指标、二十日波动率、二十日高低价波动率、二十日成交稳定性、相对二十日均线位置",
@@ -55518,7 +55921,8 @@
     },
     {
       "monitor_key": "qmv_ret_120d_px_to_ma20_mfi_14_atr_20d_turnover_stability_20d__N20__R10",
-      "sid": "策略九",
+      "sid": "策略0404",
+      "source_sid": "策略九",
       "candidate_id": "qmv_ret_120d_px_to_ma20_mfi_14_atr_20d_turnover_stability_20d",
       "category": "质量动量低波型",
       "factors": "十四日资金流指标、二十日真实波幅、二十日成交稳定性、相对二十日均线位置",
@@ -55807,7 +56211,8 @@
     },
     {
       "monitor_key": "qmv_ret_120d_px_to_ma20_mfi_14_atr_20d_turnover_stability_20d__N10__R5",
-      "sid": "策略一",
+      "sid": "策略0405",
+      "source_sid": "策略一",
       "candidate_id": "qmv_ret_120d_px_to_ma20_mfi_14_atr_20d_turnover_stability_20d",
       "category": "质量动量低波型",
       "factors": "十四日资金流指标、二十日真实波幅、二十日成交稳定性、相对二十日均线位置",
@@ -55966,7 +56371,8 @@
     },
     {
       "monitor_key": "qmv_ret_120d_px_to_ma20_mfi_14_atr_20d_turnover_stability_20d__N10__R10",
-      "sid": "策略二",
+      "sid": "策略0406",
+      "source_sid": "策略二",
       "candidate_id": "qmv_ret_120d_px_to_ma20_mfi_14_atr_20d_turnover_stability_20d",
       "category": "质量动量低波型",
       "factors": "十四日资金流指标、二十日真实波幅、二十日成交稳定性、相对二十日均线位置",
@@ -56125,7 +56531,8 @@
     },
     {
       "monitor_key": "qmv_ret_120d_px_to_ma20_mfi_14_ret_skew_20d_turnover_stability_20d__N20__R5",
-      "sid": "策略一",
+      "sid": "策略0407",
+      "source_sid": "策略一",
       "candidate_id": "qmv_ret_120d_px_to_ma20_mfi_14_ret_skew_20d_turnover_stability_20d",
       "category": "质量动量低波型",
       "factors": "十四日资金流指标、二十日成交稳定性、二十日收益偏度、相对二十日均线位置",
@@ -56414,7 +56821,8 @@
     },
     {
       "monitor_key": "qmv_ret_60d_px_to_ma20_mfi_14_kurtosis_20d_turnover_stability_20d__N5__R10",
-      "sid": "策略二",
+      "sid": "策略0408",
+      "source_sid": "策略二",
       "candidate_id": "qmv_ret_60d_px_to_ma20_mfi_14_kurtosis_20d_turnover_stability_20d",
       "category": "质量动量低波型",
       "factors": "十四日资金流指标、二十日成交稳定性、二十日收益峰度、相对二十日均线位置",
@@ -56508,7 +56916,8 @@
     },
     {
       "monitor_key": "microtrend_intraday_ret_1d_macd_hist_ret_20d_ret_skew_20d_dollar_volume_20d__N5__R10",
-      "sid": "策略一",
+      "sid": "策略0409",
+      "source_sid": "策略一",
       "candidate_id": "microtrend_intraday_ret_1d_macd_hist_ret_20d_ret_skew_20d_dollar_volume_20d",
       "category": "均衡回调型",
       "factors": "二十日成交额、二十日收益偏度、日内收益",
@@ -56602,7 +57011,8 @@
     },
     {
       "monitor_key": "qmv_ret_120d_macd_hist_mfi_14_kurtosis_20d_turnover_stability_20d__N20__R5",
-      "sid": "策略一",
+      "sid": "策略0410",
+      "source_sid": "策略一",
       "candidate_id": "qmv_ret_120d_macd_hist_mfi_14_kurtosis_20d_turnover_stability_20d",
       "category": "质量动量低波型",
       "factors": "十四日资金流指标、二十日成交稳定性、二十日收益峰度",
@@ -56891,7 +57301,8 @@
     },
     {
       "monitor_key": "balanced_ret_20d_ret_5d_px_to_ma20_cmf_20_vol_20d_dollar_volume_20d__N5__R20",
-      "sid": "策略二",
+      "sid": "策略0411",
+      "source_sid": "策略二",
       "candidate_id": "balanced_ret_20d_ret_5d_px_to_ma20_cmf_20_vol_20d_dollar_volume_20d",
       "category": "均衡回调型",
       "factors": "二十日资金流强度、二十日波动率、二十日成交额、相对二十日均线位置",
@@ -56985,7 +57396,8 @@
     },
     {
       "monitor_key": "microtrend_overnight_gap_1d_macd_hist_ret_60d_atr_20d_turnover_stability_20d__N5__R5",
-      "sid": "策略一",
+      "sid": "策略0412",
+      "source_sid": "策略一",
       "candidate_id": "microtrend_overnight_gap_1d_macd_hist_ret_60d_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日真实波幅、二十日成交稳定性、隔夜跳空",
@@ -57079,7 +57491,8 @@
     },
     {
       "monitor_key": "balanced_ret_20d_ret_5d_px_to_ma20_mfi_7_parkinson_vol_20d_dollar_volume_20d__N5__R20",
-      "sid": "策略二",
+      "sid": "策略0413",
+      "source_sid": "策略二",
       "candidate_id": "balanced_ret_20d_ret_5d_px_to_ma20_mfi_7_parkinson_vol_20d_dollar_volume_20d",
       "category": "均衡回调型",
       "factors": "七日资金流指标、二十日波动率、二十日高低价波动率、二十日成交额、相对二十日均线位置",
@@ -57173,7 +57586,8 @@
     },
     {
       "monitor_key": "qmv_ret_120d_px_to_ma20_mfi_14_vol_60d_dollar_volume_20d__N20__R5",
-      "sid": "策略一",
+      "sid": "策略0414",
+      "source_sid": "策略一",
       "candidate_id": "qmv_ret_120d_px_to_ma20_mfi_14_vol_60d_dollar_volume_20d",
       "category": "质量动量低波型",
       "factors": "十四日资金流指标、六十日波动率、二十日成交额、相对二十日均线位置",
@@ -57462,7 +57876,8 @@
     },
     {
       "monitor_key": "microtrend_overnight_gap_1d_macd_hist_ret_60d_parkinson_vol_20d_turnover_stability_20d__N5__R5",
-      "sid": "策略二",
+      "sid": "策略0415",
+      "source_sid": "策略二",
       "candidate_id": "microtrend_overnight_gap_1d_macd_hist_ret_60d_parkinson_vol_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日波动率、二十日高低价波动率、二十日成交稳定性、隔夜跳空",
@@ -57556,7 +57971,8 @@
     },
     {
       "monitor_key": "qmv_ret_120d_px_to_ma20_mfi_14_vol_20d_dollar_volume_20d__N20__R10",
-      "sid": "策略三",
+      "sid": "策略0416",
+      "source_sid": "策略三",
       "candidate_id": "qmv_ret_120d_px_to_ma20_mfi_14_vol_20d_dollar_volume_20d",
       "category": "质量动量低波型",
       "factors": "十四日资金流指标、二十日波动率、二十日成交额、相对二十日均线位置",
@@ -57845,7 +58261,8 @@
     },
     {
       "monitor_key": "qmv_ret_60d_ma20_above_ma60_mfi_14_atr_20d_turnover_stability_20d__N20__R10",
-      "sid": "策略一",
+      "sid": "策略0417",
+      "source_sid": "策略一",
       "candidate_id": "qmv_ret_60d_ma20_above_ma60_mfi_14_atr_20d_turnover_stability_20d",
       "category": "质量动量低波型",
       "factors": "十四日资金流指标、二十日真实波幅、二十日成交稳定性、二十日均线相对六十日均线",
@@ -58134,7 +58551,8 @@
     },
     {
       "monitor_key": "microtrend_overnight_gap_1d_macd_hist_ret_60d_ret_skew_20d_dollar_volume_20d__N10__R10",
-      "sid": "策略一",
+      "sid": "策略0418",
+      "source_sid": "策略一",
       "candidate_id": "microtrend_overnight_gap_1d_macd_hist_ret_60d_ret_skew_20d_dollar_volume_20d",
       "category": "均衡回调型",
       "factors": "二十日成交额、二十日收益偏度、隔夜跳空",
@@ -58293,7 +58711,8 @@
     },
     {
       "monitor_key": "microtrend_overnight_gap_1d_macd_hist_ret_60d_kurtosis_20d_dollar_volume_20d__N10__R10",
-      "sid": "策略二",
+      "sid": "策略0419",
+      "source_sid": "策略二",
       "candidate_id": "microtrend_overnight_gap_1d_macd_hist_ret_60d_kurtosis_20d_dollar_volume_20d",
       "category": "均衡回调型",
       "factors": "二十日成交额、二十日收益峰度、隔夜跳空",
@@ -58452,7 +58871,8 @@
     },
     {
       "monitor_key": "microtrend_overnight_gap_1d_macd_hist_ret_60d_atr_20d_dollar_volume_20d__N10__R10",
-      "sid": "策略三",
+      "sid": "策略0420",
+      "source_sid": "策略三",
       "candidate_id": "microtrend_overnight_gap_1d_macd_hist_ret_60d_atr_20d_dollar_volume_20d",
       "category": "均衡回调型",
       "factors": "二十日真实波幅、二十日成交额、隔夜跳空",
@@ -58611,7 +59031,8 @@
     },
     {
       "monitor_key": "qmv_ret_120d_px_to_ma20_mfi_14_kurtosis_20d_turnover_stability_20d__N20__R10",
-      "sid": "策略一",
+      "sid": "策略0421",
+      "source_sid": "策略一",
       "candidate_id": "qmv_ret_120d_px_to_ma20_mfi_14_kurtosis_20d_turnover_stability_20d",
       "category": "质量动量低波型",
       "factors": "十四日资金流指标、二十日成交稳定性、二十日收益峰度、相对二十日均线位置",
@@ -58900,7 +59321,8 @@
     },
     {
       "monitor_key": "defensive_ret_120d_atr_20d_ret_skew_20d_turnover_stability_20d_px_to_ma20__N5__R10",
-      "sid": "策略一",
+      "sid": "策略0422",
+      "source_sid": "策略一",
       "candidate_id": "defensive_ret_120d_atr_20d_ret_skew_20d_turnover_stability_20d_px_to_ma20",
       "category": "均衡回调型",
       "factors": "二十日真实波幅、二十日成交稳定性、二十日收益偏度、相对二十日均线位置",
@@ -58994,7 +59416,8 @@
     },
     {
       "monitor_key": "defensive_ret_120d_ret_skew_20d_atr_20d_turnover_stability_20d_px_to_ma20__N5__R10",
-      "sid": "策略二",
+      "sid": "策略0423",
+      "source_sid": "策略二",
       "candidate_id": "defensive_ret_120d_ret_skew_20d_atr_20d_turnover_stability_20d_px_to_ma20",
       "category": "均衡回调型",
       "factors": "二十日真实波幅、二十日成交稳定性、二十日收益偏度、相对二十日均线位置",
@@ -59088,7 +59511,8 @@
     },
     {
       "monitor_key": "defensive_ret_120d_ret_skew_20d_vol_20d_turnover_stability_20d_px_to_ma20__N5__R10",
-      "sid": "策略三",
+      "sid": "策略0424",
+      "source_sid": "策略三",
       "candidate_id": "defensive_ret_120d_ret_skew_20d_vol_20d_turnover_stability_20d_px_to_ma20",
       "category": "均衡回调型",
       "factors": "二十日波动率、二十日成交稳定性、二十日收益偏度、相对二十日均线位置",
@@ -59182,7 +59606,8 @@
     },
     {
       "monitor_key": "defensive_ret_120d_vol_20d_ret_skew_20d_turnover_stability_20d_px_to_ma20__N5__R10",
-      "sid": "策略四",
+      "sid": "策略0425",
+      "source_sid": "策略四",
       "candidate_id": "defensive_ret_120d_vol_20d_ret_skew_20d_turnover_stability_20d_px_to_ma20",
       "category": "均衡回调型",
       "factors": "二十日波动率、二十日成交稳定性、二十日收益偏度、相对二十日均线位置",
@@ -59276,7 +59701,8 @@
     },
     {
       "monitor_key": "balanced_ret_60d_ret_5d_px_to_ma20_obv_change_20_vol_60d_turnover_stability_20d__N5__R20",
-      "sid": "策略一",
+      "sid": "策略0426",
+      "source_sid": "策略一",
       "candidate_id": "balanced_ret_60d_ret_5d_px_to_ma20_obv_change_20_vol_60d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日能量潮变化、六十日波动率、二十日成交稳定性、相对二十日均线位置",
@@ -59370,7 +59796,8 @@
     },
     {
       "monitor_key": "balanced_ret_20d_ret_5d_ma20_above_ma60_obv_change_20_vol_60d_turnover_stability_20d__N5__R20",
-      "sid": "策略一",
+      "sid": "策略0427",
+      "source_sid": "策略一",
       "candidate_id": "balanced_ret_20d_ret_5d_ma20_above_ma60_obv_change_20_vol_60d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日能量潮变化、六十日波动率、二十日成交稳定性、二十日均线相对六十日均线",
@@ -59464,7 +59891,8 @@
     },
     {
       "monitor_key": "balanced_ret_20d_ret_5d_macd_hist_obv_change_20_vol_60d_turnover_stability_20d__N5__R20",
-      "sid": "策略一",
+      "sid": "策略0428",
+      "source_sid": "策略一",
       "candidate_id": "balanced_ret_20d_ret_5d_macd_hist_obv_change_20_vol_60d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日能量潮变化、六十日波动率、二十日成交稳定性",
@@ -59558,7 +59986,8 @@
     },
     {
       "monitor_key": "balanced_ret_120d_ret_10d_px_to_ma20_obv_change_20_ret_skew_20d_turnover_stability_20d__N5__R10",
-      "sid": "策略一",
+      "sid": "策略0429",
+      "source_sid": "策略一",
       "candidate_id": "balanced_ret_120d_ret_10d_px_to_ma20_obv_change_20_ret_skew_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日能量潮变化、二十日成交稳定性、二十日收益偏度、相对二十日均线位置",
@@ -59652,7 +60081,8 @@
     },
     {
       "monitor_key": "balanced_ret_20d_ret_5d_ma20_above_ma60_obv_change_20_atr_20d_turnover_stability_20d__N5__R20",
-      "sid": "策略一",
+      "sid": "策略0430",
+      "source_sid": "策略一",
       "candidate_id": "balanced_ret_20d_ret_5d_ma20_above_ma60_obv_change_20_atr_20d_turnover_stability_20d",
       "category": "均衡回调型",
       "factors": "二十日能量潮变化、二十日真实波幅、二十日成交稳定性、二十日均线相对六十日均线",

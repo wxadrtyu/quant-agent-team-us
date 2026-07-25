@@ -8,6 +8,9 @@ import duckdb
 import pandas as pd
 
 
+DEFAULT_RAW_ROOT = Path(r"E:\quant-agent-team-us\data\us\raw")
+
+
 COMMON_CN_NAMES = {
     "AAPL": "苹果",
     "MSFT": "微软",
@@ -231,7 +234,77 @@ def load_prices(raw_dir: Path, entry_date: str, mtm_date: str) -> pd.DataFrame:
     return out
 
 
-def build_payload(db_path: Path, raw_dir: Path) -> dict:
+def resolve_raw_dir(raw_dir: Path | str | None, valuation_date: str, raw_root: Path = DEFAULT_RAW_ROOT) -> Path:
+    if raw_dir is not None:
+        return Path(raw_dir)
+    expected = raw_root / f"{valuation_date}-intraday-chart"
+    if expected.exists():
+        return expected
+    candidates = sorted(raw_root.glob("*-intraday-chart"), key=lambda path: path.name, reverse=True)
+    for candidate in candidates:
+        if valuation_date in candidate.name:
+            return candidate
+    raise RuntimeError(f"raw-dir is required; no raw directory found for valuation date {valuation_date}")
+
+
+def load_current_valuation_date(db_path: Path) -> str:
+    con = duckdb.connect(str(db_path), read_only=True)
+    try:
+        strategies = con.execute("select * from us_live_monitoring_strategies_current limit 1").fetchdf()
+    finally:
+        con.close()
+    if strategies.empty:
+        raise RuntimeError("us_live_monitoring_strategies_current is empty")
+    return str(strategies["估值日期"].dropna().iloc[0])
+
+
+def strategy_display_id(index: int) -> str:
+    return f"策略{index:04d}"
+
+
+def validate_payload_integrity(payload: dict, tolerance: float = 1e-6) -> dict[str, int]:
+    rows = payload.get("results", [])
+    seen: set[str] = set()
+    duplicate_display = 0
+    missing_prices = 0
+    contribution_mismatch = 0
+    empty_holdings = 0
+    for row in rows:
+        sid = str(row.get("sid", ""))
+        if sid in seen:
+            duplicate_display += 1
+        seen.add(sid)
+        stocks = row.get("stocks", [])
+        if not stocks:
+            empty_holdings += 1
+        contribution = 0.0
+        for stock in stocks:
+            if stock.get("buy_price") is None or stock.get("mtm_price") is None:
+                missing_prices += 1
+            contribution += float(stock.get("contribution") or 0.0)
+        if stocks and abs(contribution - float(row.get("live_return") or 0.0)) > tolerance:
+            contribution_mismatch += 1
+    summary = {
+        "missing_price_count": missing_prices,
+        "contribution_mismatch_count": contribution_mismatch,
+        "duplicate_strategy_display_count": duplicate_display,
+        "empty_holding_strategy_count": empty_holdings,
+    }
+    errors = []
+    if missing_prices:
+        errors.append(f"missing price rows: {missing_prices}")
+    if contribution_mismatch:
+        errors.append(f"contribution mismatch strategies: {contribution_mismatch}")
+    if duplicate_display:
+        errors.append(f"duplicate strategy display ids: {duplicate_display}")
+    if empty_holdings:
+        errors.append(f"empty holding strategies: {empty_holdings}")
+    if errors:
+        raise RuntimeError("; ".join(errors))
+    return summary
+
+
+def build_payload(db_path: Path, raw_dir: Path | None) -> dict:
     con = duckdb.connect(str(db_path), read_only=True)
     try:
         strategies = con.execute("select * from us_live_monitoring_strategies_current").fetchdf()
@@ -249,6 +322,7 @@ def build_payload(db_path: Path, raw_dir: Path) -> dict:
     entry_date = str(strategies["入场日期"].dropna().iloc[0])
     signal_date = str(strategies["实盘起点"].dropna().iloc[0])
     mtm_date = str(strategies["估值日期"].dropna().iloc[0])
+    raw_dir = resolve_raw_dir(raw_dir, mtm_date)
     name_map = load_name_map(raw_dir)
     price_frame = load_prices(raw_dir, entry_date, mtm_date)
     holdings = holdings.merge(price_frame, left_on="股票代码", right_on="symbol", how="left")
@@ -256,7 +330,7 @@ def build_payload(db_path: Path, raw_dir: Path) -> dict:
     holdings["contribution"] = holdings["目标权重"] * holdings["stock_return"]
 
     results = []
-    for row in strategies.itertuples(index=False):
+    for idx, row in enumerate(strategies.itertuples(index=False), start=1):
         monitor_key = getattr(row, "monitor_key")
         sid = getattr(row, "策略编号")
         candidate_id = getattr(row, "candidate_id")
@@ -283,7 +357,8 @@ def build_payload(db_path: Path, raw_dir: Path) -> dict:
         results.append(
             {
                 "monitor_key": monitor_key,
-                "sid": sid,
+                "sid": strategy_display_id(idx),
+                "source_sid": sid,
                 "candidate_id": candidate_id,
                 "category": getattr(row, "策略类型"),
                 "factors": getattr(row, "主要区分因子"),
@@ -311,7 +386,7 @@ def build_payload(db_path: Path, raw_dir: Path) -> dict:
             }
         )
 
-    return {
+    payload = {
         "title": "美股正式监控实盘报告",
         "signal_date": signal_date,
         "entry_date": entry_date,
@@ -320,6 +395,8 @@ def build_payload(db_path: Path, raw_dir: Path) -> dict:
         "universe_status": "动态流动性降偏，尚非完整历史时点成分",
         "results": results,
     }
+    validate_payload_integrity(payload)
+    return payload
 
 
 HTML_TEMPLATE = r"""<!DOCTYPE html>
@@ -505,6 +582,7 @@ function show(id){ document.querySelectorAll('.tab').forEach(b=>b.classList.remo
 
 def write_outputs(payload: dict, out_dir: Path) -> dict:
     out_dir.mkdir(parents=True, exist_ok=True)
+    validate_payload_integrity(payload)
     suffix = f"{payload['signal_date'][5:].replace('-', '')}_{payload['mtm_date'][5:].replace('-', '')}"
     json_path = out_dir / f"us_simulation_formal_monitoring_{suffix}.json"
     html_path = out_dir / f"us_simulation_formal_monitoring_detail_{suffix}.html"
@@ -521,10 +599,11 @@ def write_outputs(payload: dict, out_dir: Path) -> dict:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--db", default=r"E:\quant-agent-team-us\research\us_strategy_research.duckdb")
-    parser.add_argument("--raw-dir", default=r"E:\quant-agent-team-us\data\us\raw\2026-07-17-intraday-chart")
+    parser.add_argument("--raw-dir", default=None)
     parser.add_argument("--out-dir", default=r"G:\quant-agent-team-us\reports\us\live\current")
     args = parser.parse_args()
-    payload = build_payload(Path(args.db), Path(args.raw_dir))
+    raw_dir = Path(args.raw_dir) if args.raw_dir else None
+    payload = build_payload(Path(args.db), raw_dir)
     outputs = write_outputs(payload, Path(args.out_dir))
     print(json.dumps({"strategies": len(payload["results"]), **outputs}, ensure_ascii=False, indent=2))
     return 0
