@@ -1,0 +1,23 @@
+# 2026-07-26 低成本日内交易路线阶段记忆（本地保底）
+
+- memory_type: `market-research`
+- summary: 面向零基础、小资金和低数据成本目标，首选美股高流动性 ETF 的 15-60 分钟级、低换手日内算法，不选择毫秒级高频，也不以加密货币现货高频作为第一条实盘路线。加密货币免费实时行情容易获取，但小账户 maker/taker 双边手续费很容易吞噬微小毛利。
+- stage: `route-selection`
+- kpi_version: `not-set`
+- tags:
+  - `project:quant-agent-team`
+  - `market:us`
+  - `freq:intraday`
+  - `stage:route-selection`
+  - `status:proposed`
+- evidence:
+  - Alpaca Basic 行情计划为零成本，但美股实时覆盖限于 IEX，WebSocket 限 30 个标的；适合小范围分钟级研究，不适合完整盘口级高频。
+  - Kraken 低交易量现货费率为 maker 0.25%、taker 0.40%，完整买卖的显性成本约 0.50%-0.80%，尚未计入价差和滑点。
+  - FINRA 2026-06-04 指引强调频繁日内交易的成本、现金结算、保证金和亏损风险；小白路线应使用现金账户和无杠杆。
+- proposed_scope:
+  - 交易对象先限 `SPY`、`QQQ`，可后续加入 `IWM`
+  - 15 分钟信号，持仓 15-120 分钟
+  - 每日最多 1-3 笔，限价单优先
+  - 先做包含滑点和费用的回测，再仿真至少 8 周，人工审核后才允许小额实盘
+- next_step: 用户确认路线后，形成正式设计文档；首先验证免费 IEX 数据是否足以支持目标信号，并建立费用、价差、滑点和成交概率模型。
+- memory_backend_status: `codex-mcp-memory unavailable in current tool context; local fallback used`
