@@ -1,0 +1,4 @@
+monitor_key,approved,reason,top_n,live_excess,max_current_overlap,current_stock_reuse_share,max_current_symbol_count,drag_symbol_hits,weak_symbol_hits,max_pairwise_correlation
+balanced_ret_120d_ret_10d_px_to_ma20_cmf_20_ret_skew_20d_turnover_stability_20d__N5__R20,True,approved,5,0.041944595834937815,0.25,0.5,11,0,0,0.5432649970795338
+balanced_ret_120d_ret_10d_px_to_ma20_volume_ma_ratio_5_20_ret_skew_20d_turnover_stability_20d__N5__R10,True,approved,5,0.13585949861842272,0.25,0.5,11,0,0,0.5432649970795338
+balanced_ret_120d_ret_10d_px_to_ma20_cmf_20_kurtosis_20d_turnover_stability_20d__N5__R10,True,approved,5,0.12556992744493933,0.0,0.0,0,0,0,0.3521495890811356

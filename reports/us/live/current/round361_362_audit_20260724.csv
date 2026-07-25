@@ -1,0 +1,5 @@
+monitor_key,approved,reason,top_n,live_excess,max_current_overlap,current_stock_reuse_share,max_current_symbol_count,drag_symbol_hits,weak_symbol_hits,max_pairwise_correlation
+balanced_ret_120d_drawdown_5d_macd_hist_mfi_14_vol_60d_turnover_stability_20d__N5__R5,True,approved,5,0.07235022017882065,0.0,0.0,0,0,0,0.4659068855442092
+balanced_ret_60d_drawdown_5d_ma20_above_ma60_obv_change_20_atr_20d_dollar_volume_20d__N5__R10,True,approved,5,0.0629425268067001,0.0,0.0,0,0,0,0.37242074033628414
+balanced_ret_60d_drawdown_5d_ma20_above_ma60_obv_change_20_vol_60d_dollar_volume_20d__N5__R10,True,approved,5,0.06369047891989443,0.0,0.0,0,0,0,0.37242074033628414
+balanced_ret_120d_drawdown_5d_ma20_above_ma60_obv_change_20_vol_60d_dollar_volume_20d__N5__R10,True,approved,5,0.07235022017882065,0.0,0.0,0,0,0,0.4659068855442092

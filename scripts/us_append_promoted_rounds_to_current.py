@@ -8,6 +8,10 @@ import duckdb
 import pandas as pd
 
 
+MONITOR_RUN_DATE = "2026-07-24"
+LEGACY_MONITOR_RUN_DATE = "2026-07-13"
+
+
 def monitor_key(frame: pd.DataFrame) -> pd.Series:
     return (
         frame["candidate_id"].astype(str)
@@ -29,7 +33,10 @@ def main() -> int:
     args = parser.parse_args()
 
     db_path = Path(args.db)
-    run_ids = [f"2026-07-13-monitor-round{round_no}-quality-stability" for round_no in range(args.start_round, args.end_round + 1)]
+    run_ids = []
+    for round_no in range(args.start_round, args.end_round + 1):
+        run_ids.append(f"{MONITOR_RUN_DATE}-monitor-round{round_no}-quality-stability")
+        run_ids.append(f"{LEGACY_MONITOR_RUN_DATE}-monitor-round{round_no}-quality-stability")
     current_run_id = args.current_run_id or f"{args.admission_date}-current-compact-add-round{args.start_round}-{args.end_round}"
 
     con = duckdb.connect(str(db_path))

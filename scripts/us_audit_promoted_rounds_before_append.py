@@ -9,7 +9,9 @@ import pandas as pd
 
 
 DB_PATH = Path(r"E:\quant-agent-team-us\research\us_strategy_research.duckdb")
-RAW_DIR = Path(r"E:\quant-agent-team-us\data\us\raw\2026-07-17-intraday-chart")
+RAW_DIR = Path(r"E:\quant-agent-team-us\data\us\raw\2026-07-24-intraday-chart")
+MONITOR_RUN_DATE = "2026-07-24"
+LEGACY_MONITOR_RUN_DATE = "2026-07-13"
 DRAG_SYMBOLS = {
     "ARM",
     "ON",
@@ -239,7 +241,10 @@ def audit_rounds(
     weak_symbols: set[str] | None = None,
     max_weak_symbol_hits: int = 1,
 ) -> pd.DataFrame:
-    run_ids = [f"2026-07-13-monitor-round{round_no}-quality-stability" for round_no in range(start_round, end_round + 1)]
+    run_ids = []
+    for round_no in range(start_round, end_round + 1):
+        run_ids.append(f"{MONITOR_RUN_DATE}-monitor-round{round_no}-quality-stability")
+        run_ids.append(f"{LEGACY_MONITOR_RUN_DATE}-monitor-round{round_no}-quality-stability")
     con = duckdb.connect(str(db_path), read_only=True)
     try:
         strategies = con.execute("select * from us_live_pool_strategies").fetchdf()

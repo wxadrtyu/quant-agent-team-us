@@ -13,12 +13,14 @@ import us_rolling_validation as rolling
 import us_strategy_factory_loop as factory
 
 
-RAW_DIR = Path(r"E:\quant-agent-team-us\data\us\raw\2026-07-17-intraday-chart")
+RAW_DIR = Path(r"E:\quant-agent-team-us\data\us\raw\2026-07-24-intraday-chart")
 RESEARCH_DIR = Path(r"E:\quant-agent-team-us\research")
 REPORT_DIR = Path(r"G:\quant-agent-team-us\reports\us\live")
 DB_PATH = RESEARCH_DIR / "us_strategy_research.duckdb"
 LIVE_SIGNAL_DATE = "2026-06-30"
-LIVE_VALUATION_DATE = "2026-07-17"
+LIVE_VALUATION_DATE = "2026-07-24"
+ARTIFACT_DATE = LIVE_VALUATION_DATE
+MONITOR_RUN_DATE = LIVE_VALUATION_DATE
 
 
 PREFERRED_SETS = [
@@ -146,7 +148,7 @@ def write_round_candidates(pool: pd.DataFrame, start_round: int, rounds: int, pe
             break
         cursor += per_round
         label = f"round{round_no}-quality-stability"
-        path = RESEARCH_DIR / f"2026-07-13-{label}-candidates.csv"
+        path = RESEARCH_DIR / f"{ARTIFACT_DATE}-{label}-candidates.csv"
         chunk.to_csv(path, index=False)
         out.append((round_no, path, label))
     return out
@@ -194,7 +196,7 @@ def run_null(context: factory.EvalContext, rolling_dir: Path, summary: pd.DataFr
 
 
 def promote_round(round_no: int, label: str, candidates_path: Path, rolling_path: Path, null_path: Path) -> dict:
-    run_id = f"2026-07-13-monitor-round{round_no}-quality-stability"
+    run_id = f"{MONITOR_RUN_DATE}-monitor-round{round_no}-quality-stability"
     rolling_summary = pd.read_csv(rolling_path)
     random_checks = pd.read_csv(null_path) if null_path.exists() else pd.DataFrame()
     candidates = pd.read_csv(candidates_path)
@@ -227,7 +229,7 @@ def promote_round(round_no: int, label: str, candidates_path: Path, rolling_path
     us_live_pool.write_live_pool(DB_PATH, run_id, strategies, holdings, review)
     report_dir = REPORT_DIR / f"round{round_no}"
     report_dir.mkdir(parents=True, exist_ok=True)
-    report_path = report_dir / f"2026-07-13-{label}.md"
+    report_path = report_dir / f"{ARTIFACT_DATE}-{label}.md"
     us_live_pool.write_report(strategies, holdings, review, report_path)
     us_live_pool._validate_outputs(DB_PATH, run_id, report_path, strategies, holdings)
     return {
@@ -262,8 +264,8 @@ def main() -> int:
     round_files = write_round_candidates(pool, args.start_round, args.rounds, args.candidates_per_round)
     summary_rows = []
     for round_no, candidates_path, label in round_files:
-        rolling_dir = RESEARCH_DIR / f"2026-07-13-rolling-{label}"
-        null_dir = RESEARCH_DIR / f"2026-07-13-null-{label}"
+        rolling_dir = RESEARCH_DIR / f"{ARTIFACT_DATE}-rolling-{label}"
+        null_dir = RESEARCH_DIR / f"{ARTIFACT_DATE}-null-{label}"
         rolling_summary = run_rolling(panel, context, candidates_path, rolling_dir, args.rolling_top_k)
         null_summary = run_null(context, rolling_dir, rolling_summary, null_dir, args.null_top_k, args.null_iter, args.seed + round_no * 100)
         passed = null_summary[
@@ -296,7 +298,8 @@ def main() -> int:
                 "promoted_holdings": int(promoted.get("holdings", 0)),
             }
         )
-        pd.DataFrame(summary_rows).to_csv(RESEARCH_DIR / "2026-07-13-quality-stability-round23-52-summary.csv", index=False)
+        summary_path = RESEARCH_DIR / f"{ARTIFACT_DATE}-quality-stability-round{args.start_round}-{args.start_round + args.rounds - 1}-summary.csv"
+        pd.DataFrame(summary_rows).to_csv(summary_path, index=False)
         print(json.dumps(summary_rows[-1], ensure_ascii=False))
 
     manifest = {
@@ -311,7 +314,8 @@ def main() -> int:
             "live": "2026-06-30 signal to latest valuation, live excess return must be positive",
         },
     }
-    (RESEARCH_DIR / "2026-07-13-quality-stability-round23-52-manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+    manifest_path = RESEARCH_DIR / f"{ARTIFACT_DATE}-quality-stability-round{args.start_round}-{args.start_round + args.rounds - 1}-manifest.json"
+    manifest_path.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
     return 0
 
 

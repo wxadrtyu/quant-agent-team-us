@@ -14,9 +14,11 @@ import us_live_pool
 import us_strategy_factory_loop as factory
 
 
-RAW_DIR = Path(r"E:\quant-agent-team-us\data\us\raw\2026-07-17-intraday-chart")
+RAW_DIR = Path(r"E:\quant-agent-team-us\data\us\raw\2026-07-24-intraday-chart")
 RESEARCH_DIR = Path(r"E:\quant-agent-team-us\research")
 DB_PATH = RESEARCH_DIR / "us_strategy_research.duckdb"
+LIVE_SIGNAL_DATE = "2026-06-30"
+LIVE_VALUATION_DATE = "2026-07-24"
 
 DRAG_SYMBOLS = {
     "ARM",
@@ -827,7 +829,7 @@ def generate_live_strength_pool(
     branch: str = "mixed",
 ) -> pd.DataFrame:
     live_frame, signal_date, _, _ = us_live_pool.build_live_period(
-        panel, signal_date="2026-06-30", valuation_date="2026-07-17"
+        panel, signal_date=LIVE_SIGNAL_DATE, valuation_date=LIVE_VALUATION_DATE
     )
     benchmark_ret = float(live_frame["asset_ret"].mean())
     rebalance_choices = [5, 10, 20]
@@ -1034,7 +1036,7 @@ def write_round_candidates(pool: pd.DataFrame, start_round: int, rounds_count: i
             break
         cursor += per_round
         label = f"round{round_no}-live-strength"
-        path = RESEARCH_DIR / f"2026-07-17-{label}-candidates.csv"
+        path = RESEARCH_DIR / f"{LIVE_VALUATION_DATE}-{label}-candidates.csv"
         chunk.to_csv(path, index=False)
         out.append((round_no, path, label))
     return out
@@ -1089,14 +1091,14 @@ def main() -> int:
         args.max_signal_overlap,
         args.branch,
     )
-    pool_path = RESEARCH_DIR / f"2026-07-17-live-strength-pool-round{args.start_round}-{args.start_round + args.rounds - 1}.csv"
+    pool_path = RESEARCH_DIR / f"{LIVE_VALUATION_DATE}-live-strength-pool-round{args.start_round}-{args.start_round + args.rounds - 1}.csv"
     pool.to_csv(pool_path, index=False)
     round_files = write_round_candidates(pool, args.start_round, args.rounds, args.candidates_per_round)
 
     summary_rows = []
     for round_no, candidates_path, label in round_files:
-        rolling_dir = RESEARCH_DIR / f"2026-07-17-rolling-{label}"
-        null_dir = RESEARCH_DIR / f"2026-07-17-null-{label}"
+        rolling_dir = RESEARCH_DIR / f"{LIVE_VALUATION_DATE}-rolling-{label}"
+        null_dir = RESEARCH_DIR / f"{LIVE_VALUATION_DATE}-null-{label}"
         rolling_summary = rounds.run_rolling(panel, context, candidates_path, rolling_dir, args.rolling_top_k)
         null_summary = rounds.run_null(
             context, rolling_dir, rolling_summary, null_dir, args.null_top_k, args.null_iter, args.seed + round_no * 100
@@ -1121,7 +1123,7 @@ def main() -> int:
         summary_rows.append(row)
         print(json.dumps(row, ensure_ascii=False))
 
-    summary_path = RESEARCH_DIR / f"2026-07-17-live-strength-round{args.start_round}-{args.start_round + args.rounds - 1}-summary.csv"
+    summary_path = RESEARCH_DIR / f"{LIVE_VALUATION_DATE}-live-strength-round{args.start_round}-{args.start_round + args.rounds - 1}-summary.csv"
     pd.DataFrame(summary_rows).to_csv(summary_path, index=False)
     print(json.dumps({"pool": str(pool_path), "summary": str(summary_path), "rounds": len(summary_rows)}, ensure_ascii=False))
     return 0
