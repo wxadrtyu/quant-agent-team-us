@@ -1,0 +1,21 @@
+{
+  "run_id": "2026-08-21-current-live-valuation",
+  "raw_dir": "E:\\quant-agent-team-us\\data\\us\\raw\\2026-08-24-intraday-chart",
+  "signal_date": "2026-06-30",
+  "entry_date": "2026-07-01",
+  "valuation_date": "2026-08-21",
+  "benchmark_ret": 0.04412294551730156,
+  "current_strategies": 437,
+  "current_holdings": 3671,
+  "outperforming": 114,
+  "underperforming_kept": 323,
+  "persistent_outperforming": 77,
+  "holding_distribution": {
+    "5": 106,
+    "7": 123,
+    "10": 188,
+    "20": 20
+  },
+  "backup_suffix": "20260826_003745",
+  "note": "Full current pool retained; underperforming strategies are not removed."
+}
