@@ -9,7 +9,7 @@
     :root{--ink:#18243a;--muted:#57657c;--line:#dce4ed;--paper:#fff;--bg:#f5f7fb;--accent:#176a87;--accent-soft:#e9f5f8;--warn:#8b4b12;--warn-soft:#fff4e6;--code:#17253b}
     *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.72 system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif}
     a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:3px}a:hover{text-decoration-thickness:2px}
-    .wrap{max-width:1180px;margin:auto;padding:0 28px}.hero{background:linear-gradient(125deg,#10263d,#14536d);color:#fff;padding:52px 0 40px}.eyebrow{margin:0 0 12px;letter-spacing:.12em;text-transform:uppercase;color:#abdae9;font-size:.8rem;font-weight:700}
+    .wrap{max-width:1180px;margin:auto;padding:0 28px}.hero{background:linear-gradient(125deg,#10263d,#14536d);color:#fff;padding:52px 0 40px}.prelude{display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;margin:0 0 28px;padding:12px 16px;border:1px solid #79aec2;border-radius:12px;background:#ffffff12;font-size:.9rem}.prelude a{color:#fff;font-weight:700}.eyebrow{margin:0 0 12px;letter-spacing:.12em;text-transform:uppercase;color:#abdae9;font-size:.8rem;font-weight:700}
     h1{font-size:clamp(2rem,5vw,3.35rem);line-height:1.16;margin:0 0 14px;letter-spacing:-.025em}.hero p{max-width:760px;margin:0;color:#e2edf3}.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.meta span{border:1px solid #79aec2;border-radius:999px;padding:4px 12px;font-size:.82rem;color:#e9f7fb}
     .layout{display:grid;grid-template-columns:226px minmax(0,1fr);gap:30px;align-items:start;padding-top:32px;padding-bottom:70px}
     nav{position:sticky;top:20px;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 7px 22px #26364c0a}nav h2{font-size:.9rem;margin:0 0 8px;color:var(--muted)}nav a{display:block;padding:5px 0;text-decoration:none;font-size:.92rem}main{min-width:0}
@@ -24,16 +24,17 @@
     footer{color:var(--muted);padding:0 0 45px;font-size:.85rem}
     @media(max-width:880px){.layout{grid-template-columns:1fr}nav{position:static;display:flex;gap:6px 16px;flex-wrap:wrap}nav h2{width:100%}nav a{padding:2px 0}.grid{grid-template-columns:1fr}}
     @media(max-width:600px){.wrap{padding-left:15px;padding-right:15px}.hero{padding:34px 0}section{padding:22px 18px;border-radius:12px}body{font-size:15px}}
-    @media print{body{background:#fff;color:#000;font-size:10pt}.hero{background:#fff;color:#000;padding:0 0 16px;border-bottom:2px solid #000}.hero p,.eyebrow,.meta span{color:#000}.meta span{border-color:#999}.layout{display:block;padding:0}nav{display:none}section{box-shadow:none;border:0;border-radius:0;padding:18px 0;margin:0;break-inside:avoid}h2,h3{break-after:avoid}.callout,.card,pre{break-inside:avoid}a{color:#000;text-decoration:none}a:after{content:""}pre{white-space:pre-wrap;color:#000;background:#f0f0f0}footer{padding:0}}
+    @media print{body{background:#fff;color:#000;font-size:10pt}.hero{background:#fff;color:#000;padding:0 0 16px;border-bottom:2px solid #000}.hero p,.eyebrow,.meta span{color:#000}.prelude{background:#fff;border-color:#999;color:#000}.prelude a{color:#000}.meta span{border-color:#999}.layout{display:block;padding:0}nav{display:none}section{box-shadow:none;border:0;border-radius:0;padding:18px 0;margin:0;break-inside:avoid}h2,h3{break-after:avoid}.callout,.card,pre{break-inside:avoid}a{color:#000;text-decoration:none}a:after{content:""}pre{white-space:pre-wrap;color:#000;background:#f0f0f0}footer{padding:0}}
   </style>
 </head>
 <body>
   <header class="hero">
     <div class="wrap">
+      <div class="prelude"><strong>开始前的方案</strong><a href="superpowers/specs/2026-10-16-secondary-development-html-guide-design.md">二开说明书设计规格 ↗</a><a href="superpowers/plans/2026-10-16-secondary-development-html-guide.md">执行计划 ↗</a></div>
       <p class="eyebrow">Developer handbook / current checkout</p>
       <h1>Quant Agent Team<br>二次开发说明书</h1>
       <p>面向接手开发者的代码导航、扩展配方和安全边界。覆盖 A 股日频主流程与仓库内的美股研究扩展；以当前代码核查结果为准，不把历史规划写成已上线能力。</p>
-      <div class="meta"><span>核查日期 2026-10-16</span><span>分支 codex/v1.1</span><span>单文件 · 离线可用</span><span>仅开发说明，非交易授权</span></div>
+      <div class="meta"><span>核查日期 2026-10-16</span><span>方案入口修订 2026-10-17</span><span>分支 codex/v1.1</span><span>单文件 · 离线可用</span><span>仅开发说明，非交易授权</span></div>
     </div>
   </header>
   <div class="wrap layout">
