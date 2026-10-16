@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Quant Agent Team · 二次开发说明书</title>
+  <style>
+    :root{--ink:#18243a;--muted:#57657c;--line:#dce4ed;--paper:#fff;--bg:#f5f7fb;--accent:#176a87;--accent-soft:#e9f5f8;--warn:#8b4b12;--warn-soft:#fff4e6;--code:#17253b}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.72 system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif}
+    a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:3px}a:hover{text-decoration-thickness:2px}
+    .wrap{max-width:1180px;margin:auto;padding:0 28px}.hero{background:linear-gradient(125deg,#10263d,#14536d);color:#fff;padding:52px 0 40px}.eyebrow{margin:0 0 12px;letter-spacing:.12em;text-transform:uppercase;color:#abdae9;font-size:.8rem;font-weight:700}
+    h1{font-size:clamp(2rem,5vw,3.35rem);line-height:1.16;margin:0 0 14px;letter-spacing:-.025em}.hero p{max-width:760px;margin:0;color:#e2edf3}.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.meta span{border:1px solid #79aec2;border-radius:999px;padding:4px 12px;font-size:.82rem;color:#e9f7fb}
+    .layout{display:grid;grid-template-columns:226px minmax(0,1fr);gap:30px;align-items:start;padding-top:32px;padding-bottom:70px}
+    nav{position:sticky;top:20px;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 7px 22px #26364c0a}nav h2{font-size:.9rem;margin:0 0 8px;color:var(--muted)}nav a{display:block;padding:5px 0;text-decoration:none;font-size:.92rem}main{min-width:0}
+    section{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:30px 34px;margin-bottom:22px;box-shadow:0 7px 22px #26364c09;scroll-margin-top:20px}
+    h2{font-size:1.55rem;line-height:1.3;margin:0 0 14px}h3{font-size:1.08rem;margin:24px 0 8px}p{margin:0 0 13px}ul,ol{padding-left:1.45em;margin:8px 0 16px}li+li{margin-top:5px}
+    .lead{font-size:1.05rem;color:#344660}.callout{border-left:4px solid var(--accent);background:var(--accent-soft);padding:14px 17px;border-radius:0 10px 10px 0;margin:17px 0}.callout.warn{border-color:#cf7f2a;background:var(--warn-soft);color:#573515}.callout p:last-child{margin-bottom:0}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}.card{border:1px solid var(--line);border-radius:12px;padding:17px;background:#fbfdff}.card h3{margin:0 0 5px}.card p{margin:0}
+    .table-wrap{overflow-x:auto;margin:15px 0 20px}table{border-collapse:collapse;width:100%;min-width:640px;font-size:.93rem}th,td{border-bottom:1px solid var(--line);padding:11px 12px;text-align:left;vertical-align:top}th{background:#f1f6f9;font-weight:700}tr:last-child td{border-bottom:0}
+    code{font: .88em/1.5 ui-monospace,SFMono-Regular,Consolas,"Liberation Mono",monospace;background:#edf2f7;padding:1px 5px;border-radius:4px;overflow-wrap:anywhere}pre{background:var(--code);color:#e7f2fb;border-radius:11px;padding:16px 18px;overflow:auto;line-height:1.5;margin:12px 0 19px}pre code{color:inherit;background:none;padding:0;overflow-wrap:normal}
+    .steps{counter-reset:step;list-style:none;padding:0}.steps li{counter-increment:step;position:relative;padding-left:39px;margin:13px 0}.steps li:before{content:counter(step);position:absolute;left:0;top:0;width:27px;height:27px;display:grid;place-items:center;background:#d8edf3;color:#12506a;border-radius:50%;font-size:.8rem;font-weight:800}
+    .small{font-size:.88rem;color:var(--muted)}.tag{display:inline-block;font-size:.72rem;line-height:1.5;font-weight:700;letter-spacing:.02em;padding:2px 8px;border-radius:999px;background:#e5eef8;color:#315a85}.tag.risk{background:#ffead2;color:#8b4b12}
+    footer{color:var(--muted);padding:0 0 45px;font-size:.85rem}
+    @media(max-width:880px){.layout{grid-template-columns:1fr}nav{position:static;display:flex;gap:6px 16px;flex-wrap:wrap}nav h2{width:100%}nav a{padding:2px 0}.grid{grid-template-columns:1fr}}
+    @media(max-width:600px){.wrap{padding-left:15px;padding-right:15px}.hero{padding:34px 0}section{padding:22px 18px;border-radius:12px}body{font-size:15px}}
+    @media print{body{background:#fff;color:#000;font-size:10pt}.hero{background:#fff;color:#000;padding:0 0 16px;border-bottom:2px solid #000}.hero p,.eyebrow,.meta span{color:#000}.meta span{border-color:#999}.layout{display:block;padding:0}nav{display:none}section{box-shadow:none;border:0;border-radius:0;padding:18px 0;margin:0;break-inside:avoid}h2,h3{break-after:avoid}.callout,.card,pre{break-inside:avoid}a{color:#000;text-decoration:none}a:after{content:""}pre{white-space:pre-wrap;color:#000;background:#f0f0f0}footer{padding:0}}
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <p class="eyebrow">Developer handbook / current checkout</p>
+      <h1>Quant Agent Team<br>二次开发说明书</h1>
+      <p>面向接手开发者的代码导航、扩展配方和安全边界。覆盖 A 股日频主流程与仓库内的美股研究扩展；以当前代码核查结果为准，不把历史规划写成已上线能力。</p>
+      <div class="meta"><span>核查日期 2026-10-16</span><span>分支 codex/v1.1</span><span>单文件 · 离线可用</span><span>仅开发说明，非交易授权</span></div>
+    </div>
+  </header>
+  <div class="wrap layout">
+    <nav aria-label="本页目录">
+      <h2>目录</h2>
+      <a href="#orientation">01 项目定位</a><a href="#map">02 仓库地图</a><a href="#environment">03 环境与验证</a><a href="#cn-flow">04 A 股主链路</a><a href="#us-flow">05 美股扩展</a><a href="#recipes">06 二开配方</a><a href="#guardrails">07 质量与权限</a><a href="#operations">08 排查与维护</a>
+    </nav>
+    <main>
+      <section id="orientation">
+        <h2>01 · 项目定位与现状</h2>
+        <p class="lead">这个仓库起源于 A 股日频策略工厂，现包含较多美股研究、验证、观察与报表脚本。两个方向共处一个仓库，但不是同一套可直接替换的数据契约或生产入口。</p>
+        <div class="grid">
+          <div class="card"><h3>A 股日频主流程</h3><p><a href="../src/quant_agent_team/cli.py"><code>cli.py</code></a> 暴露命令；<a href="../src/quant_agent_team/workflow.py"><code>ProjectWorkflow</code></a> 编排 KPI、策略规格、数据同步、摄取、特征、回测和评估。默认配置见 <a href="../configs/defaults.yaml"><code>configs/defaults.yaml</code></a>。</p></div>
+          <div class="card"><h3>美股研究扩展</h3><p><code>scripts/us_*.py</code> 覆盖数据快照、股票池、策略探索、滚动与随机检验、报告等环节。部分脚本会写 DuckDB 或报告，不能视为无副作用的“查看”命令。</p></div>
+        </div>
+        <div class="callout warn"><p><strong>先看代码，再看旧文档。</strong> <a href="../README.md"><code>README.md</code></a> 与 <a href="current-architecture-draft.md"><code>docs/current-architecture-draft.md</code></a> 含早期范围和机器路径。它们有历史价值，但不能单独证明当前实现、可运行性或授权状态。例如“生成评审占位文件”不等于通过人工审核。</p></div>
+        <p>本说明书描述“在哪里改、如何验证、哪些地方不能越界”。它不替代策略评审记录，也不承诺某个样本、数据源或回测结果具备全市场代表性。</p>
+      </section>
+
+      <section id="map">
+        <h2>02 · 仓库地图与边界</h2>
+        <div class="table-wrap"><table><thead><tr><th>位置</th><th>职责 / 二开入口</th><th>注意</th></tr></thead><tbody>
+          <tr><td><a href="../src/quant_agent_team/"><code>src/quant_agent_team/</code></a></td><td>核心模型、CLI、工作流、数据接入、因子、回测、评估与质量检查。</td><td>业务语义优先在这里保持一致；不要只改脚本外壳。</td></tr>
+          <tr><td><a href="../scripts/"><code>scripts/</code></a></td><td>日更、数据抓取、一次性研究、美股验证与报告等可执行脚本。</td><td>逐个核对副作用；<code>tmp_*.py</code> 不是稳定公共 API。</td></tr>
+          <tr><td><a href="../configs/"><code>configs/</code></a></td><td>默认项目参数、数据清单与 Paper 配置。</td><td>配置存在不代表批准启用；勿把示例值当生产参数。</td></tr>
+          <tr><td><a href="../tests/"><code>tests/</code></a></td><td>功能、点时、成本、质量、工作流与美股完整性测试。</td><td>新增功能需补对应行为及反例测试。</td></tr>
+          <tr><td><a href="../inputs/"><code>inputs/</code></a> / <a href="../strategies/"><code>strategies/</code></a></td><td>KPI、约束样例、研究说明和策略规格。</td><td>区分草稿、生成物与已批准版本。</td></tr>
+          <tr><td><a href="../reports/"><code>reports/</code></a> / <a href="../research/"><code>research/</code></a></td><td>研究证据、质量报表、审核产物与 HTML 报告。</td><td>历史结果不能自动升级为独立样本或上线批准。</td></tr>
+          <tr><td><a href="../memory/"><code>memory/</code></a> / <a href="memory_policy.md"><code>docs/memory_policy.md</code></a></td><td>阶段结论和 MCP 不可用时的本地保底记录。</td><td>按 <a href="../AGENTS.md"><code>AGENTS.md</code></a> 的标签、字段与补写规则维护。</td></tr>
+        </tbody></table></div>
+        <p class="small">上表是开发导航，不代表目录下每个脚本都应日常执行。源码与配置是当前状态的主要证据；研究记录需按各自版本、来源和日期另行核对。</p>
+      </section>
+
+      <section id="environment">
+        <h2>03 · 环境、配置与最小验证</h2>
+        <p><a href="../pyproject.toml"><code>pyproject.toml</code></a> 声明基础依赖 <code>pandas</code>、<code>numpy</code>、<code>pycryptodome</code>、<code>optuna</code>，可选项包含 <code>pytest</code>、<code>anthropic</code>、<code>yfinance</code>。本次使用 Python 3.12.10 收集测试；虽然声明最低版本为 3.9，部分脚本使用较新的类型语法，移植到 3.9 前应逐文件验证。</p>
+        <p>新环境先安装项目与测试依赖（安装可能访问包仓库），之后可做不连业务数据源、不运行策略的检查：</p>
+        <pre><code>python --version
+python -m pip install -e ".[test]"
+python -m quant_agent_team.cli --help
+python -m pytest --collect-only -q
+python -m pytest tests/test_db_config.py tests/test_point_in_time.py -q</code></pre>
+        <p class="small">本次核查：测试收集 226 项；全量测试为 217 通过、9 跳过、6 条 pandas FutureWarning；上述两个定向测试文件共 6 项通过。安装命令是给新环境的操作指引，本次未执行。若不安装而直接从源码运行 CLI，须先将 <code>src</code> 加到 <code>PYTHONPATH</code>；本次在 PowerShell 中用 <code>$env:PYTHONPATH='src'</code> 验证了 <code>--help</code>。测试结果仅适用于本次检出的代码与环境，不代表真实数据链路或策略已获批准。</p>
+        <div class="callout"><p><strong>数据库分层。</strong> A 股摄取/特征路径使用 <a href="../src/quant_agent_team/db.py"><code>PostgresCli</code></a>。其配置读取 <code>QUANT_DB_URL</code>、<code>QUANT_DB_ADMIN_URL</code>、<code>QUANT_PSQL_BIN</code>、<code>QUANT_CREATEDB_BIN</code>；默认值偏向 macOS 本机 PostgreSQL socket。Windows 上应显式配置可用连接和命令路径，不要照抄默认路径。部分因子和美股研究脚本另外使用 DuckDB；它不等于 A 股 PostgreSQL 主库。</p></div>
+        <p>美股脚本可能直接导入 <code>duckdb</code> 等库，而这些库并未全部列在 <code>pyproject.toml</code> 的依赖中。运行某个脚本前，先检查其 import、输入文件和写入目标，补齐环境后再做隔离验证；不要把一次本地成功当作可复现安装证明。</p>
+        <p><a href="../scripts/run_daily_job.sh"><code>run_daily_job.sh</code></a> 和 <a href="../scripts/install_launchd_daily_job.sh"><code>install_launchd_daily_job.sh</code></a> 面向类 Unix / macOS；配置里的 <code>15:30</code> 是预留时点，不代表自动调度已获批准。</p>
+      </section>
+
+      <section id="cn-flow">
+        <h2>04 · A 股日频主链路</h2>
+        <ol class="steps">
+          <li><strong>输入与规格：</strong> <a href="../src/quant_agent_team/models.py"><code>models.py</code></a> 定义 KPI、策略说明、<code>StrategySpec</code>、规则和审核对象。CLI 的 <code>new-kpi</code>、<code>new-brief</code>、<code>new-spec</code> 生成初始产物；<code>new-spec</code> 生成的是 <code>status=draft</code> 的实现占位，需补全字段和审核。</li>
+          <li><strong>依赖规划：</strong> <a href="../src/quant_agent_team/dependency_registry.py"><code>dependency_registry.py</code></a> 与 <a href="../src/quant_agent_team/strategy_data_sync.py"><code>strategy_data_sync.py</code></a> 根据规格和数据清单形成同步计划；<code>sync-data</code> 不等于依赖已采集完整。</li>
+          <li><strong>数据进入：</strong> <a href="../src/quant_agent_team/ingestion.py"><code>ingestion.py</code></a> 处理股票文件增量、原始与标准化行情和冲突记录；<code>base-incremental-ingest</code>、<code>daily-update</code> 会写库和报告。数据源样例与交易约束格式见 <a href="../inputs/trading_constraints/README.md"><code>inputs/trading_constraints/README.md</code></a>。</li>
+          <li><strong>特征与质量：</strong> <a href="../src/quant_agent_team/feature_refresh.py"><code>feature_refresh.py</code></a> 更新研究特征；<a href="../src/quant_agent_team/data_quality.py"><code>data_quality.py</code></a> 构建质量摘要。缺口、冲突、陈旧数据应保留并分类，不要以填零或静默剔除伪装完整。</li>
+          <li><strong>回测与判定：</strong> <a href="../src/quant_agent_team/backtest_runner.py"><code>backtest_runner.py</code></a> 加载行情并模拟策略，<a href="../src/quant_agent_team/evaluation.py"><code>evaluation.py</code></a> 按显式阈值评估。<a href="../src/quant_agent_team/pipeline_v51.py"><code>pipeline_v51.py</code></a> 还提供因子、优化、留出与空值检验的另一条研究路径；不能把这些不同流程的指标混为同一证明链。</li>
+          <li><strong>人工审核后才进入监控：</strong> <code>new-review</code> 仅创建待审核 Markdown 占位；<a href="../AGENTS.md"><code>AGENTS.md</code></a> 明确未经人工审核不得进入监控池。允许零信号日，应给出原因，不得强行推荐。</li>
+        </ol>
+        <div class="callout warn"><p><strong>有副作用的命令不要当作环境自检。</strong> <code>daily-update</code>、<code>run-backtest</code>、<code>evaluate-backtest</code>、<code>repair-normalized-sync</code> 都会产生产物或修改数据状态；在真实数据上运行前先确定数据库、数据快照、版本和审批范围。</p></div>
+      </section>
+
+      <section id="us-flow">
+        <h2>05 · 美股研究与报告扩展</h2>
+        <p>美股路径以脚本和研究产物为主，不应直接套用 A 股日频 CLI 的 PostgreSQL 契约。下面按“职责”导航，不暗示任何脚本已获生产批准。</p>
+        <div class="table-wrap"><table><thead><tr><th>阶段</th><th>主要代码</th><th>二开关注点</th></tr></thead><tbody>
+          <tr><td>数据快照与股票池</td><td><a href="../scripts/fetch_us_large_mid_data.py"><code>fetch_us_large_mid_data.py</code></a>、<a href="../scripts/us_universe.py"><code>us_universe.py</code></a>、<a href="../scripts/us_survivorship_audit.py"><code>us_survivorship_audit.py</code></a></td><td>来源、截面时间、退市证券、动态成员和覆盖率；大中盘/ETF 样本不等于全市场。</td></tr>
+          <tr><td>候选与验证</td><td><a href="../scripts/us_strategy_factory_loop.py"><code>us_strategy_factory_loop.py</code></a>、<a href="../scripts/us_rolling_validation.py"><code>us_rolling_validation.py</code></a>、<a href="../scripts/us_null_overfit_check.py"><code>us_null_overfit_check.py</code></a></td><td>固定候选定义、成本、折叠、复用样本、重采样和多重比较证据。</td></tr>
+          <tr><td>研究库与报告</td><td><a href="../scripts/us_research_db_ingest.py"><code>us_research_db_ingest.py</code></a>、<a href="../scripts/us_generate_live_html_report.py"><code>us_generate_live_html_report.py</code></a></td><td>前者会写 DuckDB，且表结构不同时有替换逻辑；后者会生成报告。先核查输入、快照和输出路径。</td></tr>
+          <tr><td>观察/池相关</td><td><a href="../scripts/us_live_pool.py"><code>us_live_pool.py</code></a>、<a href="../scripts/us_build_current_model_portfolio.py"><code>us_build_current_model_portfolio.py</code></a></td><td>存在写入与状态变化风险；仅用于理解代码边界，不能从文件名推断当前可激活状态。</td></tr>
+        </tbody></table></div>
+        <div class="callout warn"><p><strong>机器绑定与数据权限。</strong> 若干美股脚本的参数默认值包含历史开发机的 <code>E:\</code>/<code>G:\</code> 路径，例如报告脚本的 <code>--db</code> 与 <code>--out-dir</code>。移植时必须显式指定受控路径、检查数据许可证及缺失范围；不要通过拼接另一供应商、填补空 bar 或幸存者筛选来“修复”覆盖率。</p></div>
+        <p>研究结果、Paper 观察、真实订单是不同权限层。即使候选通过历史门槛，也仍需独立前瞻影子验证和人工授权；本手册不提供 broker、提交/撤单或池激活的操作配方。</p>
+      </section>
+
+      <section id="recipes">
+        <h2>06 · 二次开发配方</h2>
+        <h3>增加一个数据源或字段</h3>
+        <ol><li>先定义来源、授权、交易日/时区、点时可用性、证券身份、单位、修订与缺失语义；不要先写抓取循环。</li><li>在 <a href="../src/quant_agent_team/ingestion.py"><code>ingestion.py</code></a> 或对应的独立美股入口加解析与校验，保持原始证据和冲突处理；不要覆盖异值记录。</li><li>如影响数据依赖和特征，更新 <a href="../src/quant_agent_team/dependency_registry.py"><code>dependency_registry.py</code></a>、<a href="../src/quant_agent_team/feature_refresh.py"><code>feature_refresh.py</code></a> 及数据质量规则，并增加空值、重复、时区和未来泄漏测试。</li></ol>
+        <h3>增加一个因子或策略规则</h3>
+        <ol><li>研究假设先入规格，确认输入字段已存在且交易时可得。A 股因子相关入口包括 <a href="../src/quant_agent_team/factor_library.py"><code>factor_library.py</code></a>、<a href="../src/quant_agent_team/factor_panel.py"><code>factor_panel.py</code></a>、<a href="../src/quant_agent_team/factor_scoring.py"><code>factor_scoring.py</code></a>。</li><li>将执行时点、持有期、成交限制和成本写成可测规则；参考 <a href="../tests/test_factor_panel.py"><code>test_factor_panel.py</code></a>、<a href="../tests/test_backtest_costs.py"><code>test_backtest_costs.py</code></a> 和 <a href="../tests/test_point_in_time.py"><code>test_point_in_time.py</code></a>。</li><li>若是美股研究新族，单独登记实验范围与版本，不从已看过的时期重新命名“独立 OOS”；不能为过门槛事后改变分母、价格路径或检验族。</li></ol>
+        <h3>增加评估、审核或报表字段</h3>
+        <ol><li>先在 <a href="../src/quant_agent_team/evaluation.py"><code>evaluation.py</code></a> 或相应美股验证脚本定义来源和失败含义，避免“缺数据视作通过”。</li><li>保持结构化产物与展示一致；美股 HTML 报告的载荷完整性检查在 <a href="../scripts/us_generate_live_html_report.py"><code>validate_payload_integrity()</code></a>，对应测试见 <a href="../tests/test_us_live_report_integrity.py"><code>test_us_live_report_integrity.py</code></a>。</li><li>若影响监控资格，提交审核证据并等待人工决定；不要让报表外观或分数自动改变池状态。</li></ol>
+      </section>
+
+      <section id="guardrails">
+        <h2>07 · 质量门槛与权限边界</h2>
+        <div class="grid">
+          <div class="card"><h3>数据真实性</h3><p>点时成分、退市、复权、停牌、无成交、缺失时钟须可追踪。无成交的空 bar、拍卖指示价或跨源补洞不是当然可执行价格。</p></div>
+          <div class="card"><h3>研究诚实性</h3><p>开发、留出、已看过的历史与真正前瞻期分开；完整记录成本、延迟、容量、回撤、邻域、全局证据与多重比较。失败实验也要留证据。</p></div>
+          <div class="card"><h3>审批隔离</h3><p>策略建议、回测通过、观察、Paper/实盘是不同阶段。未获人工审核，不进入监控池；新增第三方 agent/skill 先走 Phase 0 评审。</p></div>
+          <div class="card"><h3>资产与凭证</h3><p>数据库、原始数据、压缩包、密钥和日志不纳入代码提交。先核对写入目标，避免研究脚本覆盖用户数据；本手册不保存任何凭证。</p></div>
+        </div>
+        <p>项目治理基线见 <a href="../AGENTS.md"><code>AGENTS.md</code></a>；历史原则见 <a href="memory_policy.md"><code>docs/memory_policy.md</code></a>。新任务先检索长期记忆，阶段结束写入结构化结论；MCP 不可用时本地保底并在恢复后补写。一次文档改动本身不触发策略自动轮训。</p>
+      </section>
+
+      <section id="operations">
+        <h2>08 · 排查与维护清单</h2>
+        <div class="table-wrap"><table><thead><tr><th>现象</th><th>先核查</th><th>不要直接做</th></tr></thead><tbody>
+          <tr><td>CLI 子命令与文档不符</td><td><a href="../src/quant_agent_team/cli.py"><code>build_parser()</code></a>、<code>python -m quant_agent_team.cli --help</code></td><td>照抄旧 README 的绝对路径。</td></tr>
+          <tr><td>数据库连接失败</td><td><a href="../src/quant_agent_team/db.py"><code>DatabaseConfig.from_env()</code></a> 和 PostgreSQL 命令可用性</td><td>在未知连接上执行 <code>ensure_database()</code> 或修复命令。</td></tr>
+          <tr><td>数据行数或字段异常</td><td>增量摘要、冲突与质量报表；字段单位和源文件哈希</td><td>删缺失、填零或静默覆盖冲突。</td></tr>
+          <tr><td>美股研究/报告不可复现</td><td>脚本输入参数、硬编码默认路径、数据快照、第三方包和版本</td><td>把旧输出移植为新环境的合格结论。</td></tr>
+          <tr><td>候选“通过”但证据不足</td><td>原始分母、时钟联合覆盖、成本、完整路径及独立前瞻证据</td><td>自动加入观察/交易池或降低门槛。</td></tr>
+        </tbody></table></div>
+        <h3>提交前最低检查</h3>
+        <ul><li>确认 <code>git status</code> 仅含本次目标文件，没有数据库、密钥、原始包或用户未跟踪文件。</li><li>文档中每个路径可在当前仓库找到；所有可执行命令都区分“只读检查”与“会写状态”。</li><li>新增行为有测试、反例与来源说明；修改数据契约时同步策略规格、质量规则和报表。</li><li>审核状态、记忆记录和前瞻验证计划各自独立，不以单份报告替代。</li></ul>
+        <div class="callout"><p><strong>推荐阅读顺序：</strong> <a href="../AGENTS.md">治理规则</a> → <a href="../src/quant_agent_team/cli.py">CLI</a> → <a href="../src/quant_agent_team/workflow.py">工作流</a> → 目标模块及其 <a href="../tests/">测试</a> → 本次改动的输入/输出证据。遇到旧文档与当前实现冲突，先核代码和对应测试，再更新说明。</p></div>
+      </section>
+    </main>
+  </div>
+  <footer class="wrap">Quant Agent Team · 开发导航快照（2026-10-16）。本文件可离线阅读；任何真实数据、策略研究或监控操作仍以当时授权、数据契约与审核记录为准。</footer>
+</body>
+</html>
